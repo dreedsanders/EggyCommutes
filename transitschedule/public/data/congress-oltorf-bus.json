@@ -1,0 +1,1793 @@
+{
+  "geocoded_waypoints": [
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJt1vt1PG0RIYR7h816nBqhpc",
+      "types": [
+        "establishment",
+        "point_of_interest",
+        "transit_station"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJZSVW0ae1RIYRAcaAnsGIio4",
+      "types": [
+        "establishment",
+        "point_of_interest",
+        "transit_station"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 30.26676759999999,
+          "lng": -97.7393357
+        },
+        "southwest": {
+          "lat": 30.2379228,
+          "lng": -97.7534907
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$1.25",
+        "value": 1.25
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "1:07 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764745679
+          },
+          "departure_time": {
+            "text": "12:46 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764744394
+          },
+          "distance": {
+            "text": "2.8 mi",
+            "value": 4499
+          },
+          "duration": {
+            "text": "21 mins",
+            "value": 1285
+          },
+          "end_address": "Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+          "end_location": {
+            "lat": 30.265086,
+            "lng": -97.7393357
+          },
+          "start_address": "Oltorf/Congress, Austin, TX 78704, USA",
+          "start_location": {
+            "lat": 30.2379228,
+            "lng": -97.7522821
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.2 mi",
+                "value": 283
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 244
+              },
+              "end_location": {
+                "lat": 30.2394633,
+                "lng": -97.75277340000001
+              },
+              "html_instructions": "Walk to Oltorf Station (NB)",
+              "polyline": {
+                "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@]QCDi@a@JSw@k@k@a@"
+              },
+              "start_location": {
+                "lat": 30.2379228,
+                "lng": -97.7522821
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "0.1 mi",
+                    "value": 156
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 136
+                  },
+                  "end_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "html_instructions": "Head <b>northwest</b> on <b>E Oltorf St</b> toward <b>S Congress Ave</b><div style=\"font-size:0.9em\">Pass by PNC Bank (on the left in 350 ft)</div>",
+                  "polyline": {
+                    "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@"
+                  },
+                  "start_location": {
+                    "lat": 30.2379228,
+                    "lng": -97.7522821
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "128 ft",
+                    "value": 39
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 39
+                  },
+                  "end_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>S Congress Ave</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "o~pwDhnssQ]QCDi@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "69 ft",
+                    "value": 21
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 16
+                  },
+                  "end_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "html_instructions": "Turn <b>right</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "{`qwDzlssQJS"
+                  },
+                  "start_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "220 ft",
+                    "value": 67
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 53
+                  },
+                  "end_location": {
+                    "lat": 30.2394633,
+                    "lng": -97.75277340000001
+                  },
+                  "html_instructions": "Turn <b>left</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                  "maneuver": "turn-left",
+                  "polyline": {
+                    "points": "o`qwDflssQw@k@k@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "2.2 mi",
+                "value": 3536
+              },
+              "duration": {
+                "text": "5 mins",
+                "value": 319
+              },
+              "end_location": {
+                "lat": 30.266689,
+                "lng": -97.745863
+              },
+              "html_instructions": "Bus towards Downtown NB",
+              "polyline": {
+                "points": "_dqwDljssQGTECOEGCIAGCQAc@E_AKEAC?]CQCOAc@E_CYE?IAE?A?OACAMAYCSEYGg@OEAa@KA?QGOEOEUGSGOEOEEAOEEAUGWGOEqA]EASGSGICEAICME[IA?e@M[I[KF_@PaAH_@\\gBMCe@McAYa@KQEME]I}C{@c@KwCy@o@Qc@KGCy@Sa@MIb@SfAAFKj@GXENG\\y@SOEe@MaAWMC]KQEWIuA_@SGQE}@UUGEAICSE[K[IMCSGu@U[IICICMEICUGME]KQEuA_@UIa@Km@OGCWG}@WA?GAQGYGEAoA]EAQGYIOEa@KA?]KQEa@Km@Qa@KME}@WYIMEA?g@OUVORKLIJSTo@x@IHIJONGD?@URONCBCDCB[ZGFCBGFKHQN]X]VA@]XGDA@SNGDOJ?@A@SPCBM?I?]TKE{@]KEAAa@OMGKC?AYIQIc@Mi@SWIm@SGCYGi@OAAC?CAEAMEkA[iCq@SGUGCAICKCICICYI[[Y]AAACACAECEAKAAG]MYUCUIA?KEm@OIAAAMCYIGCKEKEGAEAAAA?ICQEGC]Ig@OA?MEGCA?AAKCMEYGs@QOEOEm@QDW"
+              },
+              "start_location": {
+                "lat": 30.2395173,
+                "lng": -97.7528681
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 30.266689,
+                    "lng": -97.745863
+                  },
+                  "name": "Lavaca/4th"
+                },
+                "arrival_time": {
+                  "text": "12:58 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764745101
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 30.2395173,
+                    "lng": -97.7528681
+                  },
+                  "name": "Oltorf Station (NB)"
+                },
+                "departure_time": {
+                  "text": "12:50 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764744639
+                },
+                "headsign": "Downtown NB",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Capital Metro",
+                      "phone": "1 (512) 474-1200",
+                      "url": "http://www.capmetro.org/"
+                    }
+                  ],
+                  "color": "#004a97",
+                  "name": "486-Night Owl South Congress",
+                  "short_name": "486",
+                  "text_color": "#ffffff",
+                  "url": "http://www.capmetro.org/current_schedules/pdf/486.pdf",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                    "name": "Bus",
+                    "type": "BUS"
+                  }
+                },
+                "num_stops": 7,
+                "trip_short_name": "Downtown"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "0.4 mi",
+                "value": 680
+              },
+              "duration": {
+                "text": "10 mins",
+                "value": 578
+              },
+              "end_location": {
+                "lat": 30.265086,
+                "lng": -97.7393357
+              },
+              "html_instructions": "Walk to Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+              "polyline": {
+                "points": "ymvwDt~qsQC?KC@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+              },
+              "start_location": {
+                "lat": 30.2666916,
+                "lng": -97.7458747
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "49 ft",
+                    "value": 15
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 13
+                  },
+                  "end_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "html_instructions": "Head <b>north</b> on <b>Lavaca St</b> toward <b>W 4th St</b>",
+                  "polyline": {
+                    "points": "ymvwDt~qsQC?KC"
+                  },
+                  "start_location": {
+                    "lat": 30.2666916,
+                    "lng": -97.7458747
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "0.4 mi",
+                    "value": 665
+                  },
+                  "duration": {
+                    "text": "9 mins",
+                    "value": 565
+                  },
+                  "end_location": {
+                    "lat": 30.265086,
+                    "lng": -97.7393357
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>W 4th St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "invwDp~qsQ@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+                  },
+                  "start_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "_zpwDvfssQaAhBIV[j@g@bA]QCDi@a@JScBmASh@g@O}BWsFk@a@C_AM}Cy@sHqBu@SaAW[KF_@ZaB\\gBMCiBg@s@QmFwAsF{A{Aa@]jB[|AG\\y@Su@S_Cm@wF{AuKyCaKoCqA]cCo@sBm@i@Oe@j@yAhBk@j@uAvAeCrBkA~@QBI?]TgAc@MG{@]yBu@{C}@wGgBi@OYI[[[_@ISCMG]MYk@MMEgAWy@YQEaCq@{Bk@}@WDUOCP}@X{AF]B@@EDSGCDQRkAJUHg@RiAB@J_@BGGCFY^qBPcABOD@@GD]@Ij@}CHg@MMBIH_@RgAPgA?a@\\sB"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 30.2660883,
+          "lng": -97.7393357
+        },
+        "southwest": {
+          "lat": 30.2379228,
+          "lng": -97.7534907
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "legs": [
+        {
+          "distance": {
+            "text": "2.3 mi",
+            "value": 3780
+          },
+          "duration": {
+            "text": "51 mins",
+            "value": 3061
+          },
+          "end_address": "Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+          "end_location": {
+            "lat": 30.265086,
+            "lng": -97.7393357
+          },
+          "start_address": "Oltorf/Congress, Austin, TX 78704, USA",
+          "start_location": {
+            "lat": 30.2379228,
+            "lng": -97.7522821
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "2.3 mi",
+                "value": 3780
+              },
+              "duration": {
+                "text": "51 mins",
+                "value": 3061
+              },
+              "end_location": {
+                "lat": 30.265086,
+                "lng": -97.7393357
+              },
+              "html_instructions": "Walk to Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+              "polyline": {
+                "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@]QCDi@c@CAMIIGQSUGCMIECAe@MIAGCIAKEE?e@Eu@IQC_@CKAo@?IAeBSo@KIAE?[MOCQCWIi@MCAa@KUGMEEASGKCUGOEOECAOEEAMCQEOEMEqA]EASGk@QOC]IAAc@M]IOESG{@Wo@QC?KEg@O[EKBEOg@Mu@SMCSGOE[AGCaAWIC]Ie@MYOy@W]ISGSGq@Qm@QUGMESEQGw@SEA_@?MSICUGwAa@ICYEw@S_@?WQICw@SCASGICu@SUIGAGCICMCIEUGA?[Ia@GaAWc@QK?ICa@OQGe@MCAm@Oa@MWGKCECoA]EAEAWGOEc@MWGGCUIQEYGUGYIQEYG_AYUGOGKCFGa@KMLMEGCi@U}@U[IEAUGYI[CEA[QICSEOEOEUEQGWISE[CUIYOWGa@MEASG[COEa@KEA[IMEYM_EgAGCICu@SSGUEOEg@KOK[KICYIOKUGEAIC?@_@G?DADKE}@UEACAy@SIAUOKCoA_@EASIOC]CICBOOCAJSGMEIAo@QOE[I[KDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+              },
+              "start_location": {
+                "lat": 30.2379228,
+                "lng": -97.7522821
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "0.1 mi",
+                    "value": 156
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 136
+                  },
+                  "end_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "html_instructions": "Head <b>northwest</b> on <b>E Oltorf St</b> toward <b>S Congress Ave</b><div style=\"font-size:0.9em\">Pass by PNC Bank (on the left in 350 ft)</div>",
+                  "polyline": {
+                    "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@"
+                  },
+                  "start_location": {
+                    "lat": 30.2379228,
+                    "lng": -97.7522821
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "2.0 mi",
+                    "value": 3203
+                  },
+                  "duration": {
+                    "text": "43 mins",
+                    "value": 2571
+                  },
+                  "end_location": {
+                    "lat": 30.2660883,
+                    "lng": -97.74343309999999
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>S Congress Ave</b><div style=\"font-size:0.9em\">Pass by Wells Fargo Bank (on the left in 240 ft)</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "o~pwDhnssQ]QCDi@c@CAMIIGQSUGCMIECAe@MIAGCIAKEE?e@Eu@IQC_@CKAo@?IAeBSo@KIAE?[MOCQCWIi@MCAa@KUGMEEASGKCUGOEOECAOEEAMCQEOEMEqA]EASGk@QOC]IAAc@M]IOESG{@Wo@QC?KEg@O[EKBEOg@Mu@SMCSGOE[AGCaAWIC]Ie@MYOy@W]ISGSGq@Qm@QUGMESEQGw@SEA_@?MSICUGwAa@ICYEw@S_@?WQICw@SCASGICu@SUIGAGCICMCIEUGA?[Ia@GaAWc@QK?ICa@OQGe@MCAm@Oa@MWGKCECoA]EAEAWGOEc@MWGGCUIQEYGUGYIQEYG_AYUGOGKCFGa@KMLMEGCi@U}@U[IEAUGYI[CEA[QICSEOEOEUEQGWISE[CUIYOWGa@MEASG[COEa@KEA[IMEYM_EgAGCICu@SSGUEOEg@KOK[KICYIOKUGEAIC?@_@G?DADKE}@UEACAy@SIAUOKCoA_@EASIOC]CICBOOCAJSGMEIAo@QOE[I[K"
+                  },
+                  "start_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "0.3 mi",
+                    "value": 421
+                  },
+                  "duration": {
+                    "text": "6 mins",
+                    "value": 354
+                  },
+                  "end_location": {
+                    "lat": 30.265086,
+                    "lng": -97.7393357
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>E 4th St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "ajvwDloqsQDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+                  },
+                  "start_location": {
+                    "lat": 30.2660883,
+                    "lng": -97.74343309999999
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "_zpwDvfssQaAhBIV[j@g@bA]QCDm@e@WQQSUGCMIEi@Og@MsBSk@Ey@AuC_@OAk@Qi@MeBc@s@SoBg@uBk@_AYm@MsA_@cCq@s@U[EKBEOg@McAWc@Mc@EoCs@YOy@Wq@QiCs@kBg@e@AMSICmBi@c@Iw@S_@?a@UyAa@{Ac@w@U]Ia@GaAWc@QK?k@SiBg@_EgAkD_AeCq@e@OKCFGa@KMLUIi@U}@Ua@Ko@Qa@Ee@Uc@KoA]o@Io@YsA_@k@Ig@Mi@OYM_EgAQGiA[e@Kg@KOKe@OYIOK[IIA_@G?DADKEcAW}@U_@Q{Ac@YKm@GICBOOCAJa@My@Sk@O[KDSTmARiAHg@BKD@D[D[l@aD?IDQMMH[Ha@ZiBBi@LcANy@"
+      },
+      "summary": "S Congress Ave",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 30.26676759999999,
+          "lng": -97.7393357
+        },
+        "southwest": {
+          "lat": 30.2379228,
+          "lng": -97.7534907
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$1.25",
+        "value": 1.25
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "1:41 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764747680
+          },
+          "departure_time": {
+            "text": "1:20 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764746403
+          },
+          "distance": {
+            "text": "2.8 mi",
+            "value": 4499
+          },
+          "duration": {
+            "text": "21 mins",
+            "value": 1277
+          },
+          "end_address": "Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+          "end_location": {
+            "lat": 30.265086,
+            "lng": -97.7393357
+          },
+          "start_address": "Oltorf/Congress, Austin, TX 78704, USA",
+          "start_location": {
+            "lat": 30.2379228,
+            "lng": -97.7522821
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.2 mi",
+                "value": 283
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 244
+              },
+              "end_location": {
+                "lat": 30.2394633,
+                "lng": -97.75277340000001
+              },
+              "html_instructions": "Walk to Oltorf Station (NB)",
+              "polyline": {
+                "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@]QCDi@a@JSw@k@k@a@"
+              },
+              "start_location": {
+                "lat": 30.2379228,
+                "lng": -97.7522821
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "0.1 mi",
+                    "value": 156
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 136
+                  },
+                  "end_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "html_instructions": "Head <b>northwest</b> on <b>E Oltorf St</b> toward <b>S Congress Ave</b><div style=\"font-size:0.9em\">Pass by PNC Bank (on the left in 350 ft)</div>",
+                  "polyline": {
+                    "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@"
+                  },
+                  "start_location": {
+                    "lat": 30.2379228,
+                    "lng": -97.7522821
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "128 ft",
+                    "value": 39
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 39
+                  },
+                  "end_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>S Congress Ave</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "o~pwDhnssQ]QCDi@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "69 ft",
+                    "value": 21
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 16
+                  },
+                  "end_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "html_instructions": "Turn <b>right</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "{`qwDzlssQJS"
+                  },
+                  "start_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "220 ft",
+                    "value": 67
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 53
+                  },
+                  "end_location": {
+                    "lat": 30.2394633,
+                    "lng": -97.75277340000001
+                  },
+                  "html_instructions": "Turn <b>left</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                  "maneuver": "turn-left",
+                  "polyline": {
+                    "points": "o`qwDflssQw@k@k@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "2.2 mi",
+                "value": 3536
+              },
+              "duration": {
+                "text": "5 mins",
+                "value": 319
+              },
+              "end_location": {
+                "lat": 30.266689,
+                "lng": -97.745863
+              },
+              "html_instructions": "Bus towards Downtown NB",
+              "polyline": {
+                "points": "_dqwDljssQGTECOEGCIAGCQAc@E_AKEAC?]CQCOAc@E_CYE?IAE?A?OACAMAYCSEYGg@OEAa@KA?QGOEOEUGSGOEOEEAOEEAUGWGOEqA]EASGSGICEAICME[IA?e@M[I[KF_@PaAH_@\\gBMCe@McAYa@KQEME]I}C{@c@KwCy@o@Qc@KGCy@Sa@MIb@SfAAFKj@GXENG\\y@SOEe@MaAWMC]KQEWIuA_@SGQE}@UUGEAICSE[K[IMCSGu@U[IICICMEICUGME]KQEuA_@UIa@Km@OGCWG}@WA?GAQGYGEAoA]EAQGYIOEa@KA?]KQEa@Km@Qa@KME}@WYIMEA?g@OUVORKLIJSTo@x@IHIJONGD?@URONCBCDCB[ZGFCBGFKHQN]X]VA@]XGDA@SNGDOJ?@A@SPCBM?I?]TKE{@]KEAAa@OMGKC?AYIQIc@Mi@SWIm@SGCYGi@OAAC?CAEAMEkA[iCq@SGUGCAICKCICICYI[[Y]AAACACAECEAKAAG]MYUCUIA?KEm@OIAAAMCYIGCKEKEGAEAAAA?ICQEGC]Ig@OA?MEGCA?AAKCMEYGs@QOEOEm@QDW"
+              },
+              "start_location": {
+                "lat": 30.2395173,
+                "lng": -97.7528681
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 30.266689,
+                    "lng": -97.745863
+                  },
+                  "name": "Lavaca/4th"
+                },
+                "arrival_time": {
+                  "text": "1:31 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764747102
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 30.2395173,
+                    "lng": -97.7528681
+                  },
+                  "name": "Oltorf Station (NB)"
+                },
+                "departure_time": {
+                  "text": "1:24 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764746648
+                },
+                "headsign": "Downtown NB",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Capital Metro",
+                      "phone": "1 (512) 474-1200",
+                      "url": "http://www.capmetro.org/"
+                    }
+                  ],
+                  "color": "#004a97",
+                  "name": "486-Night Owl South Congress",
+                  "short_name": "486",
+                  "text_color": "#ffffff",
+                  "url": "http://www.capmetro.org/current_schedules/pdf/486.pdf",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                    "name": "Bus",
+                    "type": "BUS"
+                  }
+                },
+                "num_stops": 7,
+                "trip_short_name": "Downtown"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "0.4 mi",
+                "value": 680
+              },
+              "duration": {
+                "text": "10 mins",
+                "value": 578
+              },
+              "end_location": {
+                "lat": 30.265086,
+                "lng": -97.7393357
+              },
+              "html_instructions": "Walk to Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+              "polyline": {
+                "points": "ymvwDt~qsQC?KC@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+              },
+              "start_location": {
+                "lat": 30.2666916,
+                "lng": -97.7458747
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "49 ft",
+                    "value": 15
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 13
+                  },
+                  "end_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "html_instructions": "Head <b>north</b> on <b>Lavaca St</b> toward <b>W 4th St</b>",
+                  "polyline": {
+                    "points": "ymvwDt~qsQC?KC"
+                  },
+                  "start_location": {
+                    "lat": 30.2666916,
+                    "lng": -97.7458747
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "0.4 mi",
+                    "value": 665
+                  },
+                  "duration": {
+                    "text": "9 mins",
+                    "value": 565
+                  },
+                  "end_location": {
+                    "lat": 30.265086,
+                    "lng": -97.7393357
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>W 4th St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "invwDp~qsQ@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+                  },
+                  "start_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "_zpwDvfssQaAhBIV[j@g@bA]QCDi@a@JScBmASh@g@O}BWsFk@a@C_AM}Cy@sHqBu@SaAW[KF_@ZaB\\gBMCiBg@s@QmFwAsF{A{Aa@]jB[|AG\\y@Su@S_Cm@wF{AuKyCaKoCqA]cCo@sBm@i@Oe@j@yAhBk@j@uAvAeCrBkA~@QBI?]TgAc@MG{@]yBu@{C}@wGgBi@OYI[[[_@ISCMG]MYk@MMEgAWy@YQEaCq@{Bk@}@WDUOCP}@X{AF]B@@EDSGCDQRkAJUHg@RiAB@J_@BGGCFY^qBPcABOD@@GD]@Ij@}CHg@MMBIH_@RgAPgA?a@\\sB"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 30.26676759999999,
+          "lng": -97.7393357
+        },
+        "southwest": {
+          "lat": 30.2379228,
+          "lng": -97.7534907
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$1.25",
+        "value": 1.25
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "2:08 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764749322
+          },
+          "departure_time": {
+            "text": "1:47 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764748030
+          },
+          "distance": {
+            "text": "2.8 mi",
+            "value": 4499
+          },
+          "duration": {
+            "text": "22 mins",
+            "value": 1292
+          },
+          "end_address": "Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+          "end_location": {
+            "lat": 30.265086,
+            "lng": -97.7393357
+          },
+          "start_address": "Oltorf/Congress, Austin, TX 78704, USA",
+          "start_location": {
+            "lat": 30.2379228,
+            "lng": -97.7522821
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.2 mi",
+                "value": 283
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 244
+              },
+              "end_location": {
+                "lat": 30.2394633,
+                "lng": -97.75277340000001
+              },
+              "html_instructions": "Walk to Oltorf Station (NB)",
+              "polyline": {
+                "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@]QCDi@a@JSw@k@k@a@"
+              },
+              "start_location": {
+                "lat": 30.2379228,
+                "lng": -97.7522821
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "0.1 mi",
+                    "value": 156
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 136
+                  },
+                  "end_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "html_instructions": "Head <b>northwest</b> on <b>E Oltorf St</b> toward <b>S Congress Ave</b><div style=\"font-size:0.9em\">Pass by PNC Bank (on the left in 350 ft)</div>",
+                  "polyline": {
+                    "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@"
+                  },
+                  "start_location": {
+                    "lat": 30.2379228,
+                    "lng": -97.7522821
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "128 ft",
+                    "value": 39
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 39
+                  },
+                  "end_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>S Congress Ave</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "o~pwDhnssQ]QCDi@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "69 ft",
+                    "value": 21
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 16
+                  },
+                  "end_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "html_instructions": "Turn <b>right</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "{`qwDzlssQJS"
+                  },
+                  "start_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "220 ft",
+                    "value": 67
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 53
+                  },
+                  "end_location": {
+                    "lat": 30.2394633,
+                    "lng": -97.75277340000001
+                  },
+                  "html_instructions": "Turn <b>left</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                  "maneuver": "turn-left",
+                  "polyline": {
+                    "points": "o`qwDflssQw@k@k@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "2.2 mi",
+                "value": 3536
+              },
+              "duration": {
+                "text": "5 mins",
+                "value": 319
+              },
+              "end_location": {
+                "lat": 30.266689,
+                "lng": -97.745863
+              },
+              "html_instructions": "Bus towards Downtown NB",
+              "polyline": {
+                "points": "_dqwDljssQGTECOEGCIAGCQAc@E_AKEAC?]CQCOAc@E_CYE?IAE?A?OACAMAYCSEYGg@OEAa@KA?QGOEOEUGSGOEOEEAOEEAUGWGOEqA]EASGSGICEAICME[IA?e@M[I[KF_@PaAH_@\\gBMCe@McAYa@KQEME]I}C{@c@KwCy@o@Qc@KGCy@Sa@MIb@SfAAFKj@GXENG\\y@SOEe@MaAWMC]KQEWIuA_@SGQE}@UUGEAICSE[K[IMCSGu@U[IICICMEICUGME]KQEuA_@UIa@Km@OGCWG}@WA?GAQGYGEAoA]EAQGYIOEa@KA?]KQEa@Km@Qa@KME}@WYIMEA?g@OUVORKLIJSTo@x@IHIJONGD?@URONCBCDCB[ZGFCBGFKHQN]X]VA@]XGDA@SNGDOJ?@A@SPCBM?I?]TKE{@]KEAAa@OMGKC?AYIQIc@Mi@SWIm@SGCYGi@OAAC?CAEAMEkA[iCq@SGUGCAICKCICICYI[[Y]AAACACAECEAKAAG]MYUCUIA?KEm@OIAAAMCYIGCKEKEGAEAAAA?ICQEGC]Ig@OA?MEGCA?AAKCMEYGs@QOEOEm@QDW"
+              },
+              "start_location": {
+                "lat": 30.2395173,
+                "lng": -97.7528681
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 30.266689,
+                    "lng": -97.745863
+                  },
+                  "name": "Lavaca/4th"
+                },
+                "arrival_time": {
+                  "text": "1:59 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764748744
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 30.2395173,
+                    "lng": -97.7528681
+                  },
+                  "name": "Oltorf Station (NB)"
+                },
+                "departure_time": {
+                  "text": "1:51 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764748275
+                },
+                "headsign": "Downtown NB",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Capital Metro",
+                      "phone": "1 (512) 474-1200",
+                      "url": "http://www.capmetro.org/"
+                    }
+                  ],
+                  "color": "#004a97",
+                  "name": "486-Night Owl South Congress",
+                  "short_name": "486",
+                  "text_color": "#ffffff",
+                  "url": "http://www.capmetro.org/current_schedules/pdf/486.pdf",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                    "name": "Bus",
+                    "type": "BUS"
+                  }
+                },
+                "num_stops": 7,
+                "trip_short_name": "Downtown"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "0.4 mi",
+                "value": 680
+              },
+              "duration": {
+                "text": "10 mins",
+                "value": 578
+              },
+              "end_location": {
+                "lat": 30.265086,
+                "lng": -97.7393357
+              },
+              "html_instructions": "Walk to Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+              "polyline": {
+                "points": "ymvwDt~qsQC?KC@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+              },
+              "start_location": {
+                "lat": 30.2666916,
+                "lng": -97.7458747
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "49 ft",
+                    "value": 15
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 13
+                  },
+                  "end_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "html_instructions": "Head <b>north</b> on <b>Lavaca St</b> toward <b>W 4th St</b>",
+                  "polyline": {
+                    "points": "ymvwDt~qsQC?KC"
+                  },
+                  "start_location": {
+                    "lat": 30.2666916,
+                    "lng": -97.7458747
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "0.4 mi",
+                    "value": 665
+                  },
+                  "duration": {
+                    "text": "9 mins",
+                    "value": 565
+                  },
+                  "end_location": {
+                    "lat": 30.265086,
+                    "lng": -97.7393357
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>W 4th St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "invwDp~qsQ@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+                  },
+                  "start_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "_zpwDvfssQaAhBIV[j@g@bA]QCDi@a@JScBmASh@g@O}BWsFk@a@C_AM}Cy@sHqBu@SaAW[KF_@ZaB\\gBMCiBg@s@QmFwAsF{A{Aa@]jB[|AG\\y@Su@S_Cm@wF{AuKyCaKoCqA]cCo@sBm@i@Oe@j@yAhBk@j@uAvAeCrBkA~@QBI?]TgAc@MG{@]yBu@{C}@wGgBi@OYI[[[_@ISCMG]MYk@MMEgAWy@YQEaCq@{Bk@}@WDUOCP}@X{AF]B@@EDSGCDQRkAJUHg@RiAB@J_@BGGCFY^qBPcABOD@@GD]@Ij@}CHg@MMBIH_@RgAPgA?a@\\sB"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 30.26676759999999,
+          "lng": -97.7393357
+        },
+        "southwest": {
+          "lat": 30.2379228,
+          "lng": -97.7534907
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$1.25",
+        "value": 1.25
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "2:33 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764750814
+          },
+          "departure_time": {
+            "text": "2:14 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764749672
+          },
+          "distance": {
+            "text": "2.8 mi",
+            "value": 4499
+          },
+          "duration": {
+            "text": "19 mins",
+            "value": 1142
+          },
+          "end_address": "Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+          "end_location": {
+            "lat": 30.265086,
+            "lng": -97.7393357
+          },
+          "start_address": "Oltorf/Congress, Austin, TX 78704, USA",
+          "start_location": {
+            "lat": 30.2379228,
+            "lng": -97.7522821
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.2 mi",
+                "value": 283
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 244
+              },
+              "end_location": {
+                "lat": 30.2394633,
+                "lng": -97.75277340000001
+              },
+              "html_instructions": "Walk to Oltorf Station (NB)",
+              "polyline": {
+                "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@]QCDi@a@JSw@k@k@a@"
+              },
+              "start_location": {
+                "lat": 30.2379228,
+                "lng": -97.7522821
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "0.1 mi",
+                    "value": 156
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 136
+                  },
+                  "end_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "html_instructions": "Head <b>northwest</b> on <b>E Oltorf St</b> toward <b>S Congress Ave</b><div style=\"font-size:0.9em\">Pass by PNC Bank (on the left in 350 ft)</div>",
+                  "polyline": {
+                    "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@"
+                  },
+                  "start_location": {
+                    "lat": 30.2379228,
+                    "lng": -97.7522821
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "128 ft",
+                    "value": 39
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 39
+                  },
+                  "end_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>S Congress Ave</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "o~pwDhnssQ]QCDi@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "69 ft",
+                    "value": 21
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 16
+                  },
+                  "end_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "html_instructions": "Turn <b>right</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "{`qwDzlssQJS"
+                  },
+                  "start_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "220 ft",
+                    "value": 67
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 53
+                  },
+                  "end_location": {
+                    "lat": 30.2394633,
+                    "lng": -97.75277340000001
+                  },
+                  "html_instructions": "Turn <b>left</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                  "maneuver": "turn-left",
+                  "polyline": {
+                    "points": "o`qwDflssQw@k@k@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "2.2 mi",
+                "value": 3536
+              },
+              "duration": {
+                "text": "5 mins",
+                "value": 319
+              },
+              "end_location": {
+                "lat": 30.266689,
+                "lng": -97.745863
+              },
+              "html_instructions": "Bus towards Downtown NB",
+              "polyline": {
+                "points": "_dqwDljssQGTECOEGCIAGCQAc@E_AKEAC?]CQCOAc@E_CYE?IAE?A?OACAMAYCSEYGg@OEAa@KA?QGOEOEUGSGOEOEEAOEEAUGWGOEqA]EASGSGICEAICME[IA?e@M[I[KF_@PaAH_@\\gBMCe@McAYa@KQEME]I}C{@c@KwCy@o@Qc@KGCy@Sa@MIb@SfAAFKj@GXENG\\y@SOEe@MaAWMC]KQEWIuA_@SGQE}@UUGEAICSE[K[IMCSGu@U[IICICMEICUGME]KQEuA_@UIa@Km@OGCWG}@WA?GAQGYGEAoA]EAQGYIOEa@KA?]KQEa@Km@Qa@KME}@WYIMEA?g@OUVORKLIJSTo@x@IHIJONGD?@URONCBCDCB[ZGFCBGFKHQN]X]VA@]XGDA@SNGDOJ?@A@SPCBM?I?]TKE{@]KEAAa@OMGKC?AYIQIc@Mi@SWIm@SGCYGi@OAAC?CAEAMEkA[iCq@SGUGCAICKCICICYI[[Y]AAACACAECEAKAAG]MYUCUIA?KEm@OIAAAMCYIGCKEKEGAEAAAA?ICQEGC]Ig@OA?MEGCA?AAKCMEYGs@QOEOEm@QDW"
+              },
+              "start_location": {
+                "lat": 30.2395173,
+                "lng": -97.7528681
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 30.266689,
+                    "lng": -97.745863
+                  },
+                  "name": "Lavaca/4th"
+                },
+                "arrival_time": {
+                  "text": "2:23 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764750236
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 30.2395173,
+                    "lng": -97.7528681
+                  },
+                  "name": "Oltorf Station (NB)"
+                },
+                "departure_time": {
+                  "text": "2:18 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764749917
+                },
+                "headsign": "Downtown NB",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Capital Metro",
+                      "phone": "1 (512) 474-1200",
+                      "url": "http://www.capmetro.org/"
+                    }
+                  ],
+                  "color": "#004a97",
+                  "name": "486-Night Owl South Congress",
+                  "short_name": "486",
+                  "text_color": "#ffffff",
+                  "url": "http://www.capmetro.org/current_schedules/pdf/486.pdf",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                    "name": "Bus",
+                    "type": "BUS"
+                  }
+                },
+                "num_stops": 7,
+                "trip_short_name": "Downtown"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "0.4 mi",
+                "value": 680
+              },
+              "duration": {
+                "text": "10 mins",
+                "value": 578
+              },
+              "end_location": {
+                "lat": 30.265086,
+                "lng": -97.7393357
+              },
+              "html_instructions": "Walk to Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+              "polyline": {
+                "points": "ymvwDt~qsQC?KC@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+              },
+              "start_location": {
+                "lat": 30.2666916,
+                "lng": -97.7458747
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "49 ft",
+                    "value": 15
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 13
+                  },
+                  "end_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "html_instructions": "Head <b>north</b> on <b>Lavaca St</b> toward <b>W 4th St</b>",
+                  "polyline": {
+                    "points": "ymvwDt~qsQC?KC"
+                  },
+                  "start_location": {
+                    "lat": 30.2666916,
+                    "lng": -97.7458747
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "0.4 mi",
+                    "value": 665
+                  },
+                  "duration": {
+                    "text": "9 mins",
+                    "value": 565
+                  },
+                  "end_location": {
+                    "lat": 30.265086,
+                    "lng": -97.7393357
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>W 4th St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "invwDp~qsQ@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+                  },
+                  "start_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "_zpwDvfssQaAhBIV[j@g@bA]QCDi@a@JScBmASh@g@O}BWsFk@a@C_AM}Cy@sHqBu@SaAW[KF_@ZaB\\gBMCiBg@s@QmFwAsF{A{Aa@]jB[|AG\\y@Su@S_Cm@wF{AuKyCaKoCqA]cCo@sBm@i@Oe@j@yAhBk@j@uAvAeCrBkA~@QBI?]TgAc@MG{@]yBu@{C}@wGgBi@OYI[[[_@ISCMG]MYk@MMEgAWy@YQEaCq@{Bk@}@WDUOCP}@X{AF]B@@EDSGCDQRkAJUHg@RiAB@J_@BGGCFY^qBPcABOD@@GD]@Ij@}CHg@MMBIH_@RgAPgA?a@\\sB"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 30.26676759999999,
+          "lng": -97.7393357
+        },
+        "southwest": {
+          "lat": 30.2379228,
+          "lng": -97.7534907
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$1.25",
+        "value": 1.25
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "3:07 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764752852
+          },
+          "departure_time": {
+            "text": "2:48 AM",
+            "time_zone": "America/Chicago",
+            "value": 1764751710
+          },
+          "distance": {
+            "text": "2.8 mi",
+            "value": 4499
+          },
+          "duration": {
+            "text": "19 mins",
+            "value": 1142
+          },
+          "end_address": "Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+          "end_location": {
+            "lat": 30.265086,
+            "lng": -97.7393357
+          },
+          "start_address": "Oltorf/Congress, Austin, TX 78704, USA",
+          "start_location": {
+            "lat": 30.2379228,
+            "lng": -97.7522821
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.2 mi",
+                "value": 283
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 244
+              },
+              "end_location": {
+                "lat": 30.2394633,
+                "lng": -97.75277340000001
+              },
+              "html_instructions": "Walk to Oltorf Station (NB)",
+              "polyline": {
+                "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@]QCDi@a@JSw@k@k@a@"
+              },
+              "start_location": {
+                "lat": 30.2379228,
+                "lng": -97.7522821
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "0.1 mi",
+                    "value": 156
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 136
+                  },
+                  "end_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "html_instructions": "Head <b>northwest</b> on <b>E Oltorf St</b> toward <b>S Congress Ave</b><div style=\"font-size:0.9em\">Pass by PNC Bank (on the left in 350 ft)</div>",
+                  "polyline": {
+                    "points": "_zpwDvfssQ[j@A@Yh@IPIV[j@EHa@x@"
+                  },
+                  "start_location": {
+                    "lat": 30.2379228,
+                    "lng": -97.7522821
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "128 ft",
+                    "value": 39
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 39
+                  },
+                  "end_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>S Congress Ave</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "o~pwDhnssQ]QCDi@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2386427,
+                    "lng": -97.7534907
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "69 ft",
+                    "value": 21
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 16
+                  },
+                  "end_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "html_instructions": "Turn <b>right</b>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "{`qwDzlssQJS"
+                  },
+                  "start_location": {
+                    "lat": 30.239023,
+                    "lng": -97.753255
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "220 ft",
+                    "value": 67
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 53
+                  },
+                  "end_location": {
+                    "lat": 30.2394633,
+                    "lng": -97.75277340000001
+                  },
+                  "html_instructions": "Turn <b>left</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
+                  "maneuver": "turn-left",
+                  "polyline": {
+                    "points": "o`qwDflssQw@k@k@a@"
+                  },
+                  "start_location": {
+                    "lat": 30.2389606,
+                    "lng": -97.7531573
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "2.2 mi",
+                "value": 3536
+              },
+              "duration": {
+                "text": "5 mins",
+                "value": 319
+              },
+              "end_location": {
+                "lat": 30.266689,
+                "lng": -97.745863
+              },
+              "html_instructions": "Bus towards Downtown NB",
+              "polyline": {
+                "points": "_dqwDljssQGTECOEGCIAGCQAc@E_AKEAC?]CQCOAc@E_CYE?IAE?A?OACAMAYCSEYGg@OEAa@KA?QGOEOEUGSGOEOEEAOEEAUGWGOEqA]EASGSGICEAICME[IA?e@M[I[KF_@PaAH_@\\gBMCe@McAYa@KQEME]I}C{@c@KwCy@o@Qc@KGCy@Sa@MIb@SfAAFKj@GXENG\\y@SOEe@MaAWMC]KQEWIuA_@SGQE}@UUGEAICSE[K[IMCSGu@U[IICICMEICUGME]KQEuA_@UIa@Km@OGCWG}@WA?GAQGYGEAoA]EAQGYIOEa@KA?]KQEa@Km@Qa@KME}@WYIMEA?g@OUVORKLIJSTo@x@IHIJONGD?@URONCBCDCB[ZGFCBGFKHQN]X]VA@]XGDA@SNGDOJ?@A@SPCBM?I?]TKE{@]KEAAa@OMGKC?AYIQIc@Mi@SWIm@SGCYGi@OAAC?CAEAMEkA[iCq@SGUGCAICKCICICYI[[Y]AAACACAECEAKAAG]MYUCUIA?KEm@OIAAAMCYIGCKEKEGAEAAAA?ICQEGC]Ig@OA?MEGCA?AAKCMEYGs@QOEOEm@QDW"
+              },
+              "start_location": {
+                "lat": 30.2395173,
+                "lng": -97.7528681
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 30.266689,
+                    "lng": -97.745863
+                  },
+                  "name": "Lavaca/4th"
+                },
+                "arrival_time": {
+                  "text": "2:57 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764752274
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 30.2395173,
+                    "lng": -97.7528681
+                  },
+                  "name": "Oltorf Station (NB)"
+                },
+                "departure_time": {
+                  "text": "2:52 AM",
+                  "time_zone": "America/Chicago",
+                  "value": 1764751955
+                },
+                "headsign": "Downtown NB",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Capital Metro",
+                      "phone": "1 (512) 474-1200",
+                      "url": "http://www.capmetro.org/"
+                    }
+                  ],
+                  "color": "#004a97",
+                  "name": "486-Night Owl South Congress",
+                  "short_name": "486",
+                  "text_color": "#ffffff",
+                  "url": "http://www.capmetro.org/current_schedules/pdf/486.pdf",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                    "name": "Bus",
+                    "type": "BUS"
+                  }
+                },
+                "num_stops": 7,
+                "trip_short_name": "Downtown"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "0.4 mi",
+                "value": 680
+              },
+              "duration": {
+                "text": "10 mins",
+                "value": 578
+              },
+              "end_location": {
+                "lat": 30.265086,
+                "lng": -97.7393357
+              },
+              "html_instructions": "Walk to Downtown Station, 209 E 4th St, Austin, TX 78701, USA",
+              "polyline": {
+                "points": "ymvwDt~qsQC?KC@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+              },
+              "start_location": {
+                "lat": 30.2666916,
+                "lng": -97.7458747
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "49 ft",
+                    "value": 15
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 13
+                  },
+                  "end_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "html_instructions": "Head <b>north</b> on <b>Lavaca St</b> toward <b>W 4th St</b>",
+                  "polyline": {
+                    "points": "ymvwDt~qsQC?KC"
+                  },
+                  "start_location": {
+                    "lat": 30.2666916,
+                    "lng": -97.7458747
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "0.4 mi",
+                    "value": 665
+                  },
+                  "duration": {
+                    "text": "9 mins",
+                    "value": 565
+                  },
+                  "end_location": {
+                    "lat": 30.265086,
+                    "lng": -97.7393357
+                  },
+                  "html_instructions": "Turn <b>right</b> onto <b>W 4th St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "invwDp~qsQ@GNu@@EBOP_A@EBMBOB@@EDSGCBO@A?CRgABKFI@IF]RiAB@@EHYBGGCDS@ERgAJi@F_@@KDU@A?CBKD@@GBS@I@I@G@Cd@iC@GBKA?@IDQMMBIDQBMDSBODUBMLu@BQ?W?ILy@BOBMF["
+                  },
+                  "start_location": {
+                    "lat": 30.26676759999999,
+                    "lng": -97.7458456
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "_zpwDvfssQaAhBIV[j@g@bA]QCDi@a@JScBmASh@g@O}BWsFk@a@C_AM}Cy@sHqBu@SaAW[KF_@ZaB\\gBMCiBg@s@QmFwAsF{A{Aa@]jB[|AG\\y@Su@S_Cm@wF{AuKyCaKoCqA]cCo@sBm@i@Oe@j@yAhBk@j@uAvAeCrBkA~@QBI?]TgAc@MG{@]yBu@{C}@wGgBi@OYI[[[_@ISCMG]MYk@MMEgAWy@YQEaCq@{Bk@}@WDUOCP}@X{AF]B@@EDSGCDQRkAJUHg@RiAB@J_@BGGCFY^qBPcABOD@@GD]@Ij@}CHg@MMBIH_@RgAPgA?a@\\sB"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    }
+  ],
+  "status": "OK"
+}

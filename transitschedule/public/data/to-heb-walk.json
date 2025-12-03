@@ -1,0 +1,261 @@
+{
+  "geocoded_waypoints": [
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJ_2NXafC0RIYRYY6aStvehwA",
+      "types": [
+        "premise",
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJmX7Gp--0RIYRgRH8P9G6q3s",
+      "types": [
+        "premise",
+        "street_address"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 30.2401853,
+          "lng": -97.7506853
+        },
+        "southwest": {
+          "lat": 30.23882339999999,
+          "lng": -97.7542744
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "legs": [
+        {
+          "distance": {
+            "text": "0.3 mi",
+            "value": 498
+          },
+          "duration": {
+            "text": "8 mins",
+            "value": 451
+          },
+          "end_address": "2400 S Congress Ave, Austin, TX 78704, USA",
+          "end_location": {
+            "lat": 30.2391475,
+            "lng": -97.7542744
+          },
+          "start_address": "2215 Post Rd, Austin, TX 78704, USA",
+          "start_location": {
+            "lat": 30.2400626,
+            "lng": -97.7506853
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "82 ft",
+                "value": 25
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 19
+              },
+              "end_location": {
+                "lat": 30.2401853,
+                "lng": -97.75089919999999
+              },
+              "html_instructions": "Head <b>northwest</b> toward <b>Post Rd</b>",
+              "polyline": {
+                "points": "kgqwDx|rsQYh@"
+              },
+              "start_location": {
+                "lat": 30.2400626,
+                "lng": -97.7506853
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "154 ft",
+                "value": 47
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 38
+              },
+              "end_location": {
+                "lat": 30.2398318,
+                "lng": -97.7511754
+              },
+              "html_instructions": "Turn <b>left</b>",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "ehqwDb~rsQfAv@"
+              },
+              "start_location": {
+                "lat": 30.2401853,
+                "lng": -97.75089919999999
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "36 ft",
+                "value": 11
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 10
+              },
+              "end_location": {
+                "lat": 30.23988929999999,
+                "lng": -97.75127409999999
+              },
+              "html_instructions": "Turn <b>right</b> toward <b>Post Rd</b>",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "}eqwDz_ssQKP"
+              },
+              "start_location": {
+                "lat": 30.2398318,
+                "lng": -97.7511754
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "141 ft",
+                "value": 43
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 37
+              },
+              "end_location": {
+                "lat": 30.2395714,
+                "lng": -97.7515204
+              },
+              "html_instructions": "Turn <b>left</b> toward <b>Post Rd</b>",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "ifqwDl`ssQ~@p@"
+              },
+              "start_location": {
+                "lat": 30.23988929999999,
+                "lng": -97.75127409999999
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "381 ft",
+                "value": 116
+              },
+              "duration": {
+                "text": "2 mins",
+                "value": 108
+              },
+              "end_location": {
+                "lat": 30.2401029,
+                "lng": -97.752557
+              },
+              "html_instructions": "Turn <b>right</b> toward <b>Post Rd</b>",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "idqwD~assQQb@Qb@M\\w@hB"
+              },
+              "start_location": {
+                "lat": 30.2395714,
+                "lng": -97.7515204
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "151 ft",
+                "value": 46
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 40
+              },
+              "end_location": {
+                "lat": 30.239798,
+                "lng": -97.75300209999999
+              },
+              "html_instructions": "Turn <b>left</b> onto <b>Post Rd</b>",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "sgqwDnhssQJJDBRPTt@"
+              },
+              "start_location": {
+                "lat": 30.2401029,
+                "lng": -97.752557
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "430 ft",
+                "value": 131
+              },
+              "duration": {
+                "text": "2 mins",
+                "value": 126
+              },
+              "end_location": {
+                "lat": 30.23882339999999,
+                "lng": -97.7537512
+              },
+              "html_instructions": "Slight <b>left</b> onto <b>S Congress Ave</b>",
+              "maneuver": "turn-slight-left",
+              "polyline": {
+                "points": "weqwDfkssQJBFBZHFBB@VJDJNJLHBBHHn@b@EHRR"
+              },
+              "start_location": {
+                "lat": 30.239798,
+                "lng": -97.75300209999999
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "259 ft",
+                "value": 79
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 73
+              },
+              "end_location": {
+                "lat": 30.2391475,
+                "lng": -97.7542744
+              },
+              "html_instructions": "Turn <b>right</b> onto <b>W Oltorf St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "s_qwD|ossQk@dAIPKN"
+              },
+              "start_location": {
+                "lat": 30.23882339999999,
+                "lng": -97.7537512
+              },
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "kgqwDx|rsQYh@fAv@KP~@p@c@fAeAfCPNRPTt@RFb@LZLTVjAz@EHRRu@vAKN"
+      },
+      "summary": "S Congress Ave",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    }
+  ],
+  "status": "OK"
+}

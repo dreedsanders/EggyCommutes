@@ -1,0 +1,190 @@
+#!/bin/bash
+
+# eggycommutes - Start transit display as desktop background
+# This script starts the React app and displays it as a fullscreen window behind other windows
+
+# Get the actual script directory, even when run via symlink
+SCRIPT_SOURCE="${BASH_SOURCE[0]}"
+# If script is a symlink, resolve it
+if [ -L "$SCRIPT_SOURCE" ]; then
+    SCRIPT_SOURCE="$(readlink "$SCRIPT_SOURCE")"
+    # If readlink returns relative path, make it absolute
+    if [[ "$SCRIPT_SOURCE" != /* ]]; then
+        SCRIPT_SOURCE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$SCRIPT_SOURCE"
+    fi
+fi
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_SOURCE")" && pwd)"
+TRANSIT_DIR="$SCRIPT_DIR/transitschedule"
+PORT=3000
+URL="http://localhost:$PORT"
+
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+# Function to check if port is in use
+check_port() {
+    lsof -ti:$PORT > /dev/null 2>&1
+}
+
+# Function to wait for server to be ready
+wait_for_server() {
+    echo -e "${YELLOW}Waiting for server to start...${NC}"
+    local max_attempts=30
+    local attempt=0
+    
+    while [ $attempt -lt $max_attempts ]; do
+        if curl -s "$URL" > /dev/null 2>&1; then
+            echo -e "${GREEN}Server is ready!${NC}"
+            return 0
+        fi
+        sleep 1
+        attempt=$((attempt + 1))
+    done
+    
+    echo -e "${RED}Server failed to start within 30 seconds${NC}"
+    return 1
+}
+
+# Function to start React server
+start_server() {
+    if check_port; then
+        echo -e "${YELLOW}Server already running on port $PORT${NC}"
+        return 0
+    fi
+    
+    echo -e "${GREEN}Starting React development server...${NC}"
+    cd "$TRANSIT_DIR" || exit 1
+    
+    # Start server in background
+    npm start > /dev/null 2>&1 &
+    SERVER_PID=$!
+    
+    # Wait for server to be ready
+    if wait_for_server; then
+        return 0
+    else
+        kill $SERVER_PID 2>/dev/null
+        return 1
+    fi
+}
+
+# Function to stop server
+stop_server() {
+    echo -e "${YELLOW}Stopping server...${NC}"
+    if check_port; then
+        lsof -ti:$PORT | xargs kill -9 2>/dev/null
+        echo -e "${GREEN}Server stopped${NC}"
+    else
+        echo -e "${YELLOW}No server running on port $PORT${NC}"
+    fi
+}
+
+# Function to fetch transit data
+fetch_transit_data() {
+    echo -e "${GREEN}Fetching transit data...${NC}"
+    cd "$TRANSIT_DIR" || exit 1
+    
+    if [ -f "fetch-transit-data.js" ]; then
+        node fetch-transit-data.js
+        if [ $? -eq 0 ]; then
+            echo -e "${GREEN}Transit data fetched successfully${NC}"
+        else
+            echo -e "${RED}Failed to fetch transit data${NC}"
+            return 1
+        fi
+    else
+        echo -e "${YELLOW}Warning: fetch-transit-data.js not found${NC}"
+    fi
+}
+
+# Handle --stop flag
+if [ "$1" == "--stop" ]; then
+    stop_server
+    exit 0
+fi
+
+# Fetch transit data first (will overwrite existing files)
+echo -e "${GREEN}Updating transit data files...${NC}"
+fetch_transit_data || echo -e "${YELLOW}Warning: Transit data fetch had issues, but continuing...${NC}"
+
+# Check if Electron is available (preferred method)
+ELECTRON_BIN="$TRANSIT_DIR/node_modules/.bin/electron"
+if command -v electron &> /dev/null || [ -f "$ELECTRON_BIN" ]; then
+    echo -e "${GREEN}Using Electron for better window control...${NC}"
+    
+    # Start server if not running
+    if ! check_port; then
+        start_server || exit 1
+    fi
+    
+    # Wait a moment for server to be fully ready
+    sleep 2
+    
+    # Launch Electron app
+    cd "$TRANSIT_DIR" || exit 1
+    if [ -f "$ELECTRON_BIN" ]; then
+        "$ELECTRON_BIN" . &
+    else
+        electron . &
+    fi
+    echo -e "${GREEN}Electron window opened! It should appear behind other windows.${NC}"
+    echo -e "${YELLOW}Press Ctrl+C to stop the server, or close Electron window.${NC}"
+    wait
+    exit 0
+fi
+
+# Fallback to browser method
+echo -e "${YELLOW}Electron not found, using browser method...${NC}"
+echo -e "${YELLOW}Note: Browser method may not support 'behind windows' positioning${NC}"
+
+# Start server if not running
+if ! check_port; then
+    start_server || exit 1
+fi
+
+# Wait a moment for server to fully initialize
+sleep 2
+
+# Try to open in Chrome kiosk mode
+if [ -d "/Applications/Google Chrome.app" ]; then
+    echo -e "${GREEN}Opening Chrome in kiosk mode...${NC}"
+    open -a "Google Chrome" --args --kiosk --app="$URL" --disable-web-security --user-data-dir="/tmp/chrome-eggycommutes"
+    
+    # Use AppleScript to try to position window behind others
+    sleep 2
+    osascript <<EOF
+tell application "Google Chrome"
+    activate
+    tell window 1
+        set index to 9999
+    end tell
+end tell
+EOF
+elif [ -d "/Applications/Safari.app" ]; then
+    echo -e "${GREEN}Opening Safari...${NC}"
+    open -a Safari "$URL"
+    
+    # Use AppleScript to try to position window behind others
+    sleep 2
+    osascript <<EOF
+tell application "Safari"
+    activate
+    tell window 1
+        set index to 9999
+    end tell
+end tell
+EOF
+else
+    echo -e "${RED}No supported browser found. Please install Chrome or Safari.${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}Display started! Press Ctrl+C to stop.${NC}"
+echo -e "${YELLOW}To stop the server, run: eggycommutes --stop${NC}"
+
+# Keep script running
+wait
+
