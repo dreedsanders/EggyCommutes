@@ -3,23 +3,26 @@ import axios from "axios";
 import TransitDisplay from "./TransitDisplay";
 import "./App.css";
 
-// Home address constant
-const HOME_ADDRESS = "2215 post rd austin tx 78704";
+// Initial home address - will be moved to state
+const INITIAL_HOME_ADDRESS = "2215 post rd austin tx 78704";
+const INITIAL_PAGE_TITLE = "Eggy Commutes";
 
 /**
  * getFerrySchedule Function
  *
- * Gets the ferry departure times from Anacortes to Orcas Island.
+ * Gets the ferry departure times from Anacortes to Orcas Island or Orcas to Anacortes.
  * Times are extracted from WSDOT schedule and stored locally.
- * Schedule: AM - 5:30, 7:30, 10:05, 11:55; PM - 3:20, 8:40
+ * Anacortes Schedule: AM - 5:30, 7:30, 10:05, 11:55; PM - 3:20, 8:40
+ * Orcas Schedule: AM - 6:15, 8:15, 10:50, 12:40; PM - 4:05, 9:25
  *
+ * @param {string} direction - 'anacortes' or 'orcas' (default: 'anacortes')
  * @returns {Array} Array of Date objects representing departure times in Central Time Zone
  */
-const getFerrySchedule = () => {
-  console.log("getFerrySchedule called");
-  // Ferry departure times from Anacortes (in 24-hour format)
-  // Times are in Pacific Time, we'll convert to Central Time
-  const ferryTimes = [
+const getFerrySchedule = (direction = "anacortes") => {
+  console.log("getFerrySchedule called with direction:", direction);
+
+  // Ferry departure times from Anacortes (in 24-hour format, Pacific Time)
+  const anacortesTimes = [
     { hour: 5, minute: 30 }, // 5:30 AM
     { hour: 7, minute: 30 }, // 7:30 AM
     { hour: 10, minute: 5 }, // 10:05 AM
@@ -27,6 +30,18 @@ const getFerrySchedule = () => {
     { hour: 15, minute: 20 }, // 3:20 PM
     { hour: 20, minute: 40 }, // 8:40 PM
   ];
+
+  // Ferry departure times from Orcas Island (in 24-hour format, Pacific Time)
+  const orcasTimes = [
+    { hour: 6, minute: 15 }, // 6:15 AM
+    { hour: 8, minute: 15 }, // 8:15 AM
+    { hour: 10, minute: 50 }, // 10:50 AM
+    { hour: 12, minute: 40 }, // 12:40 PM
+    { hour: 16, minute: 5 }, // 4:05 PM
+    { hour: 21, minute: 25 }, // 9:25 PM
+  ];
+
+  const ferryTimes = direction === "orcas" ? orcasTimes : anacortesTimes;
 
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -77,8 +92,12 @@ const getFerrySchedule = () => {
 
   // Store in localStorage
   try {
+    const storageKey =
+      direction === "orcas"
+        ? "ferry_schedule_orcas_anacortes"
+        : "ferry_schedule_anacortes_orcas";
     localStorage.setItem(
-      "ferry_schedule_anacortes_orcas",
+      storageKey,
       JSON.stringify(departureTimes.map((dt) => dt.toISOString()))
     );
   } catch (error) {
@@ -121,6 +140,112 @@ const convertToCentralTime = (timeValue) => {
 };
 
 /**
+ * getDestinationName Function
+ *
+ * Uses Google Places API Text Search to determine the appropriate name for a destination.
+ * Returns business name for businesses, address for residential, cross streets for intersections.
+ *
+ * @param {string} destination - The destination address or query
+ * @param {string} apiKey - Google Maps API key
+ * @returns {Promise<string>} - The appropriate name for the destination
+ */
+const getDestinationName = async (destination, apiKey) => {
+  try {
+    // Use Places API Text Search endpoint
+    const placesUrl =
+      "https://maps.googleapis.com/maps/api/place/textsearch/json";
+
+    const placesResponse = await axios.get(placesUrl, {
+      params: {
+        query: destination,
+        key: apiKey,
+      },
+    });
+
+    if (
+      placesResponse.data &&
+      placesResponse.data.status === "OK" &&
+      placesResponse.data.results &&
+      placesResponse.data.results.length > 0
+    ) {
+      const place = placesResponse.data.results[0];
+      const types = place.types || [];
+
+      // Check if it's a business/establishment
+      if (
+        types.includes("establishment") ||
+        types.includes("point_of_interest") ||
+        types.includes("store") ||
+        types.includes("restaurant") ||
+        types.includes("gas_station") ||
+        types.includes("lodging") ||
+        types.includes("gym") ||
+        types.includes("supermarket")
+      ) {
+        // Use business name
+        return place.name || place.formatted_address || destination;
+      }
+
+      // Check if it's an intersection
+      if (types.includes("intersection")) {
+        // Extract route names from address components
+        const routes = place.address_components
+          ?.filter((comp) => comp.types?.includes("route"))
+          .map((comp) => comp.long_name || comp.short_name)
+          .join(" & ");
+        return routes || place.formatted_address || destination;
+      }
+
+      // For residential addresses, use formatted address
+      if (types.includes("street_address") || types.includes("premise")) {
+        return place.formatted_address || destination;
+      }
+
+      // Default: use place name or formatted address
+      return place.name || place.formatted_address || destination;
+    }
+
+    // Fallback: try Geocoding API if Places API doesn't return results
+    const geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json";
+    const geocodeResponse = await axios.get(geocodeUrl, {
+      params: {
+        address: destination,
+        key: apiKey,
+      },
+    });
+
+    if (
+      geocodeResponse.data &&
+      geocodeResponse.data.status === "OK" &&
+      geocodeResponse.data.results &&
+      geocodeResponse.data.results.length > 0
+    ) {
+      const result = geocodeResponse.data.results[0];
+      const types = result.types || [];
+
+      // Check for intersection
+      if (types.includes("intersection")) {
+        const routes = result.address_components
+          ?.filter((comp) => comp.types?.includes("route"))
+          .map((comp) => comp.long_name || comp.short_name)
+          .join(" & ");
+        return routes || result.formatted_address || destination;
+      }
+
+      // For street addresses, use formatted address
+      return result.formatted_address || destination;
+    }
+
+    // If all else fails, return original destination
+    return destination;
+  } catch (error) {
+    console.error("Error getting destination name:", error);
+    // Return original destination on error
+    return destination;
+  }
+};
+
+/**
  * fetchAllTransitTimes Function
  *
  * Makes API calls to fetch transit data for both stops (route 801 bus at Lamar/Oltorf
@@ -131,8 +256,15 @@ const convertToCentralTime = (timeValue) => {
  *
  * @param {Function} setStops - React setState function to update stops state
  * @param {string} apiKey - Google Maps API key
+ * @param {string} homeAddress - Home address to use for stops that depend on it
+ * @param {string} ferryDirection - Ferry direction ('anacortes' or 'orcas')
  */
-const fetchAllTransitTimes = async (setStops, apiKey) => {
+const fetchAllTransitTimes = async (
+  setStops,
+  apiKey,
+  homeAddress = INITIAL_HOME_ADDRESS,
+  ferryDirection = "anacortes"
+) => {
   const baseUrl = "https://maps.googleapis.com/maps/api/directions/json";
 
   // Define the stops we want to track
@@ -158,7 +290,7 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
     {
       name: "To Springs",
       type: "bike",
-      origin: HOME_ADDRESS,
+      origin: homeAddress,
       destination: "barton springs pool in austin tx",
       mode: "bicycling",
       dataFile: "/data/to-springs-bike.json",
@@ -166,7 +298,7 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
     {
       name: "To HEB",
       type: "walk",
-      origin: HOME_ADDRESS,
+      origin: homeAddress,
       destination: "2400 S. CONGRESS AVE. AUSTIN, TX 78704",
       mode: "walking",
       dataFile: "/data/to-heb-walk.json",
@@ -174,15 +306,20 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
     {
       name: "Central Market",
       type: "drive",
-      origin: HOME_ADDRESS,
+      origin: homeAddress,
       destination: "4477 S Lamar Blvd, Austin, TX 78745",
       mode: "driving",
       dataFile: "/data/central-market-drive.json",
     },
     {
-      name: "Anacortes To Orcas Island",
+      name:
+        ferryDirection === "orcas"
+          ? "Orcas Island To Anacortes"
+          : "Anacortes To Orcas Island",
       type: "ferry",
-      location: "Anacortes, WA",
+      location:
+        ferryDirection === "orcas" ? "Orcas Island, WA" : "Anacortes, WA",
+      ferryDirection: ferryDirection,
     },
   ];
 
@@ -320,7 +457,8 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
       // Handle ferry type - get schedule from WSDOT
       if (stopConfig.type === "ferry") {
         console.log("Processing ferry stop:", stopConfig.name);
-        const ferryDepartureTimes = getFerrySchedule();
+        const direction = stopConfig.ferryDirection || "anacortes";
+        const ferryDepartureTimes = getFerrySchedule(direction);
         console.log("Got ferry times:", ferryDepartureTimes.length, "times");
 
         // Safety check: ensure we have departure times
@@ -329,6 +467,8 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
           return {
             name: stopConfig.name,
             type: stopConfig.type,
+            ferryDirection: stopConfig.ferryDirection || "anacortes",
+            location: stopConfig.location,
             allArrivalTimes: [],
             nextDepartureTime: null,
             nextArrivalTime: null,
@@ -402,15 +542,22 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
             nextDeparture instanceof Date && !isNaN(nextDeparture.getTime()),
         });
 
+        const destinationName =
+          direction === "orcas" ? "Anacortes" : "Orcas Island";
+        const routeName =
+          direction === "orcas" ? "Orcas-Anacortes" : "Anacortes-Orcas";
+
         return {
           name: stopConfig.name,
           type: stopConfig.type,
+          ferryDirection: direction,
+          location: stopConfig.location,
           allArrivalTimes: ferryDepartureTimes.map((time) => ({
             stopName: stopConfig.name,
             arrivalTime: time,
             departureTime: time,
-            headsign: "Orcas Island",
-            lineName: "Anacortes-Orcas",
+            headsign: destinationName,
+            lineName: routeName,
           })),
           nextDepartureTime: nextDeparture,
           nextArrivalTime: null,
@@ -439,6 +586,9 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
           return {
             name: stopConfig.name,
             type: stopConfig.type,
+            origin: stopConfig.origin,
+            destination: stopConfig.destination,
+            mode: stopConfig.mode,
             allArrivalTimes: [],
             estimatedTime: null,
             lastStopTime: null,
@@ -485,6 +635,10 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
         return {
           name: stopConfig.name,
           type: stopConfig.type,
+          origin: stopConfig.origin,
+          destination: stopConfig.destination,
+          routeFilter: stopConfig.routeFilter,
+          transitMode: stopConfig.transitMode,
           allArrivalTimes: [],
           nextArrivalTime: null,
           lastStopTime: null,
@@ -707,6 +861,10 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
       return {
         name: stopConfig.name,
         type: stopConfig.type,
+        origin: stopConfig.origin,
+        destination: stopConfig.destination,
+        routeFilter: stopConfig.routeFilter,
+        transitMode: stopConfig.transitMode,
         allArrivalTimes: allArrivalTimes,
         nextArrivalTime: nextArrival?.arrivalTime || null,
         lastStopTime: lastStopTime,
@@ -803,11 +961,25 @@ const fetchAllTransitTimes = async (setStops, apiKey) => {
  * and passes processed data to the TransitDisplay component.
  */
 function App() {
+  // State for home address and page title
+  const [homeAddress, setHomeAddress] = useState(INITIAL_HOME_ADDRESS);
+  const [pageTitle, setPageTitle] = useState(INITIAL_PAGE_TITLE);
+
+  // State for editing
+  const [editingStop, setEditingStop] = useState(null);
+  const [editingHome, setEditingHome] = useState(false);
+  const [previousStopConfig, setPreviousStopConfig] = useState(null);
+  const [reviewData, setReviewData] = useState(null);
+
   // State for storing all transit stops data
   const [stops, setStops] = useState([
     {
       name: "Congress and Oltorf",
       type: "bus",
+      origin: "Congress and Oltorf, Austin, TX",
+      destination: "Downtown Station, Austin, TX",
+      routeFilter: "801",
+      transitMode: "bus",
       allArrivalTimes: [],
       nextArrivalTime: null,
       lastStopTime: null,
@@ -816,6 +988,10 @@ function App() {
     {
       name: "South San Francisco",
       type: "train",
+      origin: "South San Francisco Caltrain Station, CA",
+      destination: "San Francisco Caltrain Station, CA",
+      routeFilter: "Caltrain",
+      transitMode: "rail",
       allArrivalTimes: [],
       nextArrivalTime: null,
       lastStopTime: null,
@@ -824,6 +1000,9 @@ function App() {
     {
       name: "To Springs",
       type: "bike",
+      origin: INITIAL_HOME_ADDRESS,
+      destination: "barton springs pool in austin tx",
+      mode: "bicycling",
       allArrivalTimes: [],
       estimatedTime: null,
       nextArrivalTime: null,
@@ -833,6 +1012,9 @@ function App() {
     {
       name: "To HEB",
       type: "walk",
+      origin: INITIAL_HOME_ADDRESS,
+      destination: "2400 S. CONGRESS AVE. AUSTIN, TX 78704",
+      mode: "walking",
       allArrivalTimes: [],
       estimatedTime: null,
       nextArrivalTime: null,
@@ -842,6 +1024,9 @@ function App() {
     {
       name: "Central Market",
       type: "drive",
+      origin: INITIAL_HOME_ADDRESS,
+      destination: "4477 S Lamar Blvd, Austin, TX 78745",
+      mode: "driving",
       allArrivalTimes: [],
       estimatedTime: null,
       nextArrivalTime: null,
@@ -851,6 +1036,8 @@ function App() {
     {
       name: "Anacortes To Orcas Island",
       type: "ferry",
+      ferryDirection: "anacortes",
+      location: "Anacortes, WA",
       allArrivalTimes: [],
       nextDepartureTime: null,
       nextArrivalTime: null,
@@ -858,6 +1045,9 @@ function App() {
       isWithinTwoStops: false,
     },
   ]);
+
+  // State for ferry direction
+  const [ferryDirection, setFerryDirection] = useState("anacortes");
 
   // Get API key from environment variables with default
   const apiKey =
@@ -873,11 +1063,11 @@ function App() {
   useEffect(() => {
     // Fetch transit times - ferry doesn't need API key, others do
     if (apiKey && apiKey !== "YOUR_API_KEY_HERE") {
-      fetchAllTransitTimes(setStops, apiKey);
+      fetchAllTransitTimes(setStops, apiKey, homeAddress, ferryDirection);
 
       // Set up interval to refresh data every 5 minutes
       const interval = setInterval(() => {
-        fetchAllTransitTimes(setStops, apiKey);
+        fetchAllTransitTimes(setStops, apiKey, homeAddress, ferryDirection);
       }, 5 * 60 * 1000); // 5 minutes
 
       return () => clearInterval(interval);
@@ -886,13 +1076,383 @@ function App() {
         "Google Maps API key not configured. Please set REACT_APP_GOOGLE_MAPS_API_KEY in .env file"
       );
       // Still process ferry stops even without API key
-      fetchAllTransitTimes(setStops, apiKey || "YOUR_API_KEY_HERE");
+      fetchAllTransitTimes(
+        setStops,
+        apiKey || "YOUR_API_KEY_HERE",
+        homeAddress,
+        ferryDirection
+      );
     }
-  }, [apiKey]);
+  }, [apiKey, homeAddress, ferryDirection]);
+
+  /**
+   * Update a single stop's configuration
+   */
+  const updateStop = async (stopIndex, newConfig) => {
+    const stop = stops[stopIndex];
+    if (!stop) return;
+
+    // Save previous config for rollback
+    const previousConfig = {
+      ...stop,
+      origin: stop.origin,
+      destination: stop.destination,
+      ferryDirection: stop.ferryDirection,
+    };
+    setPreviousStopConfig(previousConfig);
+
+    try {
+      // For ferry, just update direction
+      if (stop.type === "ferry") {
+        const newFerryDirection = newConfig.ferryDirection || "anacortes";
+        setFerryDirection(newFerryDirection);
+        // Re-fetch to update ferry schedule
+        await fetchAllTransitTimes(
+          setStops,
+          apiKey,
+          homeAddress,
+          newFerryDirection
+        );
+        setEditingStop(null);
+        setReviewData(null);
+        // Reload page with new information
+        window.location.reload();
+        return;
+      }
+
+      // For other stops, make API call
+      const baseUrl = "https://maps.googleapis.com/maps/api/directions/json";
+      let params;
+
+      if (
+        stop.type === "bike" ||
+        stop.type === "walk" ||
+        stop.type === "drive"
+      ) {
+        params = {
+          origin: newConfig.origin,
+          destination: newConfig.destination,
+          mode: stop.mode,
+          key: apiKey,
+        };
+      } else if (stop.type === "bus") {
+        // For bus, use selectedStop as origin, destination is always Downtown
+        params = {
+          origin: newConfig.selectedStop || newConfig.origin,
+          destination: "Downtown Station, Austin, TX",
+          mode: "transit",
+          transit_mode: "bus",
+          departure_time: "now",
+          alternatives: true,
+          key: apiKey,
+        };
+      } else if (stop.type === "train") {
+        // For train, use selectedStop as origin, destination is always SF
+        params = {
+          origin: newConfig.selectedStop || newConfig.origin,
+          destination: "San Francisco Caltrain Station, CA",
+          mode: "transit",
+          transit_mode: "rail",
+          departure_time: "now",
+          alternatives: true,
+          key: apiKey,
+        };
+      }
+
+      const response = await axios.get(baseUrl, { params });
+
+      if (response.data && response.data.status === "OK") {
+        // Get updated destination name if destination was changed
+        let updatedName = stop.name;
+        if (
+          (stop.type === "bike" ||
+            stop.type === "walk" ||
+            stop.type === "drive") &&
+          newConfig.destination !== (stop.destination || "")
+        ) {
+          // Destination was changed, get the new name
+          updatedName = await getDestinationName(newConfig.destination, apiKey);
+        } else if (
+          (stop.type === "bus" || stop.type === "train") &&
+          newConfig.selectedStop !== (stop.origin || "")
+        ) {
+          // Stop was changed for bus/train, use the selected stop name
+          updatedName = newConfig.selectedStop || stop.name;
+        }
+
+        // Process the response similar to fetchAllTransitTimes
+        const updatedConfig = {
+          ...stop,
+          name: updatedName,
+          origin:
+            stop.type === "bus" || stop.type === "train"
+              ? newConfig.selectedStop || newConfig.origin
+              : newConfig.origin,
+          destination:
+            stop.type === "bus" || stop.type === "train"
+              ? stop.type === "bus"
+                ? "Downtown Station, Austin, TX"
+                : "San Francisco Caltrain Station, CA"
+              : newConfig.destination,
+        };
+        const processedStop = processStopResponse(updatedConfig, response.data);
+
+        const newStops = [...stops];
+        newStops[stopIndex] = processedStop;
+        setStops(newStops);
+        setEditingStop(null);
+        setReviewData(null);
+
+        // Re-fetch all transit data (similar to fetch-transit-data.js functionality)
+        // Wait for all data to be fetched before reloading
+        await fetchAllTransitTimes(
+          setStops,
+          apiKey,
+          homeAddress,
+          ferryDirection
+        );
+
+        // Reload page with new information after data is fetched
+        window.location.reload();
+      } else {
+        // Handle API error responses
+        const status = response.data?.status;
+        let errorMsg = response.data?.error_message || "Unknown error occurred";
+
+        if (status === "ZERO_RESULTS") {
+          errorMsg = "Can not route to destination";
+        } else if (status === "NOT_FOUND") {
+          errorMsg = "Address does not exist";
+        } else if (status === "INVALID_REQUEST") {
+          errorMsg = "Invalid request - please check your inputs";
+        }
+
+        throw new Error(errorMsg);
+      }
+    } catch (error) {
+      let errorMessage = "An error occurred";
+
+      // Parse specific error messages
+      if (error.response?.data?.error_message) {
+        errorMessage = error.response.data.error_message;
+      } else if (error.response?.data?.status) {
+        const status = error.response.data.status;
+        if (status === "ZERO_RESULTS") {
+          errorMessage = "Can not route to destination";
+        } else if (status === "NOT_FOUND") {
+          errorMessage = "Address does not exist";
+        } else if (status === "INVALID_REQUEST") {
+          errorMessage = "Invalid request - please check your inputs";
+        } else {
+          errorMessage = status;
+        }
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      // Show error alert with specific message
+      alert(`Error: ${errorMessage}`);
+
+      // Revert to previous configuration
+      if (previousConfig) {
+        const newStops = [...stops];
+        newStops[stopIndex] = previousConfig;
+        setStops(newStops);
+      }
+
+      setEditingStop(null);
+      setReviewData(null);
+    }
+  };
+
+  /**
+   * Process stop response similar to fetchAllTransitTimes
+   */
+  const processStopResponse = (stopConfig, response) => {
+    if (
+      stopConfig.type === "bike" ||
+      stopConfig.type === "walk" ||
+      stopConfig.type === "drive"
+    ) {
+      if (
+        !response ||
+        response.status !== "OK" ||
+        !response.routes ||
+        response.routes.length === 0
+      ) {
+        return {
+          ...stopConfig,
+          allArrivalTimes: [],
+          estimatedTime: null,
+          nextArrivalTime: null,
+          lastStopTime: null,
+          isWithinTwoStops: false,
+        };
+      }
+
+      const route = response.routes[0];
+      const leg = route.legs[0];
+      const durationInSeconds = leg.duration.value;
+      const durationInMinutes = Math.round(durationInSeconds / 60);
+      const estimatedTime = `${durationInMinutes} min`;
+
+      return {
+        ...stopConfig,
+        origin: stopConfig.origin,
+        destination: stopConfig.destination,
+        mode: stopConfig.mode,
+        allArrivalTimes: [],
+        estimatedTime: estimatedTime,
+        nextArrivalTime: null,
+        lastStopTime: null,
+        isWithinTwoStops: false,
+      };
+    } else if (stopConfig.type === "bus" || stopConfig.type === "train") {
+      // Process transit stop (similar logic to fetchAllTransitTimes)
+      if (
+        !response ||
+        response.status !== "OK" ||
+        !response.routes ||
+        response.routes.length === 0
+      ) {
+        return {
+          ...stopConfig,
+          origin: stopConfig.origin,
+          destination: stopConfig.destination,
+          routeFilter: stopConfig.routeFilter,
+          transitMode: stopConfig.transitMode,
+          allArrivalTimes: [],
+          nextArrivalTime: null,
+          lastStopTime: null,
+          isWithinTwoStops: false,
+        };
+      }
+
+      // Extract arrival times (similar to fetchAllTransitTimes)
+      const allArrivalTimes = [];
+      response.routes.forEach((route) => {
+        route.legs.forEach((leg) => {
+          leg.steps.forEach((step) => {
+            if (step.travel_mode === "TRANSIT" && step.transit_details) {
+              const transitDetails = step.transit_details;
+              const lineName =
+                transitDetails.line?.short_name ||
+                transitDetails.line?.name ||
+                "";
+              const matchesRoute =
+                stopConfig.type === "bus"
+                  ? lineName === stopConfig.routeFilter
+                  : lineName.toLowerCase().includes("caltrain") ||
+                    transitDetails.line?.agencies?.[0]?.name
+                      ?.toLowerCase()
+                      .includes("caltrain");
+
+              if (matchesRoute && transitDetails.arrival_time) {
+                const isRealTime =
+                  transitDetails.arrival_time.value !== undefined;
+                if (isRealTime || transitDetails.arrival_time.text) {
+                  const arrivalTime = convertToCentralTime(
+                    transitDetails.arrival_time
+                  );
+                  if (arrivalTime) {
+                    allArrivalTimes.push({
+                      stopName:
+                        transitDetails.arrival_stop?.name || stopConfig.name,
+                      arrivalTime: arrivalTime,
+                      departureTime: convertToCentralTime(
+                        transitDetails.departure_time
+                      ),
+                      headsign: transitDetails.headsign || "Unknown",
+                      lineName: lineName,
+                      isRealTime: isRealTime,
+                    });
+                  }
+                }
+              }
+            }
+          });
+        });
+      });
+
+      allArrivalTimes.sort((a, b) => {
+        if (a.isRealTime && !b.isRealTime) return -1;
+        if (!a.isRealTime && b.isRealTime) return 1;
+        return a.arrivalTime - b.arrivalTime;
+      });
+
+      const now = new Date();
+      const realTimeArrivals = allArrivalTimes.filter(
+        (time) => time.isRealTime && time.arrivalTime > now
+      );
+      const nextArrival =
+        realTimeArrivals.length > 0
+          ? realTimeArrivals[0]
+          : allArrivalTimes.length > 0
+          ? allArrivalTimes[0]
+          : null;
+
+      return {
+        ...stopConfig,
+        origin: stopConfig.origin,
+        destination: stopConfig.destination,
+        routeFilter: stopConfig.routeFilter,
+        transitMode: stopConfig.transitMode,
+        allArrivalTimes: allArrivalTimes,
+        nextArrivalTime: nextArrival?.arrivalTime || null,
+        lastStopTime:
+          allArrivalTimes.length > 0
+            ? allArrivalTimes[allArrivalTimes.length - 1]?.arrivalTime
+            : null,
+        isWithinTwoStops: false,
+      };
+    }
+
+    return stopConfig;
+  };
+
+  /**
+   * Update home address and refresh dependent stops
+   */
+  const updateHomeAddress = async (newHomeAddress, newPageTitle) => {
+    setHomeAddress(newHomeAddress);
+    if (newPageTitle) {
+      setPageTitle(newPageTitle);
+    }
+
+    // Refresh all stops that use home address
+    await fetchAllTransitTimes(
+      setStops,
+      apiKey,
+      newHomeAddress,
+      ferryDirection
+    );
+    setEditingHome(false);
+    setReviewData(null);
+  };
 
   return (
     <div className="App">
-      <TransitDisplay stops={stops} />
+      <TransitDisplay
+        stops={stops}
+        onEditStop={(index) => {
+          setEditingStop(index);
+          setPreviousStopConfig({ ...stops[index] });
+        }}
+        onEditHome={() => setEditingHome(true)}
+        editingStop={editingStop}
+        editingHome={editingHome}
+        onCloseEdit={() => {
+          setEditingStop(null);
+          setEditingHome(false);
+          setReviewData(null);
+        }}
+        onReview={(data) => setReviewData(data)}
+        onUpdateStop={updateStop}
+        onUpdateHome={updateHomeAddress}
+        reviewData={reviewData}
+        pageTitle={pageTitle}
+        homeAddress={homeAddress}
+      />
     </div>
   );
 }
