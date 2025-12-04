@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./TransitDisplay.css";
 import "@fontsource/press-start-2p";
+// Import constants
+import { CAP_METRO_STOPS, CALTRAIN_STOPS } from "./utils/constants";
 
 /**
  * ScrollText Component
@@ -61,58 +63,7 @@ const formatArrivalTime = (time) => {
  *
  * Modal form for editing stop information
  */
-// Cap Metro official stops (major stops)
-const CAP_METRO_STOPS = [
-  "Congress and Oltorf, Austin, TX",
-  "Downtown Station, Austin, TX",
-  "Lamar and Oltorf, Austin, TX",
-  "South Congress and Oltorf, Austin, TX",
-  "Riverside and Congress, Austin, TX",
-  "South First and Oltorf, Austin, TX",
-  "Barton Springs and Lamar, Austin, TX",
-  "Guadalupe and 24th, Austin, TX",
-  "Guadalupe and MLK, Austin, TX",
-  "UT West Mall, Austin, TX",
-  "UT Main Building, Austin, TX",
-  "Capitol Station, Austin, TX",
-  "Republic Square, Austin, TX",
-  "Convention Center, Austin, TX",
-  "Riverside and Pleasant Valley, Austin, TX",
-];
 
-// Caltrain official stops
-const CALTRAIN_STOPS = [
-  "San Francisco Caltrain Station, CA",
-  "22nd Street, CA",
-  "Bayshore, CA",
-  "South San Francisco Caltrain Station, CA",
-  "San Bruno, CA",
-  "Millbrae, CA",
-  "Broadway, CA",
-  "Burlingame, CA",
-  "San Mateo, CA",
-  "Hayward Park, CA",
-  "Hillsdale, CA",
-  "Belmont, CA",
-  "San Carlos, CA",
-  "Redwood City, CA",
-  "Menlo Park, CA",
-  "Palo Alto, CA",
-  "California Avenue, CA",
-  "San Antonio, CA",
-  "Mountain View, CA",
-  "Sunnyvale, CA",
-  "Lawrence, CA",
-  "Santa Clara, CA",
-  "College Park, CA",
-  "San Jose Diridon, CA",
-  "Tamien, CA",
-  "Capitol, CA",
-  "Blossom Hill, CA",
-  "Morgan Hill, CA",
-  "San Martin, CA",
-  "Gilroy, CA",
-];
 
 const EditStopForm = ({
   stop,
