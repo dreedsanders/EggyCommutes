@@ -3,278 +3,50 @@ import axios from "axios";
 import TransitDisplay from "./TransitDisplay";
 import "./App.css";
 
-// Initial home address - will be moved to state
-const INITIAL_HOME_ADDRESS = "2215 post rd austin tx 78704";
-const INITIAL_PAGE_TITLE = "Eggy Commutes";
+// Import services
+import { getBikeStopData, processBikeResponse } from "./services/bikeService";
+import { getWalkStopData, processWalkResponse } from "./services/walkService";
+import {
+  getDriveStopData,
+  processDriveResponse,
+} from "./services/driveService";
+import { getBusStopData, processBusResponse } from "./services/busService";
+import {
+  getTrainStopData,
+  processTrainResponse,
+} from "./services/trainService";
+import { getFerryStopData } from "./services/ferryService";
 
-/**
- * getFerrySchedule Function
- *
- * Gets the ferry departure times from Anacortes to Orcas Island or Orcas to Anacortes.
- * Times are extracted from WSDOT schedule and stored locally.
- * Anacortes Schedule: AM - 5:30, 7:30, 10:05, 11:55; PM - 3:20, 8:40
- * Orcas Schedule: AM - 6:15, 8:15, 10:50, 12:40; PM - 4:05, 9:25
- *
- * @param {string} direction - 'anacortes' or 'orcas' (default: 'anacortes')
- * @returns {Array} Array of Date objects representing departure times in Central Time Zone
- */
-const getFerrySchedule = (direction = "anacortes") => {
-  console.log("getFerrySchedule called with direction:", direction);
-
-  // Ferry departure times from Anacortes (in 24-hour format, Pacific Time)
-  const anacortesTimes = [
-    { hour: 5, minute: 30 }, // 5:30 AM
-    { hour: 7, minute: 30 }, // 7:30 AM
-    { hour: 10, minute: 5 }, // 10:05 AM
-    { hour: 11, minute: 55 }, // 11:55 AM
-    { hour: 15, minute: 20 }, // 3:20 PM
-    { hour: 20, minute: 40 }, // 8:40 PM
-  ];
-
-  // Ferry departure times from Orcas Island (in 24-hour format, Pacific Time)
-  const orcasTimes = [
-    { hour: 6, minute: 15 }, // 6:15 AM
-    { hour: 8, minute: 15 }, // 8:15 AM
-    { hour: 10, minute: 50 }, // 10:50 AM
-    { hour: 12, minute: 40 }, // 12:40 PM
-    { hour: 16, minute: 5 }, // 4:05 PM
-    { hour: 21, minute: 25 }, // 9:25 PM
-  ];
-
-  const ferryTimes = direction === "orcas" ? orcasTimes : anacortesTimes;
-
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-  // Get current time in Central Time (hours and minutes only)
-  const centralNow = new Date(
-    now.toLocaleString("en-US", { timeZone: "America/Chicago" })
-  );
-  const currentHour = centralNow.getHours();
-  const currentMinute = centralNow.getMinutes();
-  const currentTimeInMinutes = currentHour * 60 + currentMinute;
-
-  // Convert Pacific Time to Central Time (add 2 hours) and create Date objects
-  const departureTimes = ferryTimes.map(({ hour, minute }) => {
-    // Convert Pacific Time to Central Time (add 2 hours)
-    let centralHour = hour + 2;
-    let centralMinute = minute;
-
-    // Handle hour overflow
-    if (centralHour >= 24) {
-      centralHour -= 24;
-    }
-
-    // Create date for today
-    const centralTime = new Date(today);
-    centralTime.setHours(centralHour, centralMinute, 0, 0);
-
-    // Calculate time in minutes for comparison
-    const timeInMinutes = centralHour * 60 + centralMinute;
-
-    // If the time has passed today (based on time only, not date), set it for tomorrow
-    if (timeInMinutes <= currentTimeInMinutes) {
-      centralTime.setDate(centralTime.getDate() + 1);
-    }
-
-    return centralTime;
-  });
-
-  // Sort times
-  departureTimes.sort((a, b) => a - b);
-
-  console.log(
-    "getFerrySchedule returning",
-    departureTimes.length,
-    "times:",
-    departureTimes.map((d) => d.toString())
-  );
-
-  // Store in localStorage
-  try {
-    const storageKey =
-      direction === "orcas"
-        ? "ferry_schedule_orcas_anacortes"
-        : "ferry_schedule_anacortes_orcas";
-    localStorage.setItem(
-      storageKey,
-      JSON.stringify(departureTimes.map((dt) => dt.toISOString()))
-    );
-  } catch (error) {
-    console.error("Error storing ferry schedule:", error);
-  }
-
-  return departureTimes;
-};
-
-/**
- * convertToCentralTime Function
- *
- * Converts API time responses to Central Time Zone.
- * Handles various time formats from the Google Directions API.
- *
- * @param {Object} timeValue - Time value from API (can be time object or timestamp)
- * @returns {Date} - Date object in Central Time Zone
- */
-const convertToCentralTime = (timeValue) => {
-  if (!timeValue) return null;
-
-  // If timeValue has a value property (Google API time object)
-  if (timeValue.value) {
-    // Convert Unix timestamp to Date, then convert to Central Time
-    const date = new Date(timeValue.value * 1000);
-    return date;
-  }
-
-  // If it's already a Date object
-  if (timeValue instanceof Date) {
-    return timeValue;
-  }
-
-  // If it's a timestamp string
-  if (typeof timeValue === "string") {
-    return new Date(timeValue);
-  }
-
-  return null;
-};
-
-/**
- * getDestinationName Function
- *
- * Uses Google Places API Text Search to determine the appropriate name for a destination.
- * Returns business name for businesses, address for residential, cross streets for intersections.
- *
- * @param {string} destination - The destination address or query
- * @param {string} apiKey - Google Maps API key
- * @returns {Promise<string>} - The appropriate name for the destination
- */
-const getDestinationName = async (destination, apiKey) => {
-  try {
-    // Use Places API Text Search endpoint
-    const placesUrl =
-      "https://maps.googleapis.com/maps/api/place/textsearch/json";
-
-    const placesResponse = await axios.get(placesUrl, {
-      params: {
-        query: destination,
-        key: apiKey,
-      },
-    });
-
-    if (
-      placesResponse.data &&
-      placesResponse.data.status === "OK" &&
-      placesResponse.data.results &&
-      placesResponse.data.results.length > 0
-    ) {
-      const place = placesResponse.data.results[0];
-      const types = place.types || [];
-
-      // Check if it's a business/establishment
-      if (
-        types.includes("establishment") ||
-        types.includes("point_of_interest") ||
-        types.includes("store") ||
-        types.includes("restaurant") ||
-        types.includes("gas_station") ||
-        types.includes("lodging") ||
-        types.includes("gym") ||
-        types.includes("supermarket")
-      ) {
-        // Use business name
-        return place.name || place.formatted_address || destination;
-      }
-
-      // Check if it's an intersection
-      if (types.includes("intersection")) {
-        // Extract route names from address components
-        const routes = place.address_components
-          ?.filter((comp) => comp.types?.includes("route"))
-          .map((comp) => comp.long_name || comp.short_name)
-          .join(" & ");
-        return routes || place.formatted_address || destination;
-      }
-
-      // For residential addresses, use formatted address
-      if (types.includes("street_address") || types.includes("premise")) {
-        return place.formatted_address || destination;
-      }
-
-      // Default: use place name or formatted address
-      return place.name || place.formatted_address || destination;
-    }
-
-    // Fallback: try Geocoding API if Places API doesn't return results
-    const geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json";
-    const geocodeResponse = await axios.get(geocodeUrl, {
-      params: {
-        address: destination,
-        key: apiKey,
-      },
-    });
-
-    if (
-      geocodeResponse.data &&
-      geocodeResponse.data.status === "OK" &&
-      geocodeResponse.data.results &&
-      geocodeResponse.data.results.length > 0
-    ) {
-      const result = geocodeResponse.data.results[0];
-      const types = result.types || [];
-
-      // Check for intersection
-      if (types.includes("intersection")) {
-        const routes = result.address_components
-          ?.filter((comp) => comp.types?.includes("route"))
-          .map((comp) => comp.long_name || comp.short_name)
-          .join(" & ");
-        return routes || result.formatted_address || destination;
-      }
-
-      // For street addresses, use formatted address
-      return result.formatted_address || destination;
-    }
-
-    // If all else fails, return original destination
-    return destination;
-  } catch (error) {
-    console.error("Error getting destination name:", error);
-    // Return original destination on error
-    return destination;
-  }
-};
+// Import utilities
+import { getDestinationName, parseApiError } from "./utils/helpers";
+import { INITIAL_HOME_ADDRESS, INITIAL_PAGE_TITLE } from "./utils/constants";
 
 /**
  * fetchAllTransitTimes Function
  *
- * Makes API calls to fetch transit data for both stops (route 801 bus at Lamar/Oltorf
- * and Caltrain at South San Francisco). Since Google Directions API requires origin
- * and destination, we make optimized calls for each stop. All arrival times are stored
- * locally, converted to Central Time Zone, and processed to determine next arrival
- * and last stop times.
+ * Orchestrates fetching transit data for all stops by delegating to appropriate services.
+ * Each service handles its own API calls and data processing.
  *
  * @param {Function} setStops - React setState function to update stops state
  * @param {string} apiKey - Google Maps API key
  * @param {string} homeAddress - Home address to use for stops that depend on it
  * @param {string} ferryDirection - Ferry direction ('anacortes' or 'orcas')
  */
+
 const fetchAllTransitTimes = async (
   setStops,
   apiKey,
   homeAddress = INITIAL_HOME_ADDRESS,
   ferryDirection = "anacortes"
 ) => {
-  const baseUrl = "https://maps.googleapis.com/maps/api/directions/json";
-
   // Define the stops we want to track
   const stopsConfig = [
     {
       name: "Congress and Oltorf",
       type: "bus",
       origin: "Congress and Oltorf, Austin, TX",
-      destination: "Downtown Station, Austin, TX", // Route 801 goes downtown
-      routeFilter: "801", // Filter for route 801
+      destination: "Downtown Station, Austin, TX",
+      routeFilter: "801",
       transitMode: "bus",
       dataFile: "/data/congress-oltorf-bus.json",
     },
@@ -282,8 +54,8 @@ const fetchAllTransitTimes = async (
       name: "South San Francisco",
       type: "train",
       origin: "South San Francisco Caltrain Station, CA",
-      destination: "San Francisco Caltrain Station, CA", // Caltrain goes to SF
-      routeFilter: "Caltrain", // Filter for Caltrain
+      destination: "San Francisco Caltrain Station, CA",
+      routeFilter: "Caltrain",
       transitMode: "rail",
       dataFile: "/data/south-san-francisco-train.json",
     },
@@ -324,557 +96,51 @@ const fetchAllTransitTimes = async (
   ];
 
   try {
-    // Try to load from saved files first, then fall back to API calls if files don't exist
-    const apiCalls = stopsConfig.map(async (stopConfig) => {
-      // Ferry doesn't need API call, use schedule function
-      if (stopConfig.type === "ferry") {
-        return Promise.resolve({
-          stopConfig,
-          response: { status: "OK" }, // Dummy response for ferry
-        });
-      }
-
-      // Try to load from saved file first
-      if (stopConfig.dataFile) {
-        try {
-          const filePath = `${process.env.PUBLIC_URL || ""}${
-            stopConfig.dataFile
-          }`;
-          const response = await fetch(filePath);
-          if (response.ok) {
-            const data = await response.json();
-            console.log(
-              `✓ Loaded saved data for ${stopConfig.name} (${stopConfig.type})`
-            );
-            return {
-              stopConfig,
-              response: data,
-            };
-          } else {
-            console.log(
-              `✗ Saved file not found for ${stopConfig.name}, will fetch from API`
-            );
-          }
-        } catch (error) {
-          console.log(
-            `✗ Error loading saved file for ${stopConfig.name}, will fetch from API:`,
-            error.message
-          );
+    // Fetch all stops in parallel using appropriate services
+    const stopPromises = stopsConfig.map(async (stopConfig) => {
+      try {
+        switch (stopConfig.type) {
+          case "bike":
+            return await getBikeStopData(stopConfig, apiKey);
+          case "walk":
+            return await getWalkStopData(stopConfig, apiKey);
+          case "drive":
+            return await getDriveStopData(stopConfig, apiKey);
+          case "bus":
+            return await getBusStopData(stopConfig, apiKey);
+          case "train":
+            return await getTrainStopData(stopConfig, apiKey);
+          case "ferry":
+            return await getFerryStopData(stopConfig);
+          default:
+            console.error(`Unknown stop type: ${stopConfig.type}`);
+            return null;
         }
+      } catch (error) {
+        console.error(`Error fetching ${stopConfig.name}:`, error);
+        return null;
       }
-
-      // If file doesn't exist or failed to load, make API call
-      let params;
-
-      if (
-        stopConfig.type === "bike" ||
-        stopConfig.type === "walk" ||
-        stopConfig.type === "drive"
-      ) {
-        // Bike, walking, or driving directions
-        params = {
-          origin: stopConfig.origin,
-          destination: stopConfig.destination,
-          mode: stopConfig.mode,
-          key: apiKey,
-        };
-      } else {
-        // Transit directions - use origin and destination on the route
-        params = {
-          origin: stopConfig.origin,
-          destination: stopConfig.destination,
-          mode: "transit",
-          transit_mode: stopConfig.transitMode,
-          departure_time: "now",
-          alternatives: true,
-          key: apiKey,
-        };
-      }
-
-      return axios
-        .get(baseUrl, { params })
-        .then((response) => {
-          if (response.data && response.data.status === "OK") {
-            console.log(
-              `✓ Request successful for ${stopConfig.name} (${stopConfig.type})`
-            );
-          } else {
-            console.log(
-              `✗ Request unsuccessful for ${stopConfig.name} (${
-                stopConfig.type
-              }): ${response.data?.status || "Unknown error"}`
-            );
-          }
-          return {
-            stopConfig,
-            response: response.data,
-          };
-        })
-        .catch((error) => {
-          if (error.code === "ERR_NETWORK") {
-            console.error(
-              `✗ Network error for ${stopConfig.name} (${stopConfig.type}): Network Error`
-            );
-            console.error(
-              `  Possible causes: API key restrictions, CORS issues, or network connectivity`
-            );
-            console.error(
-              `  API Key configured: ${
-                apiKey ? "Yes (" + apiKey.substring(0, 10) + "...)" : "No"
-              }`
-            );
-            console.error(`  Request URL: ${baseUrl}`);
-            console.error(
-              `  Check: Google Cloud Console > APIs & Services > Credentials`
-            );
-            console.error(
-              `  Ensure: Directions API is enabled and API key allows localhost:3000`
-            );
-          } else if (error.response) {
-            console.error(
-              `✗ Request unsuccessful for ${stopConfig.name} (${stopConfig.type}):`,
-              error.response.data?.error_message || error.response.statusText
-            );
-            console.error(`  Status: ${error.response.status}`);
-            if (error.response.data?.error_message) {
-              console.error(`  Error: ${error.response.data.error_message}`);
-            }
-          } else {
-            console.error(
-              `✗ Request unsuccessful for ${stopConfig.name} (${stopConfig.type}):`,
-              error.message || error
-            );
-          }
-          return { stopConfig, response: null };
-        });
     });
 
-    // Wait for all API calls to complete
-    const results = await Promise.all(apiCalls);
+    // Wait for all stops to be fetched
+    const processedStops = await Promise.all(stopPromises);
 
-    // Process each result
-    const processedStops = results.map(({ stopConfig, response }) => {
-      // Handle ferry type - get schedule from WSDOT
-      if (stopConfig.type === "ferry") {
-        console.log("Processing ferry stop:", stopConfig.name);
-        const direction = stopConfig.ferryDirection || "anacortes";
-        const ferryDepartureTimes = getFerrySchedule(direction);
-        console.log("Got ferry times:", ferryDepartureTimes.length, "times");
-
-        // Safety check: ensure we have departure times
-        if (!ferryDepartureTimes || ferryDepartureTimes.length === 0) {
-          console.error("No ferry departure times found!");
-          return {
-            name: stopConfig.name,
-            type: stopConfig.type,
-            ferryDirection: stopConfig.ferryDirection || "anacortes",
-            location: stopConfig.location,
-            allArrivalTimes: [],
-            nextDepartureTime: null,
-            nextArrivalTime: null,
-            lastStopTime: null,
-            isWithinTwoStops: false,
-          };
-        }
-
-        const now = new Date();
-
-        // Get current time in Central Time (hours and minutes only for comparison)
-        // Use Intl.DateTimeFormat to get hours/minutes in Central Time
-        const centralTimeFormatter = new Intl.DateTimeFormat("en-US", {
-          timeZone: "America/Chicago",
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: false,
-        });
-        const centralTimeParts = centralTimeFormatter.formatToParts(now);
-        const currentHour = parseInt(
-          centralTimeParts.find((p) => p.type === "hour").value
-        );
-        const currentMinute = parseInt(
-          centralTimeParts.find((p) => p.type === "minute").value
-        );
-        const currentTimeInMinutes = currentHour * 60 + currentMinute;
-
-        // Find next departure time based on time of day (not date)
-        // Compare times in minutes: find first time that's later in the day
-        const nextDeparture =
-          ferryDepartureTimes.find((time) => {
-            if (!(time instanceof Date) || isNaN(time.getTime())) {
-              console.error("Invalid date in ferryDepartureTimes:", time);
-              return false;
-            }
-            const timeHour = time.getHours();
-            const timeMinute = time.getMinutes();
-            const timeInMinutes = timeHour * 60 + timeMinute;
-            return timeInMinutes > currentTimeInMinutes;
-          }) || ferryDepartureTimes[0]; // If all times passed, use first one (next day)
-
-        // Validate nextDeparture
-        if (
-          !nextDeparture ||
-          !(nextDeparture instanceof Date) ||
-          isNaN(nextDeparture.getTime())
-        ) {
-          console.error("Invalid nextDeparture:", nextDeparture);
-          return {
-            name: stopConfig.name,
-            type: stopConfig.type,
-            allArrivalTimes: ferryDepartureTimes.map((time) => ({
-              stopName: stopConfig.name,
-              arrivalTime: time,
-              departureTime: time,
-              headsign: "Orcas Island",
-              lineName: "Anacortes-Orcas",
-            })),
-            nextDepartureTime: null,
-            nextArrivalTime: null,
-            lastStopTime: null,
-            isWithinTwoStops: false,
-          };
-        }
-
-        console.log("Ferry Debug:", {
-          ferryDepartureTimes: ferryDepartureTimes.map((d) => d.toString()),
-          currentTimeInMinutes,
-          nextDeparture: nextDeparture.toString(),
-          nextDepartureIsValid:
-            nextDeparture instanceof Date && !isNaN(nextDeparture.getTime()),
-        });
-
-        const destinationName =
-          direction === "orcas" ? "Anacortes" : "Orcas Island";
-        const routeName =
-          direction === "orcas" ? "Orcas-Anacortes" : "Anacortes-Orcas";
-
-        return {
-          name: stopConfig.name,
-          type: stopConfig.type,
-          ferryDirection: direction,
-          location: stopConfig.location,
-          allArrivalTimes: ferryDepartureTimes.map((time) => ({
-            stopName: stopConfig.name,
-            arrivalTime: time,
-            departureTime: time,
-            headsign: destinationName,
-            lineName: routeName,
-          })),
-          nextDepartureTime: nextDeparture,
-          nextArrivalTime: null,
-          lastStopTime: null,
-          isWithinTwoStops: false,
-        };
-      }
-
-      // Handle bike, walk, and drive types differently
-      if (
-        stopConfig.type === "bike" ||
-        stopConfig.type === "walk" ||
-        stopConfig.type === "drive"
-      ) {
-        if (
-          !response ||
-          response.status !== "OK" ||
-          !response.routes ||
-          response.routes.length === 0
-        ) {
-          console.log(
-            `✗ Request unsuccessful for ${stopConfig.name} (${
-              stopConfig.type
-            }) - ${response?.status || "No response"}`
-          );
-          return {
-            name: stopConfig.name,
-            type: stopConfig.type,
-            origin: stopConfig.origin,
-            destination: stopConfig.destination,
-            mode: stopConfig.mode,
-            allArrivalTimes: [],
-            estimatedTime: null,
-            lastStopTime: null,
-            isWithinTwoStops: false,
-          };
-        }
-
-        // Get the first route's duration for biking, walking, or driving
-        const route = response.routes[0];
-        const leg = route.legs[0];
-        const durationInSeconds = leg.duration.value; // Duration in seconds
-        const durationInMinutes = Math.round(durationInSeconds / 60);
-
-        // Create a time string for display (e.g., "15 min")
-        const estimatedTime = `${durationInMinutes} min`;
-
-        console.log(
-          `✓ Stop times found for ${stopConfig.name} (${stopConfig.type}): ${estimatedTime}`
-        );
-
-        return {
-          name: stopConfig.name,
-          type: stopConfig.type,
-          allArrivalTimes: [],
-          estimatedTime: estimatedTime,
-          nextArrivalTime: null,
-          lastStopTime: null,
-          isWithinTwoStops: false,
-        };
-      }
-
-      // Handle transit stops (bus and train)
-      if (
-        !response ||
-        response.status !== "OK" ||
-        !response.routes ||
-        response.routes.length === 0
-      ) {
-        console.log(
-          `✗ No stop times found for ${stopConfig.name} (${
-            stopConfig.type
-          }) - ${response?.status || "No response"}`
-        );
-        return {
-          name: stopConfig.name,
-          type: stopConfig.type,
-          origin: stopConfig.origin,
-          destination: stopConfig.destination,
-          routeFilter: stopConfig.routeFilter,
-          transitMode: stopConfig.transitMode,
-          allArrivalTimes: [],
-          nextArrivalTime: null,
-          lastStopTime: null,
-          isWithinTwoStops: false,
-        };
-      }
-
-      // Extract all arrival times from all routes
-      const allArrivalTimes = [];
-
-      response.routes.forEach((route) => {
-        route.legs.forEach((leg) => {
-          leg.steps.forEach((step) => {
-            if (step.travel_mode === "TRANSIT" && step.transit_details) {
-              const transitDetails = step.transit_details;
-
-              // Filter by route (801 for bus, Caltrain for train)
-              const lineName =
-                transitDetails.line?.short_name ||
-                transitDetails.line?.name ||
-                "";
-              const matchesRoute =
-                stopConfig.type === "bus"
-                  ? lineName === stopConfig.routeFilter
-                  : lineName.toLowerCase().includes("caltrain") ||
-                    transitDetails.line?.agencies?.[0]?.name
-                      ?.toLowerCase()
-                      .includes("caltrain");
-
-              if (matchesRoute && transitDetails.arrival_time) {
-                // Check if we have real-time data (value property indicates real-time)
-                const isRealTime =
-                  transitDetails.arrival_time.value !== undefined;
-
-                // Prioritize real-time data - only use if we have value property (real-time)
-                // or if it's the only data available
-                if (isRealTime || transitDetails.arrival_time.text) {
-                  const arrivalTime = convertToCentralTime(
-                    transitDetails.arrival_time
-                  );
-                  const departureTime = convertToCentralTime(
-                    transitDetails.departure_time
-                  );
-
-                  if (arrivalTime) {
-                    allArrivalTimes.push({
-                      stopName:
-                        transitDetails.arrival_stop?.name || stopConfig.name,
-                      arrivalTime: arrivalTime,
-                      departureTime: departureTime,
-                      headsign: transitDetails.headsign || "Unknown",
-                      lineName: lineName,
-                      isRealTime: isRealTime, // Track if this is real-time data
-                    });
-                  }
-                }
-              }
-            }
-          });
-        });
-      });
-
-      // Sort all arrival times by time, prioritizing real-time data
-      allArrivalTimes.sort((a, b) => {
-        // If one is real-time and the other isn't, prioritize real-time
-        if (a.isRealTime && !b.isRealTime) return -1;
-        if (!a.isRealTime && b.isRealTime) return 1;
-        // Otherwise sort by time
-        return a.arrivalTime - b.arrivalTime;
-      });
-
-      // Log if we found stop times
-      if (allArrivalTimes.length > 0) {
-        console.log(
-          `✓ Stop times found for ${stopConfig.name} (${stopConfig.type}): ${allArrivalTimes.length} times`
-        );
-      } else {
-        console.log(
-          `✗ No stop times found for ${stopConfig.name} (${stopConfig.type}) - No matching routes`
-        );
-      }
-
-      // Find next arrival time (earliest upcoming time)
-      // Compare by time of day, not full date, so there's always a next arrival
-      const now = new Date();
-      const currentHour = now.getHours();
-      const currentMinute = now.getMinutes();
-      const currentTimeInMinutes = currentHour * 60 + currentMinute;
-
-      // Helper function to get time of day in minutes from a Date
-      const getTimeInMinutes = (date) => {
-        return date.getHours() * 60 + date.getMinutes();
-      };
-
-      // Helper function to create a Date for today or tomorrow with given time
-      const createNextDate = (timeInMinutes) => {
-        const nextDate = new Date(now);
-        const hours = Math.floor(timeInMinutes / 60);
-        const minutes = timeInMinutes % 60;
-        nextDate.setHours(hours, minutes, 0, 0);
-
-        // If the time has passed today, set it for tomorrow
-        if (nextDate <= now) {
-          nextDate.setDate(nextDate.getDate() + 1);
-        }
-
-        return nextDate;
-      };
-
-      // Find next arrival by time of day
-      let nextArrival = null;
-
-      // First, try to find real-time arrivals that are still in the future
-      const realTimeArrivals = allArrivalTimes.filter(
-        (time) => time.isRealTime && time.arrivalTime > now
-      );
-
-      if (realTimeArrivals.length > 0) {
-        // Use real-time data if available and still in the future
-        nextArrival = realTimeArrivals[0];
-      } else {
-        // Find the next time by comparing time of day
-        // Sort all times by their time of day
-        const timesByTimeOfDay = allArrivalTimes
-          .map((time) => ({
-            ...time,
-            timeOfDay: getTimeInMinutes(time.arrivalTime),
-          }))
-          .sort((a, b) => a.timeOfDay - b.timeOfDay);
-
-        // Find first time that's later in the day than current time
-        const nextToday = timesByTimeOfDay.find(
-          (time) => time.timeOfDay > currentTimeInMinutes
-        );
-
-        if (nextToday) {
-          // Found a time later today
-          nextArrival = {
-            ...nextToday,
-            arrivalTime: createNextDate(nextToday.timeOfDay),
-          };
-        } else {
-          // All times passed today, use first time tomorrow
-          const firstTomorrow = timesByTimeOfDay[0];
-          if (firstTomorrow) {
-            nextArrival = {
-              ...firstTomorrow,
-              arrivalTime: createNextDate(firstTomorrow.timeOfDay),
-            };
-          }
-        }
-      }
-
-      if (nextArrival) {
-        console.log(
-          `✓ Next arrival time for ${stopConfig.name}: ${nextArrival.arrivalTime}`
-        );
-      } else {
-        console.log(`✗ No next arrival time found for ${stopConfig.name}`);
-      }
-
-      // Determine last stop time
-      // The last stop is the final destination in the route
-      // Use time of day logic to ensure it's always in the future
-      let lastStopTime = null;
-      if (allArrivalTimes.length > 0 && nextArrival) {
-        // Find the last stop time relative to the next arrival
-        // Get all times sorted by time of day
-        const timesByTimeOfDay = allArrivalTimes
-          .map((time) => ({
-            ...time,
-            timeOfDay: getTimeInMinutes(time.arrivalTime),
-          }))
-          .sort((a, b) => a.timeOfDay - b.timeOfDay);
-
-        // Find the last time in the sorted list
-        const lastTimeOfDay = timesByTimeOfDay[timesByTimeOfDay.length - 1];
-        const nextArrivalTimeOfDay = getTimeInMinutes(nextArrival.arrivalTime);
-
-        // If last time is after next arrival time, use same day, otherwise tomorrow
-        if (lastTimeOfDay.timeOfDay > nextArrivalTimeOfDay) {
-          lastStopTime = createNextDate(lastTimeOfDay.timeOfDay);
-        } else {
-          // Last time is before next arrival, so it's tomorrow
-          const tomorrowDate = createNextDate(lastTimeOfDay.timeOfDay);
-          tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-          lastStopTime = tomorrowDate;
-        }
-      }
-
-      // Calculate if next arrival is within 2 stops
-      // Compare by time of day since dates may differ
-      let isWithinTwoStops = false;
-      if (nextArrival && lastStopTime) {
-        // Get time of day for next arrival and last stop
-        const nextArrivalTimeOfDay = getTimeInMinutes(nextArrival.arrivalTime);
-        const lastStopTimeOfDay = getTimeInMinutes(lastStopTime);
-
-        // Find how many stops are between next arrival and last stop
-        // Sort all times by time of day
-        const timesByTimeOfDay = allArrivalTimes
-          .map((time) => getTimeInMinutes(time.arrivalTime))
-          .sort((a, b) => a - b);
-
-        // Find index of next arrival time and last stop time
-        const nextIndex = timesByTimeOfDay.findIndex(
-          (time) => time === nextArrivalTimeOfDay
-        );
-        const lastIndex = timesByTimeOfDay.findIndex(
-          (time) => time === lastStopTimeOfDay
-        );
-
-        // Check if there are 2 or fewer stops between them
-        if (nextIndex >= 0 && lastIndex >= 0) {
-          const stopsBetween = Math.abs(lastIndex - nextIndex);
-          isWithinTwoStops = stopsBetween <= 2;
-        }
-      }
-
-      return {
-        name: stopConfig.name,
-        type: stopConfig.type,
-        origin: stopConfig.origin,
-        destination: stopConfig.destination,
-        routeFilter: stopConfig.routeFilter,
-        transitMode: stopConfig.transitMode,
-        allArrivalTimes: allArrivalTimes,
-        nextArrivalTime: nextArrival?.arrivalTime || null,
-        lastStopTime: lastStopTime,
-        isWithinTwoStops: isWithinTwoStops,
-      };
-    });
+    // Filter out null results and ensure all required fields are present
+    const validStops = processedStops
+      .filter((stop) => stop !== null)
+      .map((stop) => ({
+        ...stop,
+        // Ensure all required fields are present
+        origin: stop.origin || "",
+        destination: stop.destination || "",
+        allArrivalTimes: stop.allArrivalTimes || [],
+        nextArrivalTime: stop.nextArrivalTime || null,
+        lastStopTime: stop.lastStopTime || null,
+        isWithinTwoStops: stop.isWithinTwoStops || false,
+      }));
 
     // Store all stop data locally in localStorage
-    // Serialize Date objects to ISO strings for storage
-    processedStops.forEach((stop) => {
+    validStops.forEach((stop) => {
       try {
         const serializedTimes = stop.allArrivalTimes.map((time) => ({
           ...time,
@@ -891,10 +157,10 @@ const fetchAllTransitTimes = async (
     });
 
     // Update state with processed stops
-    setStops(processedStops);
+    setStops(validStops);
   } catch (error) {
     console.error("Error fetching transit times:", error);
-    // Set error state
+    // Set error state with default stops
     setStops([
       {
         name: "Congress and Oltorf",
@@ -1180,7 +446,7 @@ function App() {
           updatedName = newConfig.selectedStop || stop.name;
         }
 
-        // Process the response similar to fetchAllTransitTimes
+        // Process the response using appropriate service
         const updatedConfig = {
           ...stop,
           name: updatedName,
@@ -1195,7 +461,27 @@ function App() {
                 : "San Francisco Caltrain Station, CA"
               : newConfig.destination,
         };
-        const processedStop = processStopResponse(updatedConfig, response.data);
+
+        let processedStop;
+        switch (stop.type) {
+          case "bike":
+            processedStop = processBikeResponse(updatedConfig, response.data);
+            break;
+          case "walk":
+            processedStop = processWalkResponse(updatedConfig, response.data);
+            break;
+          case "drive":
+            processedStop = processDriveResponse(updatedConfig, response.data);
+            break;
+          case "bus":
+            processedStop = processBusResponse(updatedConfig, response.data);
+            break;
+          case "train":
+            processedStop = processTrainResponse(updatedConfig, response.data);
+            break;
+          default:
+            processedStop = updatedConfig;
+        }
 
         const newStops = [...stops];
         newStops[stopIndex] = processedStop;
@@ -1232,23 +518,8 @@ function App() {
     } catch (error) {
       let errorMessage = "An error occurred";
 
-      // Parse specific error messages
-      if (error.response?.data?.error_message) {
-        errorMessage = error.response.data.error_message;
-      } else if (error.response?.data?.status) {
-        const status = error.response.data.status;
-        if (status === "ZERO_RESULTS") {
-          errorMessage = "Can not route to destination";
-        } else if (status === "NOT_FOUND") {
-          errorMessage = "Address does not exist";
-        } else if (status === "INVALID_REQUEST") {
-          errorMessage = "Invalid request - please check your inputs";
-        } else {
-          errorMessage = status;
-        }
-      } else if (error.message) {
-        errorMessage = error.message;
-      }
+      // Parse specific error messages using helper
+      errorMessage = parseApiError(error);
 
       // Show error alert with specific message
       alert(`Error: ${errorMessage}`);
@@ -1263,151 +534,6 @@ function App() {
       setEditingStop(null);
       setReviewData(null);
     }
-  };
-
-  /**
-   * Process stop response similar to fetchAllTransitTimes
-   */
-  const processStopResponse = (stopConfig, response) => {
-    if (
-      stopConfig.type === "bike" ||
-      stopConfig.type === "walk" ||
-      stopConfig.type === "drive"
-    ) {
-      if (
-        !response ||
-        response.status !== "OK" ||
-        !response.routes ||
-        response.routes.length === 0
-      ) {
-        return {
-          ...stopConfig,
-          allArrivalTimes: [],
-          estimatedTime: null,
-          nextArrivalTime: null,
-          lastStopTime: null,
-          isWithinTwoStops: false,
-        };
-      }
-
-      const route = response.routes[0];
-      const leg = route.legs[0];
-      const durationInSeconds = leg.duration.value;
-      const durationInMinutes = Math.round(durationInSeconds / 60);
-      const estimatedTime = `${durationInMinutes} min`;
-
-      return {
-        ...stopConfig,
-        origin: stopConfig.origin,
-        destination: stopConfig.destination,
-        mode: stopConfig.mode,
-        allArrivalTimes: [],
-        estimatedTime: estimatedTime,
-        nextArrivalTime: null,
-        lastStopTime: null,
-        isWithinTwoStops: false,
-      };
-    } else if (stopConfig.type === "bus" || stopConfig.type === "train") {
-      // Process transit stop (similar logic to fetchAllTransitTimes)
-      if (
-        !response ||
-        response.status !== "OK" ||
-        !response.routes ||
-        response.routes.length === 0
-      ) {
-        return {
-          ...stopConfig,
-          origin: stopConfig.origin,
-          destination: stopConfig.destination,
-          routeFilter: stopConfig.routeFilter,
-          transitMode: stopConfig.transitMode,
-          allArrivalTimes: [],
-          nextArrivalTime: null,
-          lastStopTime: null,
-          isWithinTwoStops: false,
-        };
-      }
-
-      // Extract arrival times (similar to fetchAllTransitTimes)
-      const allArrivalTimes = [];
-      response.routes.forEach((route) => {
-        route.legs.forEach((leg) => {
-          leg.steps.forEach((step) => {
-            if (step.travel_mode === "TRANSIT" && step.transit_details) {
-              const transitDetails = step.transit_details;
-              const lineName =
-                transitDetails.line?.short_name ||
-                transitDetails.line?.name ||
-                "";
-              const matchesRoute =
-                stopConfig.type === "bus"
-                  ? lineName === stopConfig.routeFilter
-                  : lineName.toLowerCase().includes("caltrain") ||
-                    transitDetails.line?.agencies?.[0]?.name
-                      ?.toLowerCase()
-                      .includes("caltrain");
-
-              if (matchesRoute && transitDetails.arrival_time) {
-                const isRealTime =
-                  transitDetails.arrival_time.value !== undefined;
-                if (isRealTime || transitDetails.arrival_time.text) {
-                  const arrivalTime = convertToCentralTime(
-                    transitDetails.arrival_time
-                  );
-                  if (arrivalTime) {
-                    allArrivalTimes.push({
-                      stopName:
-                        transitDetails.arrival_stop?.name || stopConfig.name,
-                      arrivalTime: arrivalTime,
-                      departureTime: convertToCentralTime(
-                        transitDetails.departure_time
-                      ),
-                      headsign: transitDetails.headsign || "Unknown",
-                      lineName: lineName,
-                      isRealTime: isRealTime,
-                    });
-                  }
-                }
-              }
-            }
-          });
-        });
-      });
-
-      allArrivalTimes.sort((a, b) => {
-        if (a.isRealTime && !b.isRealTime) return -1;
-        if (!a.isRealTime && b.isRealTime) return 1;
-        return a.arrivalTime - b.arrivalTime;
-      });
-
-      const now = new Date();
-      const realTimeArrivals = allArrivalTimes.filter(
-        (time) => time.isRealTime && time.arrivalTime > now
-      );
-      const nextArrival =
-        realTimeArrivals.length > 0
-          ? realTimeArrivals[0]
-          : allArrivalTimes.length > 0
-          ? allArrivalTimes[0]
-          : null;
-
-      return {
-        ...stopConfig,
-        origin: stopConfig.origin,
-        destination: stopConfig.destination,
-        routeFilter: stopConfig.routeFilter,
-        transitMode: stopConfig.transitMode,
-        allArrivalTimes: allArrivalTimes,
-        nextArrivalTime: nextArrival?.arrivalTime || null,
-        lastStopTime:
-          allArrivalTimes.length > 0
-            ? allArrivalTimes[allArrivalTimes.length - 1]?.arrivalTime
-            : null,
-        isWithinTwoStops: false,
-      };
-    }
-
-    return stopConfig;
   };
 
   /**
