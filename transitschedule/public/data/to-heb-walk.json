@@ -25,8 +25,8 @@
           "lng": -97.7506853
         },
         "southwest": {
-          "lat": 30.23882339999999,
-          "lng": -97.7542744
+          "lat": 30.2385098,
+          "lng": -97.75393059999999
         }
       },
       "copyrights": "Powered by Google, ©2025 Google",
@@ -34,16 +34,16 @@
         {
           "distance": {
             "text": "0.3 mi",
-            "value": 498
+            "value": 465
           },
           "duration": {
-            "text": "8 mins",
-            "value": 451
+            "text": "7 mins",
+            "value": 428
           },
           "end_address": "2400 S Congress Ave, Austin, TX 78704, USA",
           "end_location": {
-            "lat": 30.2391475,
-            "lng": -97.7542744
+            "lat": 30.2385098,
+            "lng": -97.75393059999999
           },
           "start_address": "2215 Post Rd, Austin, TX 78704, USA",
           "start_location": {
@@ -196,49 +196,25 @@
             },
             {
               "distance": {
-                "text": "430 ft",
-                "value": 131
+                "text": "0.1 mi",
+                "value": 177
               },
               "duration": {
-                "text": "2 mins",
-                "value": 126
+                "text": "3 mins",
+                "value": 176
               },
               "end_location": {
-                "lat": 30.23882339999999,
-                "lng": -97.7537512
+                "lat": 30.2385098,
+                "lng": -97.75393059999999
               },
-              "html_instructions": "Slight <b>left</b> onto <b>S Congress Ave</b>",
+              "html_instructions": "Slight <b>left</b> onto <b>S Congress Ave</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
               "maneuver": "turn-slight-left",
               "polyline": {
-                "points": "weqwDfkssQJBFBZHFBB@VJDJNJLHBBHHn@b@EHRR"
+                "points": "weqwDfkssQJBFBZHFBB@VJDJNJLHBBHHn@b@EHRRDKv@n@"
               },
               "start_location": {
                 "lat": 30.239798,
                 "lng": -97.75300209999999
-              },
-              "travel_mode": "WALKING"
-            },
-            {
-              "distance": {
-                "text": "259 ft",
-                "value": 79
-              },
-              "duration": {
-                "text": "1 min",
-                "value": 73
-              },
-              "end_location": {
-                "lat": 30.2391475,
-                "lng": -97.7542744
-              },
-              "html_instructions": "Turn <b>right</b> onto <b>W Oltorf St</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
-              "maneuver": "turn-right",
-              "polyline": {
-                "points": "s_qwD|ossQk@dAIPKN"
-              },
-              "start_location": {
-                "lat": 30.23882339999999,
-                "lng": -97.7537512
               },
               "travel_mode": "WALKING"
             }
@@ -248,7 +224,7 @@
         }
       ],
       "overview_polyline": {
-        "points": "kgqwDx|rsQYh@fAv@KP~@p@c@fAeAfCPNRPTt@RFb@LZLTVjAz@EHRRu@vAKN"
+        "points": "kgqwDx|rsQYh@fAv@KP~@p@c@fAeAfCPNRPTt@RFb@LZLTVjAz@EHRRDKv@n@"
       },
       "summary": "S Congress Ave",
       "warnings": [

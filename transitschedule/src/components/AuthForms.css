@@ -1,0 +1,25 @@
+/* Auth form container - styled like edit-form-modal */
+.auth-form-container {
+  background-color: rgba(115, 173, 33, 0.629); 
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px); /* Adds a subtle blur effect to background */
+}
+
+.auth-error {
+  background-color: #ff4444;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  text-align: center;
+}
+
