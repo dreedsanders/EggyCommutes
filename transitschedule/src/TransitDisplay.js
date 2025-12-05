@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./TransitDisplay.css";
 import "@fontsource/press-start-2p";
 // Import constants
@@ -63,7 +63,6 @@ const formatArrivalTime = (time) => {
  *
  * Modal form for editing stop information
  */
-
 
 const EditStopForm = ({
   stop,
@@ -493,10 +492,45 @@ function TransitDisplay({
   reviewData,
   pageTitle,
   homeAddress,
+  onLogout,
 }) {
+  // Menu state
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
   // Get customizable colors from environment variables with defaults
   const bgColor = process.env.REACT_APP_DISPLAY_BG_COLOR || "#000000";
   const textColor = process.env.REACT_APP_DISPLAY_TEXT_COLOR || "#CCFF00";
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // Handle logout with confirmation
+  const handleLogoutClick = () => {
+    const confirmed = window.confirm("Are you sure you want to logout?");
+    if (confirmed) {
+      setIsMenuOpen(false);
+      if (onLogout) {
+        onLogout();
+      }
+    } else {
+      setIsMenuOpen(false);
+    }
+  };
 
   if (!stops || stops.length === 0) {
     return (
@@ -540,6 +574,30 @@ function TransitDisplay({
         >
           ✏️
         </button>
+      </div>
+
+      {/* Menu Button and Dropdown */}
+      <div className="menu-container" ref={menuRef}>
+        <button
+          className="menu-button"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          title="Menu"
+        >
+          ☰
+        </button>
+        {isMenuOpen && (
+          <div className="menu-dropdown">
+            <div className="menu-item" onClick={() => setIsMenuOpen(false)}>
+              Edit Profile
+            </div>
+            <div className="menu-item" onClick={() => setIsMenuOpen(false)}>
+              Add Stop
+            </div>
+            <div className="menu-item" onClick={handleLogoutClick}>
+              Logout
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bike/Walk/Drive stops on the left */}

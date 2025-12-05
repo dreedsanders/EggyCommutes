@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TransitDisplay from "./TransitDisplay";
+import AuthPage from "./components/AuthPage";
+import { isAuthenticated, logout as authLogout } from "./services/authService";
 import "./App.css";
 
 // Import services
@@ -227,6 +229,9 @@ const fetchAllTransitTimes = async (
  * and passes processed data to the TransitDisplay component.
  */
 function App() {
+  // State for authentication
+  const [authenticated, setAuthenticated] = useState(false);
+
   // State for home address and page title
   const [homeAddress, setHomeAddress] = useState(INITIAL_HOME_ADDRESS);
   const [pageTitle, setPageTitle] = useState(INITIAL_PAGE_TITLE);
@@ -320,6 +325,28 @@ function App() {
     process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE";
 
   /**
+   * Check authentication on mount
+   */
+  useEffect(() => {
+    setAuthenticated(isAuthenticated());
+  }, []);
+
+  /**
+   * Handle successful login
+   */
+  const handleLoginSuccess = () => {
+    setAuthenticated(true);
+  };
+
+  /**
+   * Handle logout
+   */
+  const handleLogout = () => {
+    authLogout();
+    setAuthenticated(false);
+  };
+
+  /**
    * useEffect Hook
    *
    * Runs once when the component mounts to fetch transit data.
@@ -327,6 +354,9 @@ function App() {
    * All data is stored locally in state and localStorage for persistence.
    */
   useEffect(() => {
+    // Only fetch transit data if authenticated
+    if (!authenticated) return;
+
     // Fetch transit times - ferry doesn't need API key, others do
     if (apiKey && apiKey !== "YOUR_API_KEY_HERE") {
       fetchAllTransitTimes(setStops, apiKey, homeAddress, ferryDirection);
@@ -349,7 +379,7 @@ function App() {
         ferryDirection
       );
     }
-  }, [apiKey, homeAddress, ferryDirection]);
+  }, [apiKey, homeAddress, ferryDirection, authenticated]);
 
   /**
    * Update a single stop's configuration
@@ -556,6 +586,15 @@ function App() {
     setReviewData(null);
   };
 
+  // Show auth page if not authenticated
+  if (!authenticated) {
+    return (
+      <div className="App">
+        <AuthPage onLoginSuccess={handleLoginSuccess} />
+      </div>
+    );
+  }
+
   return (
     <div className="App">
       <TransitDisplay
@@ -578,6 +617,7 @@ function App() {
         reviewData={reviewData}
         pageTitle={pageTitle}
         homeAddress={homeAddress}
+        onLogout={handleLogout}
       />
     </div>
   );

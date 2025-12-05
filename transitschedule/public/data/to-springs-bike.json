@@ -25,7 +25,7 @@
           "lng": -97.74686059999999
         },
         "southwest": {
-          "lat": 30.2395714,
+          "lat": 30.23980019999999,
           "lng": -97.77185899999999
         }
       },
@@ -34,7 +34,7 @@
         {
           "distance": {
             "text": "3.5 mi",
-            "value": 5575
+            "value": 5574
           },
           "duration": {
             "text": "17 mins",
@@ -42,8 +42,8 @@
           },
           "end_address": "2131 William Barton Dr, Austin, TX 78746, USA",
           "end_location": {
-            "lat": 30.2640023,
-            "lng": -97.77087069999999
+            "lat": 30.2639893,
+            "lng": -97.7709131
           },
           "start_address": "2215 Post Rd, Austin, TX 78704, USA",
           "start_location": {
@@ -100,21 +100,21 @@
             },
             {
               "distance": {
-                "text": "36 ft",
-                "value": 11
+                "text": "223 ft",
+                "value": 68
               },
               "duration": {
                 "text": "1 min",
-                "value": 2
+                "value": 16
               },
               "end_location": {
-                "lat": 30.23988929999999,
-                "lng": -97.75127409999999
+                "lat": 30.2401657,
+                "lng": -97.75177440000002
               },
               "html_instructions": "Turn <b>right</b> toward <b>Post Rd</b>",
               "maneuver": "turn-right",
               "polyline": {
-                "points": "}eqwDz_ssQKP"
+                "points": "}eqwDz_ssQKPSb@c@~@"
               },
               "start_location": {
                 "lat": 30.2398318,
@@ -124,36 +124,36 @@
             },
             {
               "distance": {
-                "text": "141 ft",
-                "value": 43
+                "text": "148 ft",
+                "value": 45
               },
               "duration": {
                 "text": "1 min",
-                "value": 9
+                "value": 8
               },
               "end_location": {
-                "lat": 30.2395714,
-                "lng": -97.7515204
+                "lat": 30.23982329999999,
+                "lng": -97.7520277
               },
               "html_instructions": "Turn <b>left</b> toward <b>Post Rd</b>",
               "maneuver": "turn-left",
               "polyline": {
-                "points": "ifqwDl`ssQ~@p@"
+                "points": "ahqwDpcssQdAr@"
               },
               "start_location": {
-                "lat": 30.23988929999999,
-                "lng": -97.75127409999999
+                "lat": 30.2401657,
+                "lng": -97.75177440000002
               },
               "travel_mode": "BICYCLING"
             },
             {
               "distance": {
-                "text": "381 ft",
-                "value": 116
+                "text": "197 ft",
+                "value": 60
               },
               "duration": {
                 "text": "1 min",
-                "value": 37
+                "value": 24
               },
               "end_location": {
                 "lat": 30.2401029,
@@ -162,11 +162,11 @@
               "html_instructions": "Turn <b>right</b> toward <b>Post Rd</b>",
               "maneuver": "turn-right",
               "polyline": {
-                "points": "idqwD~assQQb@Qb@M\\w@hB"
+                "points": "{eqwDdessQw@hB"
               },
               "start_location": {
-                "lat": 30.2395714,
-                "lng": -97.7515204
+                "lat": 30.23982329999999,
+                "lng": -97.7520277
               },
               "travel_mode": "BICYCLING"
             },
@@ -201,7 +201,7 @@
               },
               "duration": {
                 "text": "5 mins",
-                "value": 287
+                "value": 288
               },
               "end_location": {
                 "lat": 30.2571617,
@@ -210,7 +210,7 @@
               "html_instructions": "Sharp <b>right</b> onto <b>S Congress Ave</b><div style=\"font-size:0.9em\">Pass by STAG Provisions For Men (on the right in 0.7 mi)</div>",
               "maneuver": "turn-sharp-right",
               "polyline": {
-                "points": "weqwDnjssQQAc@E_AKEAC?]CQCOAc@E_CYE?IAE?QACAMAYCSEYGg@OEAa@KA?QGOEOEUGSGOEOEEAOEEAUGWGOEqA]EASGSGICEAICME[IA?e@M[I[KeAWo@SA?KEu@SOEGAq@Qs@SOESGWGYGaAWYIeAYcAY]K]Iy@Wy@SOEe@MaAWMC]KQEWIuA_@SGQE}@UUGEAICSEw@UMCSGu@U[IICICMEICUGME]KQEuA_@UIa@Km@OGCWG}@WA?GAQGYGEAoA]EAQGYIq@QA?]KQEa@Km@Qa@KME}@WYIMEA?g@O"
+                "points": "weqwDnjssQQAc@E_AKEAC?]CQCOAc@E_CYE?IAE?QACAMAYCSEYGg@OEAa@KA?QGOEOEUGSGOEOEEAOEEAUGWGOEqA]EASGSGICEAICME[IA?e@M[I[KeAWo@SA?KEu@SOEGAq@Qs@SOESGWGYGaAWYIeAYcAY]K]Iy@WUGc@KOEe@MaAWMC]KQEWIuA_@SGQE}@UUGEAICSEw@UMCSGu@U[Ia@Mq@QYIy@Um@OUGc@Ms@SWI}@WA?GAQGYGEAoA]EAQGYIq@QA?]KQEa@Km@Qa@KME}@WYIMEA?g@O"
               },
               "start_location": {
                 "lat": 30.23980019999999,
@@ -508,21 +508,21 @@
             },
             {
               "distance": {
-                "text": "151 ft",
-                "value": 46
+                "text": "138 ft",
+                "value": 42
               },
               "duration": {
                 "text": "1 min",
-                "value": 6
+                "value": 5
               },
               "end_location": {
-                "lat": 30.2640023,
-                "lng": -97.77087069999999
+                "lat": 30.2639893,
+                "lng": -97.7709131
               },
-              "html_instructions": "Turn <b>left</b> to stay on <b>Zilker Metro Park-Barton Springs Pool Pedestrian Walkway</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+              "html_instructions": "Turn <b>left</b> to stay on <b>Zilker Metro Park-Barton Springs Pool Pedestrian Walkway</b><div style=\"font-size:0.9em\">Destination will be on the left</div>",
               "maneuver": "turn-left",
               "polyline": {
-                "points": "i|uwDx}vsQAMEWCMEWAIAE"
+                "points": "i|uwDx}vsQAMEWCMEWAG"
               },
               "start_location": {
                 "lat": 30.2638869,
@@ -536,7 +536,7 @@
         }
       ],
       "overview_polyline": {
-        "points": "kgqwDx|rsQYh@fAv@KP~@p@c@fAeAfCb@^V^QAcBQy@IyDa@e@Eg@Em@MqA]gA[}Bm@iL_DqEmAiIyBuHqBsCw@kBe@sEoAkEmAaKoCcFsAgBg@g@OUV[`@wAdBa@b@yAxAcAz@eAx@gA|@W?k@\\y@b@_Bv@C@CIG_@KAGM{@?m@Ke@KYQ_@UKMKSIAWGOPSHQHi@t@Wn@UfA]~Ac@rAi@pBC~@CVMVq@dA]bAKb@Cl@?lEFf@Xv@BLWx@EHMBe@@SZQbASdA]t@i@tA[j@Qh@YhA[n@_A~Bq@lBo@xAEf@AZ_@pAi@bBAlAEf@Fj@?LHZTt@r@lBl@vAn@jBp@zAVf@_@Ts@`@ZzAV|@Vj@VNVb@Hf@?v@@JFXL^@LJ`@T~ARhFJhC?HFDR`BDpCLXB`@JnCXjBZKJA?OGo@?QDEFCGe@Mu@"
+        "points": "kgqwDx|rsQYh@fAv@_@t@c@~@dAr@w@hBJJDBh@n@{BUwFk@i@Em@IaAW{@UiA[yBk@{KyCcFuAmCq@eEiAwGgBsCw@kBe@kFyAyHuBoL_DgCs@OEg@OUV[`@]`@sA~AuAtA_@\\oAbAuAfAWTW?aAl@}At@e@TC@CIG_@C?GAGE?G{@?m@Ke@KYQ_@UKMKSIAWGOPSHQHi@t@OZQt@WnAc@~As@|BIp@Av@GTg@x@SXSf@On@G^AnB?zBFf@\\dA[`AEBg@@G@IHMZStAW|@_@z@Wn@g@bAW`AYz@c@`A{@|Ba@fAi@hAI^Ah@Mh@g@zAUx@Af@?d@Ef@Fj@?LHZTt@^hAf@dAr@lB`@jAd@bAVf@_@Ts@`@RbAR|@Rf@P\\FDLFJNHLF\\Bb@@n@FXLZ@PJ`@Hd@P`BFnCL`CBbAFDBLNrABtB@`@NZFrBDt@XjBZKJA@CIk@?a@DEFCQkAAG"
       },
       "summary": "S Congress Ave and Ann and Roy Butler Hike and Bike Trl",
       "warnings": [
