@@ -23,5 +23,18 @@ api.interceptors.request.use(
   }
 );
 
+// Add response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Handle 401 Unauthorized - token might be expired
+    if (error.response?.status === 401) {
+      // Optionally clear auth data and redirect to login
+      // This can be implemented if needed
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default api;
 

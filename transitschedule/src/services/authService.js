@@ -1,4 +1,12 @@
 import api from '../config/api';
+import {
+  storeAuthData,
+  clearAuthData,
+  getStoredUser,
+  getStoredToken,
+  isAuthenticated,
+  extractErrorMessage,
+} from '../utils/authHelpers';
 
 /**
  * Login with email and password
@@ -13,17 +21,10 @@ export const login = async (email, password) => {
       password,
     });
     
-    if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-    }
-    
+    storeAuthData(response.data.user, response.data.token);
     return response.data;
   } catch (error) {
-    if (error.response) {
-      throw new Error(error.response.data.error || 'Login failed');
-    }
-    throw new Error('Network error. Please try again.');
+    throw new Error(extractErrorMessage(error));
   }
 };
 
@@ -46,24 +47,10 @@ export const createAccount = async (name, email, password, passwordConfirmation)
       },
     });
     
-    if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-    }
-    
+    storeAuthData(response.data.user, response.data.token);
     return response.data;
   } catch (error) {
-    if (error.response && error.response.data.errors) {
-      const errors = error.response.data.errors;
-      if (Array.isArray(errors)) {
-        throw new Error(errors.join(', '));
-      }
-      throw new Error(Object.values(errors).flat().join(', '));
-    }
-    if (error.response && error.response.data.error) {
-      throw new Error(error.response.data.error);
-    }
-    throw new Error('Network error. Please try again.');
+    throw new Error(extractErrorMessage(error));
   }
 };
 
@@ -71,8 +58,7 @@ export const createAccount = async (name, email, password, passwordConfirmation)
  * Logout user by removing token from localStorage
  */
 export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
+  clearAuthData();
 };
 
 /**
@@ -80,18 +66,9 @@ export const logout = () => {
  * @returns {Object|null} - User object or null
  */
 export const getCurrentUser = () => {
-  const userStr = localStorage.getItem('user');
-  if (userStr) {
-    return JSON.parse(userStr);
-  }
-  return null;
+  return getStoredUser();
 };
 
-/**
- * Check if user is authenticated
- * @returns {boolean} - True if token exists
- */
-export const isAuthenticated = () => {
-  return !!localStorage.getItem('token');
-};
+// Re-export authentication check for convenience
+export { isAuthenticated };
 
