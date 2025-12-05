@@ -4,7 +4,7 @@ import { CAP_METRO_STOPS } from "../utils/constants";
 
 /**
  * Bus Service
- * 
+ *
  * Handles bus transit API calls and processing for Cap Metro bus routes.
  */
 
@@ -12,7 +12,7 @@ const BASE_URL = "https://maps.googleapis.com/maps/api/directions/json";
 
 /**
  * Fetches bus transit data from Google Directions API
- * 
+ *
  * @param {string} origin - Starting bus stop
  * @param {string} destination - Destination bus stop (always Downtown Station)
  * @param {string} apiKey - Google Maps API key
@@ -34,13 +34,26 @@ export const fetchBusRoute = async (origin, destination, apiKey) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching bus route:", error);
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error("Response data:", error.response.data);
+      console.error("Response status:", error.response.status);
+      console.error("Response headers:", error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error("No response received:", error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error("Error message:", error.message);
+    }
     throw error;
   }
 };
 
 /**
  * Processes bus transit response and returns formatted stop data
- * 
+ *
  * @param {Object} stopConfig - Stop configuration object
  * @param {Object} response - API response data
  * @returns {Object} - Formatted stop data
@@ -53,7 +66,9 @@ export const processBusResponse = (stopConfig, response) => {
     response.routes.length === 0
   ) {
     console.log(
-      `✗ No stop times found for ${stopConfig.name} (bus) - ${response?.status || "No response"}`
+      `✗ No stop times found for ${stopConfig.name} (bus) - ${
+        response?.status || "No response"
+      }`
     );
     return {
       name: stopConfig.name,
@@ -81,15 +96,12 @@ export const processBusResponse = (stopConfig, response) => {
 
           // Filter by route (801 for bus)
           const lineName =
-            transitDetails.line?.short_name ||
-            transitDetails.line?.name ||
-            "";
+            transitDetails.line?.short_name || transitDetails.line?.name || "";
           const matchesRoute = lineName === routeFilter;
 
           if (matchesRoute && transitDetails.arrival_time) {
             // Check if we have real-time data
-            const isRealTime =
-              transitDetails.arrival_time.value !== undefined;
+            const isRealTime = transitDetails.arrival_time.value !== undefined;
 
             if (isRealTime || transitDetails.arrival_time.text) {
               const arrivalTime = convertToCentralTime(
@@ -258,24 +270,52 @@ export const processBusResponse = (stopConfig, response) => {
 
 /**
  * Fetches and processes bus transit data
- * 
+ *
  * @param {Object} stopConfig - Stop configuration object
  * @param {string} apiKey - Google Maps API key
  * @returns {Promise<Object>} - Formatted stop data
  */
 export const getBusStopData = async (stopConfig, apiKey) => {
   try {
-    // Try to load from saved file first
+    // Try to load from saved file first, but verify it has the correct route
     if (stopConfig.dataFile) {
       try {
-        const filePath = `${process.env.PUBLIC_URL || ""}${stopConfig.dataFile}`;
+        const filePath = `${process.env.PUBLIC_URL || ""}${
+          stopConfig.dataFile
+        }`;
         const response = await fetch(filePath);
         if (response.ok) {
           const data = await response.json();
-          console.log(
-            `✓ Loaded saved data for ${stopConfig.name} (bus)`
-          );
-          return processBusResponse(stopConfig, data);
+          const routeFilter = stopConfig.routeFilter || "801";
+
+          // Check if saved data contains the requested route
+          let hasMatchingRoute = false;
+          if (data.routes && data.routes.length > 0) {
+            data.routes.forEach((route) => {
+              route.legs.forEach((leg) => {
+                leg.steps.forEach((step) => {
+                  if (step.travel_mode === "TRANSIT" && step.transit_details) {
+                    const lineName =
+                      step.transit_details.line?.short_name ||
+                      step.transit_details.line?.name ||
+                      "";
+                    if (lineName === routeFilter) {
+                      hasMatchingRoute = true;
+                    }
+                  }
+                });
+              });
+            });
+          }
+
+          if (hasMatchingRoute) {
+            console.log(`✓ Loaded saved data for ${stopConfig.name} (bus)`);
+            return processBusResponse(stopConfig, data);
+          } else {
+            console.log(
+              `✗ Saved data for ${stopConfig.name} doesn't contain route ${routeFilter}, fetching from API`
+            );
+          }
         }
       } catch (error) {
         console.log(
@@ -286,25 +326,115 @@ export const getBusStopData = async (stopConfig, apiKey) => {
     }
 
     // If file doesn't exist or failed to load, make API call
-    const response = await fetchBusRoute(
-      stopConfig.origin,
-      stopConfig.destination,
-      apiKey
-    );
-
-    if (response && response.status === "OK") {
-      console.log(
-        `✓ Request successful for ${stopConfig.name} (bus)`
+    if (!apiKey || apiKey === "YOUR_API_KEY_HERE") {
+      console.warn(
+        `⚠ No API key configured for ${stopConfig.name} (bus) - cannot fetch live data`
       );
-    } else {
-      console.log(
-        `✗ Request unsuccessful for ${stopConfig.name} (bus): ${response?.status || "Unknown error"}`
-      );
+      return {
+        name: stopConfig.name,
+        type: "bus",
+        origin: stopConfig.origin,
+        destination: stopConfig.destination || "Downtown Station, Austin, TX",
+        routeFilter: stopConfig.routeFilter || "801",
+        transitMode: "bus",
+        allArrivalTimes: [],
+        nextArrivalTime: null,
+        lastStopTime: null,
+        isWithinTwoStops: false,
+      };
     }
 
-    return processBusResponse(stopConfig, response);
+    let response;
+    try {
+      response = await fetchBusRoute(
+        stopConfig.origin,
+        stopConfig.destination,
+        apiKey
+      );
+
+      if (response && response.status === "OK") {
+        console.log(`✓ Request successful for ${stopConfig.name} (bus)`);
+        return processBusResponse(stopConfig, response);
+      } else {
+        console.log(
+          `✗ Request unsuccessful for ${stopConfig.name} (bus): ${
+            response?.status || "Unknown error"
+          }`
+        );
+        if (response?.error_message) {
+          console.error(`API Error Message: ${response.error_message}`);
+        }
+        // Fall through to try saved data
+      }
+    } catch (networkError) {
+      // Network error - try to use saved data as fallback
+      console.warn(
+        `⚠ Network error fetching live data for ${stopConfig.name} (bus), attempting to use saved data as fallback`
+      );
+      if (stopConfig.dataFile) {
+        try {
+          const filePath = `${process.env.PUBLIC_URL || ""}${
+            stopConfig.dataFile
+          }`;
+          const fileResponse = await fetch(filePath);
+          if (fileResponse.ok) {
+            const savedData = await fileResponse.json();
+            console.log(
+              `⚠ Using saved data for ${stopConfig.name} (may not have route ${
+                stopConfig.routeFilter || "801"
+              })`
+            );
+            return processBusResponse(stopConfig, savedData);
+          }
+        } catch (fileError) {
+          console.error(`Could not load saved data: ${fileError.message}`);
+        }
+      }
+      // If we have a response object despite the error, process it
+      if (response) {
+        return processBusResponse(stopConfig, response);
+      }
+      // Re-throw if we can't use fallback
+      throw networkError;
+    }
+
+    // If we get here, we have a response but it's not OK - process it anyway
+    if (response) {
+      return processBusResponse(stopConfig, response);
+    }
+
+    // Last resort - try saved data
+    if (stopConfig.dataFile) {
+      try {
+        const filePath = `${process.env.PUBLIC_URL || ""}${
+          stopConfig.dataFile
+        }`;
+        const fileResponse = await fetch(filePath);
+        if (fileResponse.ok) {
+          const savedData = await fileResponse.json();
+          console.log(
+            `⚠ Using saved data for ${stopConfig.name} (may not have route ${
+              stopConfig.routeFilter || "801"
+            })`
+          );
+          return processBusResponse(stopConfig, savedData);
+        }
+      } catch (fileError) {
+        // Ignore file errors
+      }
+    }
   } catch (error) {
     console.error(`Error fetching bus data for ${stopConfig.name}:`, error);
+    if (error.response) {
+      console.error(`API Error Status: ${error.response.status}`);
+      console.error(`API Error Data:`, error.response.data);
+    } else if (error.request) {
+      console.error(
+        "No response from API - check network connection and API key"
+      );
+    } else {
+      console.error(`Error: ${error.message}`);
+    }
     return {
       name: stopConfig.name,
       type: "bus",
@@ -322,4 +452,3 @@ export const getBusStopData = async (stopConfig, apiKey) => {
 
 // Export Cap Metro stops list for use in dropdowns
 export { CAP_METRO_STOPS };
-
