@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .error { color: red; }
+        .success { color: green; }
+        pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Testing Google Maps API</h1>
+    <div id="status">Loading...</div>
+    <div id="result"></div>
+    <script>
+        const apiKey = 'prompt("Enter your Google Maps API key:") || ""';
+        const origin = 'Congress and Oltorf, Austin, TX';
+        const destination = 'Downtown Station, Austin, TX';
+        const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&mode=transit&transit_mode=bus&departure_time=now&alternatives=true&key=${apiKey}`;
+        
+        console.log('Testing URL:', url);
+        console.log('Protocol:', window.location.protocol);
+        console.log('Host:', window.location.host);
+        
+        document.getElementById('status').innerHTML = `<p>Protocol: ${window.location.protocol}</p><p>Host: ${window.location.host || 'file://'}</p><p>Making request...</p>`;
+        
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+            mode: 'cors'
+        })
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`HTTP ${response.status}: ${text}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                document.getElementById('status').innerHTML = '<p class="success">✓ API call successful!</p>';
+                document.getElementById('result').innerHTML = 
+                    '<h2>Response:</h2><pre>' + JSON.stringify(data, null, 2).substring(0, 2000) + '...</pre>';
+                
+                // Check for route 801
+                let hasRoute801 = false;
+                if (data.routes) {
+                    data.routes.forEach(route => {
+                        route.legs.forEach(leg => {
+                            leg.steps.forEach(step => {
+                                if (step.transit_details && step.transit_details.line) {
+                                    const shortName = step.transit_details.line.short_name;
+                                    if (shortName === '801') {
+                                        hasRoute801 = true;
+                                    }
+                                }
+                            });
+                        });
+                    });
+                }
+                
+                if (hasRoute801) {
+                    document.getElementById('result').innerHTML += '<p class="success">✓ Route 801 found in response!</p>';
+                } else {
+                    document.getElementById('result').innerHTML += '<p class="error">✗ Route 801 not found in response</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('status').innerHTML = '<p class="error">✗ API call failed</p>';
+                document.getElementById('result').innerHTML = 
+                    '<h2>Error Details:</h2>' +
+                    '<p><strong>Error:</strong> ' + error.message + '</p>' +
+                    '<p><strong>Type:</strong> ' + error.name + '</p>' +
+                    '<h3>Possible Causes:</h3>' +
+                    '<ul>' +
+                    '<li>API key has HTTP referrer restrictions</li>' +
+                    '<li>CORS issue (check browser console for CORS errors)</li>' +
+                    '<li>Network connectivity issue</li>' +
+                    '<li>API key restrictions in Google Cloud Console</li>' +
+                    '</ul>' +
+                    '<p><strong>Solution:</strong> Check Google Cloud Console → APIs & Services → Credentials → Your API Key → Application restrictions</p>';
+            });
+    </script>
+</body>
+</html>
+

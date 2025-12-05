@@ -1,0 +1,74 @@
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-12-05 17:47:17.344068', '2025-12-05 17:47:17.344070') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20251205174609)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251205174609') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "d@d.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "d@d.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (2.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Donovan"], ["email", "d@d.com"], ["password_digest", "[FILTERED]"], ["created_at", "2025-12-05 17:47:29.268952"], ["updated_at", "2025-12-05 17:47:29.268952"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started GET "/" for ::1 at 2025-12-05 09:53:16 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/donovansanders/.rvm/gems/ruby-3.0.3/gems/railties-7.1.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/donovansanders/.rvm/gems/ruby-3.0.3/gems/railties-7.1.6/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.2ms | Allocations: 582)
+Completed 200 OK in 1320ms (Views: 13.5ms | ActiveRecord: 0.0ms | Allocations: 982718)
+
+
+Started POST "/api/v1/auth/login" for ::1 at 2025-12-05 09:53:38 -0800
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"d@d.com", "password"=>"[FILTERED]", "auth"=>{"email"=>"d@d.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "d@d.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/auth_controller.rb:5:in `login'
+Completed 200 OK in 364ms (Views: 0.2ms | ActiveRecord: 15.4ms | Allocations: 33209)
+
+
+Started POST "/api/v1/auth/login" for ::1 at 2025-12-05 10:25:06 -0800
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"d@d.com", "password"=>"[FILTERED]", "auth"=>{"email"=>"d@d.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (14.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "d@d.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/auth_controller.rb:5:in `login'
+Completed 200 OK in 306ms (Views: 0.6ms | ActiveRecord: 22.7ms | Allocations: 1113)
+
+
+Started POST "/api/v1/users" for ::1 at 2025-12-05 10:25:42 -0800
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"Donna", "email"=>"a@a.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:21:in `create'
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:21:in `create'
+  [1m[36mUser Create (4.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Donna"], ["email", "a@a.com"], ["password_digest", "[FILTERED]"], ["created_at", "2025-12-05 18:25:42.687595"], ["updated_at", "2025-12-05 18:25:42.687595"]]
+  ↳ app/controllers/api/v1/users_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:21:in `create'
+Completed 201 Created in 295ms (Views: 0.7ms | ActiveRecord: 7.0ms | Allocations: 4409)
+
+
+Started POST "/api/v1/auth/login" for ::1 at 2025-12-05 10:25:56 -0800
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"a@a.com", "password"=>"[FILTERED]", "auth"=>{"email"=>"a@a.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "a@a.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/auth_controller.rb:5:in `login'
+Completed 200 OK in 289ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 734)
+
+
+Started POST "/api/v1/auth/login" for ::1 at 2025-12-05 10:26:07 -0800
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"b@b.com", "password"=>"[FILTERED]", "auth"=>{"email"=>"b@b.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "b@b.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/auth_controller.rb:5:in `login'
+Completed 401 Unauthorized in 8ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 561)
+
+
