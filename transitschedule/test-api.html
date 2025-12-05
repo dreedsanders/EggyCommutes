@@ -14,7 +14,12 @@
     <div id="status">Loading...</div>
     <div id="result"></div>
     <script>
-        const apiKey = 'prompt("Enter your Google Maps API key:") || ""';
+        // API key should be set from environment or user input
+        const apiKey = prompt('Enter your Google Maps API key:') || '';
+        if (!apiKey) {
+            document.getElementById('status').innerHTML = '<p class="error">✗ API key is required</p>';
+            throw new Error('API key is required');
+        }
         const origin = 'Congress and Oltorf, Austin, TX';
         const destination = 'Downtown Station, Austin, TX';
         const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&mode=transit&transit_mode=bus&departure_time=now&alternatives=true&key=${apiKey}`;
