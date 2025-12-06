@@ -23,6 +23,15 @@ import { getFerryStopData } from "./services/ferryService";
 import { getDestinationName, parseApiError } from "./utils/helpers";
 import { INITIAL_HOME_ADDRESS, INITIAL_PAGE_TITLE } from "./utils/constants";
 
+// Import stop service and form
+import {
+  fetchUserStops,
+  createStop,
+  hideStop,
+  fetchTransitData,
+} from "./services/stopService";
+import AddStopForm from "./components/AddStopForm";
+
 /**
  * fetchAllTransitTimes Function
  *
@@ -241,6 +250,9 @@ function App() {
   const [editingHome, setEditingHome] = useState(false);
   const [previousStopConfig, setPreviousStopConfig] = useState(null);
   const [reviewData, setReviewData] = useState(null);
+  const [addingStop, setAddingStop] = useState(false);
+  const [userStops, setUserStops] = useState([]);
+  const [fetchingTransitData, setFetchingTransitData] = useState(false);
 
   // State for storing all transit stops data
   const [stops, setStops] = useState([
@@ -325,17 +337,64 @@ function App() {
     process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE";
 
   /**
-   * Check authentication on mount
+   * Check authentication on mount and load user stops
    */
   useEffect(() => {
-    setAuthenticated(isAuthenticated());
+    const authStatus = isAuthenticated();
+
+    if (authStatus) {
+      // Fetch transit data if user is already authenticated (page refresh)
+      const fetchDataOnMount = async () => {
+        setFetchingTransitData(true);
+        try {
+          await fetchTransitData();
+          console.log("Transit data fetched successfully");
+        } catch (error) {
+          console.error("Error fetching transit data:", error);
+        } finally {
+          setFetchingTransitData(false);
+          setAuthenticated(true);
+          loadUserStops();
+        }
+      };
+      fetchDataOnMount();
+    } else {
+      setAuthenticated(false);
+    }
   }, []);
+
+  /**
+   * Load user stops from backend
+   */
+  const loadUserStops = async () => {
+    try {
+      const stops = await fetchUserStops();
+      setUserStops(stops || []);
+    } catch (error) {
+      console.error("Error loading user stops:", error);
+      setUserStops([]);
+    }
+  };
 
   /**
    * Handle successful login
    */
-  const handleLoginSuccess = () => {
-    setAuthenticated(true);
+  const handleLoginSuccess = async () => {
+    setFetchingTransitData(true);
+    try {
+      // Fetch transit data before showing the main page
+      await fetchTransitData();
+      console.log("Transit data fetched successfully");
+    } catch (error) {
+      console.error("Error fetching transit data:", error);
+      // Continue to show the page even if transit data fetch fails
+      // The app will still work, just without the cached data files
+    } finally {
+      setFetchingTransitData(false);
+      setAuthenticated(true);
+      // Load user stops after authentication is set
+      await loadUserStops();
+    }
   };
 
   /**
@@ -586,6 +645,281 @@ function App() {
     setReviewData(null);
   };
 
+  /**
+   * Handle stop creation from AddStopForm
+   */
+  const handleCreateStop = async (stopData) => {
+    try {
+      // First, validate the stop with Google Maps API
+      if (apiKey && apiKey !== "YOUR_API_KEY_HERE") {
+        const baseUrl = "https://maps.googleapis.com/maps/api/directions/json";
+        let params;
+        let validationError = null;
+
+        // Validate based on transit type
+        if (
+          stopData.transit_type === "bike" ||
+          stopData.transit_type === "walk" ||
+          stopData.transit_type === "drive"
+        ) {
+          const origin = stopData.origin || homeAddress;
+          if (!origin) {
+            throw new Error(
+              "Origin address is required for " +
+                stopData.transit_type +
+                " stops"
+            );
+          }
+          params = {
+            origin: origin,
+            destination: stopData.destination,
+            mode:
+              stopData.transit_type === "bike"
+                ? "bicycling"
+                : stopData.transit_type === "walk"
+                ? "walking"
+                : "driving",
+            key: apiKey,
+          };
+        } else if (stopData.transit_type === "bus") {
+          const origin =
+            stopData.destination ||
+            stopData.origin ||
+            "Congress and Oltorf, Austin, TX";
+          params = {
+            origin: origin,
+            destination: "Downtown Station, Austin, TX",
+            mode: "transit",
+            transit_mode: "bus",
+            departure_time: "now",
+            alternatives: true,
+            key: apiKey,
+          };
+        } else if (stopData.transit_type === "train") {
+          const origin =
+            stopData.destination ||
+            stopData.origin ||
+            "South San Francisco Caltrain Station, CA";
+          params = {
+            origin: origin,
+            destination: "San Francisco Caltrain Station, CA",
+            mode: "transit",
+            transit_mode: "rail",
+            departure_time: "now",
+            alternatives: true,
+            key: apiKey,
+          };
+        }
+        // Ferry doesn't need API validation
+
+        // Validate with API if not ferry
+        if (params && stopData.transit_type !== "ferry") {
+          try {
+            const validationResponse = await axios.get(baseUrl, { params });
+            if (
+              validationResponse.data &&
+              validationResponse.data.status !== "OK"
+            ) {
+              const status = validationResponse.data.status;
+              let errorMsg =
+                validationResponse.data.error_message ||
+                "Unknown error occurred";
+              if (status === "ZERO_RESULTS") {
+                errorMsg =
+                  "Cannot route to destination. Please check your addresses.";
+              } else if (status === "NOT_FOUND") {
+                errorMsg =
+                  "Address does not exist. Please check your addresses.";
+              } else if (status === "INVALID_REQUEST") {
+                errorMsg = "Invalid request - please check your inputs.";
+              }
+              throw new Error(errorMsg);
+            }
+          } catch (apiError) {
+            // If it's an API validation error, throw it
+            if (apiError.message && !apiError.response) {
+              throw apiError;
+            }
+            // Otherwise parse the error
+            const errorMessage = parseApiError(apiError);
+            throw new Error(errorMessage);
+          }
+        }
+      }
+
+      // If validation passed (or no API key), create the stop
+      const createdStop = await createStop(stopData);
+
+      // Fetch transit data for the new stop immediately
+      if (apiKey && apiKey !== "YOUR_API_KEY_HERE") {
+        // For bus/train, the destination in stopData is actually the stop location (origin for API)
+        // The actual destination is always Downtown Station (bus) or San Francisco (train)
+        let origin, destination;
+        if (stopData.transit_type === "bus") {
+          origin =
+            stopData.destination ||
+            stopData.origin ||
+            "Congress and Oltorf, Austin, TX";
+          destination = "Downtown Station, Austin, TX";
+        } else if (stopData.transit_type === "train") {
+          origin =
+            stopData.destination ||
+            stopData.origin ||
+            "South San Francisco Caltrain Station, CA";
+          destination = "San Francisco Caltrain Station, CA";
+        } else {
+          origin = stopData.origin || homeAddress;
+          destination = stopData.destination;
+        }
+
+        const stopConfig = {
+          name: stopData.name || stopData.destination,
+          type: stopData.transit_type,
+          origin: origin,
+          destination: destination,
+          routeFilter: stopData.route_filter,
+          stopFilter: stopData.stop_filter,
+          ferryDirection: stopData.ferry_direction,
+          location: stopData.location,
+          mode:
+            stopData.transit_type === "bike"
+              ? "bicycling"
+              : stopData.transit_type === "walk"
+              ? "walking"
+              : stopData.transit_type === "drive"
+              ? "driving"
+              : undefined,
+        };
+
+        let processedStop;
+        try {
+          switch (stopData.transit_type) {
+            case "bike":
+              processedStop = await getBikeStopData(stopConfig, apiKey);
+              break;
+            case "walk":
+              processedStop = await getWalkStopData(stopConfig, apiKey);
+              break;
+            case "drive":
+              processedStop = await getDriveStopData(stopConfig, apiKey);
+              break;
+            case "bus":
+              processedStop = await getBusStopData(stopConfig, apiKey);
+              break;
+            case "train":
+              processedStop = await getTrainStopData(stopConfig, apiKey);
+              break;
+            case "ferry":
+              processedStop = await getFerryStopData(stopConfig);
+              break;
+            default:
+              processedStop = {
+                name: stopConfig.name,
+                type: stopData.transit_type,
+                origin: stopConfig.origin,
+                destination: stopConfig.destination,
+                allArrivalTimes: [],
+                nextArrivalTime: null,
+                lastStopTime: null,
+                isWithinTwoStops: false,
+              };
+          }
+
+          // Add the stop ID and other backend fields
+          processedStop.id = createdStop.id;
+          processedStop.isUserStop = true;
+          processedStop.routeFilter = stopData.route_filter;
+          processedStop.stopFilter = stopData.stop_filter;
+          processedStop.ferryDirection = stopData.ferry_direction;
+          processedStop.location = stopData.location;
+
+          // Add the processed stop to the stops state immediately
+          setStops((prevStops) => [...prevStops, processedStop]);
+        } catch (fetchError) {
+          console.error(
+            "Error fetching transit data for new stop:",
+            fetchError
+          );
+          // Still add the stop even if transit data fetch fails
+          const fallbackStop = {
+            id: createdStop.id,
+            name: stopData.name || stopData.destination,
+            type: stopData.transit_type,
+            origin: stopData.origin || "",
+            destination: stopData.destination,
+            allArrivalTimes: [],
+            nextArrivalTime: null,
+            lastStopTime: null,
+            isWithinTwoStops: false,
+            isUserStop: true,
+          };
+          setStops((prevStops) => [...prevStops, fallbackStop]);
+        }
+      } else {
+        // No API key, just add the stop without transit data
+        const fallbackStop = {
+          id: createdStop.id,
+          name: stopData.name || stopData.destination,
+          type: stopData.transit_type,
+          origin: stopData.origin || "",
+          destination: stopData.destination,
+          allArrivalTimes: [],
+          nextArrivalTime: null,
+          lastStopTime: null,
+          isWithinTwoStops: false,
+          isUserStop: true,
+        };
+        setStops((prevStops) => [...prevStops, fallbackStop]);
+      }
+
+      // Reload user stops to keep backend in sync
+      await loadUserStops();
+      setAddingStop(false); // Close the form on success
+    } catch (error) {
+      console.error("Error creating stop:", error);
+      // Parse error message for better user feedback
+      let errorMessage = "Unknown error occurred";
+      if (error.response?.data?.errors) {
+        // Backend validation errors
+        const errors = error.response.data.errors;
+        if (errors.full_messages) {
+          errorMessage = errors.full_messages.join(", ");
+        } else if (errors.base) {
+          errorMessage = Array.isArray(errors.base)
+            ? errors.base.join(", ")
+            : errors.base;
+        } else {
+          errorMessage = Object.values(errors).flat().join(", ");
+        }
+      } else if (error.message) {
+        errorMessage = error.message;
+      } else {
+        errorMessage = parseApiError(error);
+      }
+      throw new Error(errorMessage);
+    }
+  };
+
+  /**
+   * Handle stop deletion (hiding)
+   */
+  const handleDeleteStop = async (stopId) => {
+    if (!window.confirm("Are you sure you want to remove this stop?")) {
+      return;
+    }
+
+    try {
+      await hideStop(stopId);
+      // Remove from local state immediately
+      setUserStops((prev) => prev.filter((stop) => stop.id !== stopId));
+      // Also remove from stops if it's there
+      setStops((prev) => prev.filter((stop) => stop.id !== stopId));
+    } catch (error) {
+      console.error("Error hiding stop:", error);
+      alert(`Error removing stop: ${error.message || "Unknown error"}`);
+    }
+  };
+
   // Show auth page if not authenticated
   if (!authenticated) {
     return (
@@ -595,15 +929,71 @@ function App() {
     );
   }
 
+  // Show loading state while fetching transit data
+  if (fetchingTransitData) {
+    return (
+      <div
+        className="App"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+          fontFamily: "'Press Start 2P', monospace",
+          color: "#FF69B4",
+        }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <h2>Fetching transit data...</h2>
+          <p style={{ fontSize: "12px", marginTop: "20px" }}>Please wait...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Merge user stops with default stops for display
+  // Convert user stops to the format expected by TransitDisplay
+  const userStopsFormatted = userStops.map((stop) => ({
+    id: stop.id,
+    name: stop.name || stop.destination,
+    type: stop.transit_type,
+    origin: stop.origin || "",
+    destination: stop.destination,
+    routeFilter: stop.route_filter,
+    stopFilter: stop.stop_filter,
+    ferryDirection: stop.ferry_direction,
+    location: stop.location,
+    arrival: stop.arrival,
+    departure: stop.departure,
+    // Add default fields for display
+    allArrivalTimes: [],
+    nextArrivalTime: null,
+    lastStopTime: null,
+    isWithinTwoStops: false,
+    isUserStop: true, // Flag to identify user-added stops
+  }));
+
+  // Combine default stops with user stops
+  const allStops = [...stops, ...userStopsFormatted];
+
   return (
     <div className="App">
+      {addingStop && (
+        <AddStopForm
+          onClose={() => setAddingStop(false)}
+          onSubmit={handleCreateStop}
+          apiKey={apiKey}
+        />
+      )}
       <TransitDisplay
-        stops={stops}
+        stops={allStops}
         onEditStop={(index) => {
           setEditingStop(index);
-          setPreviousStopConfig({ ...stops[index] });
+          setPreviousStopConfig({ ...allStops[index] });
         }}
         onEditHome={() => setEditingHome(true)}
+        onAddStop={() => setAddingStop(true)}
+        onDeleteStop={handleDeleteStop}
         editingStop={editingStop}
         editingHome={editingHome}
         onCloseEdit={() => {

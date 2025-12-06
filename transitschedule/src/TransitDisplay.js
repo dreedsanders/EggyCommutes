@@ -483,6 +483,8 @@ function TransitDisplay({
   stops,
   onEditStop,
   onEditHome,
+  onAddStop,
+  onDeleteStop,
   editingStop,
   editingHome,
   onCloseEdit,
@@ -547,16 +549,6 @@ function TransitDisplay({
     process.env.PUBLIC_URL || ""
   }/images/Commute_Champions.jpg`;
 
-  // Separate bike/walk/drive stops and transit stops for different positioning
-  const bikeWalkDriveStops = stops.filter(
-    (stop) =>
-      stop.type === "bike" || stop.type === "walk" || stop.type === "drive"
-  );
-  const transitStops = stops.filter(
-    (stop) =>
-      stop.type !== "bike" && stop.type !== "walk" && stop.type !== "drive"
-  );
-
   return (
     <div
       className="transit-display-container"
@@ -564,47 +556,61 @@ function TransitDisplay({
         backgroundImage: `url(${backgroundImageUrl})`,
       }}
     >
-      {/* Page Title */}
+      {/* Page Title Box with Title and Menu */}
       <div className="page-title-box">
         <h1 className="page-title">{pageTitle || "Eggy Commutes"}</h1>
-        <button
-          className="home-edit-button"
-          onClick={onEditHome}
-          title="Edit home address and title"
-        >
-          ✏️
-        </button>
+        {/* Menu Button and Dropdown */}
+        <div className="menu-container" ref={menuRef}>
+          <button
+            className="menu-button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            title="Menu"
+          >
+            ☰
+          </button>
+          {isMenuOpen && (
+            <div className="menu-dropdown">
+              <div className="menu-item" onClick={() => setIsMenuOpen(false)}>
+                Edit Profile
+              </div>
+              <div
+                className="menu-item"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  if (onEditHome) {
+                    onEditHome();
+                  }
+                }}
+              >
+                Edit Home Address
+              </div>
+              <div
+                className="menu-item"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  if (onAddStop) {
+                    onAddStop();
+                  }
+                }}
+              >
+                Add Stop
+              </div>
+              <div className="menu-item" onClick={handleLogoutClick}>
+                Logout
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Menu Button and Dropdown */}
-      <div className="menu-container" ref={menuRef}>
-        <button
-          className="menu-button"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          title="Menu"
-        >
-          ☰
-        </button>
-        {isMenuOpen && (
-          <div className="menu-dropdown">
-            <div className="menu-item" onClick={() => setIsMenuOpen(false)}>
-              Edit Profile
-            </div>
-            <div className="menu-item" onClick={() => setIsMenuOpen(false)}>
-              Add Stop
-            </div>
-            <div className="menu-item" onClick={handleLogoutClick}>
-              Logout
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Bike/Walk/Drive stops on the left */}
-      <div className="bike-stops-container">
-        {bikeWalkDriveStops.map((stop, index) => {
-          // Find the actual index in the full stops array
-          const fullIndex = stops.findIndex((s) => s === stop);
+      {/* All stops in a single flex container */}
+      <div className="stops-container">
+        {stops.map((stop, index) => {
+          const fullIndex = index;
+          const isBikeWalkDrive =
+            stop.type === "bike" ||
+            stop.type === "walk" ||
+            stop.type === "drive";
           const bikeBgColor = "rgb(61, 179, 218)"; // Light blue with full opacity
           const bikeTextColor = "#FFA500"; // Highlighter orange
 
@@ -614,104 +620,85 @@ function TransitDisplay({
               ? "BIKE"
               : stop.type === "walk"
               ? "WALK"
-              : "DRIVE";
+              : stop.type === "drive"
+              ? "DRIVE"
+              : stop.type === "bus"
+              ? "BUS"
+              : stop.type === "train"
+              ? "TRAIN"
+              : "FERRY";
 
           return (
             <div
-              key={`bike-walk-drive-${index}`}
-              className="stop-box bike-box"
+              key={`stop-${index}-${stop.id || stop.name}`}
+              className={`stop-box ${isBikeWalkDrive ? "bike-box" : ""}`}
               style={{
-                backgroundColor: bikeBgColor,
+                backgroundColor: isBikeWalkDrive ? bikeBgColor : bgColor,
                 borderColor: "#000000",
-                color: bikeTextColor,
+                color: isBikeWalkDrive ? bikeTextColor : textColor,
               }}
             >
-              {/* Edit Button */}
-              <button
-                className="stop-edit-button"
-                onClick={() => onEditStop(fullIndex)}
-                title="Edit stop"
-              >
-                ✏️
-              </button>
+              {/* Edit and Delete Buttons */}
+              <div className="stop-action-buttons">
+                <button
+                  className="stop-edit-button"
+                  onClick={() => onEditStop(fullIndex)}
+                  title="Edit stop"
+                >
+                  ✏️
+                </button>
+                {stop.id && onDeleteStop && (
+                  <button
+                    className="stop-delete-button"
+                    onClick={() => onDeleteStop(stop.id)}
+                    title="Delete stop"
+                  >
+                    🗑️
+                  </button>
+                )}
+              </div>
 
               {/* Transit Type Label */}
               <div className="transit-type">{typeLabel}</div>
 
               {/* Scrolling Stop Name */}
               <div className="stop-name-container">
-                <ScrollText text={stop.name} textColor={bikeTextColor} />
+                <ScrollText
+                  text={stop.name}
+                  textColor={isBikeWalkDrive ? bikeTextColor : textColor}
+                />
               </div>
 
-              {/* Estimated Time */}
-              <div className="arrival-time">
-                <span className="arrival-label">Estimated time:</span>
-                <span className="arrival-value">
-                  {stop.estimatedTime || "N/A"}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Transit stops on the right */}
-      <div className="transit-stops-container">
-        {transitStops.map((stop, index) => {
-          // Find the actual index in the full stops array
-          const fullIndex = stops.findIndex((s) => s === stop);
-          return (
-            <div
-              key={`transit-${index}`}
-              className="stop-box"
-              style={{
-                backgroundColor: bgColor,
-                borderColor: "#000000",
-                color: textColor,
-              }}
-            >
-              {/* Edit Button */}
-              <button
-                className="stop-edit-button"
-                onClick={() => onEditStop(fullIndex)}
-                title="Edit stop"
-              >
-                ✏️
-              </button>
-
-              {/* Transit Type Label */}
-              <div className="transit-type">
-                {stop.type === "bus"
-                  ? "BUS"
-                  : stop.type === "train"
-                  ? "TRAIN"
-                  : "FERRY"}
-              </div>
-
-              {/* Scrolling Stop Name */}
-              <div className="stop-name-container">
-                <ScrollText text={stop.name} textColor={textColor} />
-              </div>
-
-              {/* Next Arrival/Departure Time */}
-              <div className="arrival-time">
-                <span className="arrival-label">
-                  {stop.type === "ferry"
-                    ? "Next departure time:"
-                    : "Next arrival time:"}
-                </span>
-                <span className="arrival-value">
-                  {stop.type === "ferry"
-                    ? formatArrivalTime(stop.nextDepartureTime)
-                    : formatArrivalTime(stop.nextArrivalTime)}
-                </span>
-              </div>
-
-              {/* Conditional Last Stop Display */}
-              {stop.isWithinTwoStops && stop.lastStopTime && (
-                <div className="last-stop">
-                  Last stop: {formatArrivalTime(stop.lastStopTime)}
+              {/* Estimated Time for bike/walk/drive, Arrival/Departure for transit */}
+              {isBikeWalkDrive ? (
+                <div className="arrival-time">
+                  <span className="arrival-label">Estimated time:</span>
+                  <span className="arrival-value">
+                    {stop.estimatedTime || "N/A"}
+                  </span>
                 </div>
+              ) : (
+                <>
+                  <div className="arrival-time">
+                    <span className="arrival-label">
+                      {stop.type === "ferry"
+                        ? "Next departure time:"
+                        : "Next arrival time:"}
+                    </span>
+                    <span className="arrival-value">
+                      {stop.type === "ferry"
+                        ? formatArrivalTime(stop.nextDepartureTime)
+                        : formatArrivalTime(stop.nextArrivalTime)}
+                    </span>
+                  </div>
+
+                  {/* Conditional Last Stop Display */}
+                  {stop.isWithinTwoStops && stop.lastStopTime && (
+                    <div className="last-stop">
+                      Last stop: {formatArrivalTime(stop.lastStopTime)}
+                    </div>
+                  )}
+                </>
               )}
             </div>
           );

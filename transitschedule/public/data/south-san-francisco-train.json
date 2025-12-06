@@ -39,22 +39,1306 @@
       "legs": [
         {
           "arrival_time": {
-            "text": "10:48 AM",
+            "text": "3:48 PM",
             "time_zone": "America/Los_Angeles",
-            "value": 1764960521
+            "value": 1764978498
           },
           "departure_time": {
-            "text": "10:28 AM",
+            "text": "3:27 PM",
             "time_zone": "America/Los_Angeles",
-            "value": 1764959321
+            "value": 1764977248
           },
           "distance": {
             "text": "9.3 mi",
             "value": 14975
+          },
+          "duration": {
+            "text": "21 mins",
+            "value": 1250
+          },
+          "end_address": "San Francisco Station, San Francisco, CA, USA",
+          "end_location": {
+            "lat": 37.7767296,
+            "lng": -122.3949144
+          },
+          "start_address": "South San Francisco Caltrain Station Entrance, South San Francisco, CA 94080, USA",
+          "start_location": {
+            "lat": 37.6564579,
+            "lng": -122.4059433
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.1 mi",
+                "value": 216
+              },
+              "duration": {
+                "text": "3 mins",
+                "value": 190
+              },
+              "end_location": {
+                "lat": 37.65546,
+                "lng": -122.40546
+              },
+              "html_instructions": "Walk to South San Francisco",
+              "polyline": {
+                "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?FAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GEBA?A?A?A?AAGDA`AJ"
+              },
+              "start_location": {
+                "lat": 37.6564579,
+                "lng": -122.4059433
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "299 ft",
+                    "value": 91
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 74
+                  },
+                  "end_location": {
+                    "lat": 37.6556536,
+                    "lng": -122.406099
+                  },
+                  "html_instructions": "Head <b>south</b> on <b>South San Francisco Caltrain Station Entrance</b>",
+                  "polyline": {
+                    "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?"
+                  },
+                  "start_location": {
+                    "lat": 37.6564579,
+                    "lng": -122.4059433
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "256 ft",
+                    "value": 78
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 58
+                  },
+                  "end_location": {
+                    "lat": 37.6558313,
+                    "lng": -122.4054991
+                  },
+                  "html_instructions": "Slight <b>left</b> to stay on <b>South San Francisco Caltrain Station Entrance</b>",
+                  "maneuver": "turn-slight-left",
+                  "polyline": {
+                    "points": "yrydFbmbjVFAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GE"
+                  },
+                  "start_location": {
+                    "lat": 37.6556536,
+                    "lng": -122.406099
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "33 ft",
+                    "value": 10
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 9
+                  },
+                  "end_location": {
+                    "lat": 37.6558167,
+                    "lng": -122.4054074
+                  },
+                  "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "}sydFjibjVBA?A?A?A?AAG"
+                  },
+                  "start_location": {
+                    "lat": 37.6558313,
+                    "lng": -122.4054991
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "121 ft",
+                    "value": 37
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 49
+                  },
+                  "end_location": {
+                    "lat": 37.65546,
+                    "lng": -122.40546
+                  },
+                  "html_instructions": "Take entrance <span class=\"location\">Entrance</span>",
+                  "polyline": {
+                    "points": "usydFvhbjV`AJ"
+                  },
+                  "start_location": {
+                    "lat": 37.6557942,
+                    "lng": -122.4053994
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "9.1 mi",
+                "value": 14708
+              },
+              "duration": {
+                "text": "16 mins",
+                "value": 960
+              },
+              "end_location": {
+                "lat": 37.77639,
+                "lng": -122.39499
+              },
+              "html_instructions": "Train towards San Francisco",
+              "polyline": {
+                "points": "sqydFbibjV?AaLsKg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@i@^}AdAwDxCuKxIWRmA~@k@`@WP{@j@IDc@VuAx@a@Tc@RwAp@}@^y@\\y@Zo@Ts@Tq@Rs@Ry@T{@R_AR{@NqARE@yARy@Hw@FgAHiAFiBFy@@k@?oS?aR?c@?{XAgA?c@?{B?S?c@?oC?o@?W?K?]A]?]Ak@Ci@E]Ci@Im@Ii@IMAw@Mg@Gg@K}AYoD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
+              },
+              "start_location": {
+                "lat": 37.65546,
+                "lng": -122.40546
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 37.77639,
+                    "lng": -122.39499
+                  },
+                  "name": "San Francisco"
+                },
+                "arrival_time": {
+                  "text": "3:46 PM",
+                  "time_zone": "America/Los_Angeles",
+                  "value": 1764978399
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 37.65546,
+                    "lng": -122.40546
+                  },
+                  "name": "South San Francisco"
+                },
+                "departure_time": {
+                  "text": "3:31 PM",
+                  "time_zone": "America/Los_Angeles",
+                  "value": 1764977469
+                },
+                "headsign": "San Francisco",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Caltrain",
+                      "phone": "1 (800) 660-4287",
+                      "url": "http://www.caltrain.com/"
+                    }
+                  ],
+                  "color": "#a7a8a8",
+                  "name": "Local Weekday",
+                  "text_color": "#000000",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                    "local_icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/us-caltrain.png",
+                    "name": "Train",
+                    "type": "HEAVY_RAIL"
+                  }
+                },
+                "num_stops": 3,
+                "trip_short_name": "139"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "167 ft",
+                "value": 51
+              },
+              "duration": {
+                "text": "2 mins",
+                "value": 99
+              },
+              "end_location": {
+                "lat": 37.7767296,
+                "lng": -122.3949144
+              },
+              "html_instructions": "Walk to San Francisco Station, San Francisco, CA, USA",
+              "polyline": {
+                "points": "meqeFtg`jVgAc@BR"
+              },
+              "start_location": {
+                "lat": 37.77639,
+                "lng": -122.39499
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "138 ft",
+                    "value": 42
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 92
+                  },
+                  "end_location": {
+                    "lat": 37.77674500000001,
+                    "lng": -122.394808
+                  },
+                  "html_instructions": "Take exit <span class=\"location\">Enter/Exit: 1</span>",
+                  "polyline": {
+                    "points": "meqeFtg`jVgAc@"
+                  },
+                  "start_location": {
+                    "lat": 37.77639,
+                    "lng": -122.39499
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "30 ft",
+                    "value": 9
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 7
+                  },
+                  "end_location": {
+                    "lat": 37.7767296,
+                    "lng": -122.3949144
+                  },
+                  "polyline": {
+                    "points": "ugqeFpf`jVBR"
+                  },
+                  "start_location": {
+                    "lat": 37.77674500000001,
+                    "lng": -122.394808
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AHaZgYkQuPyLkLm@m@eQsP}@u@iCwCmCgC_BwAmA{@sAw@yAw@iBo@gA]oCc@uBOcCEmCJqANiB`@iAZ}EpByNxKkSnP}AdAwDxCmLlJyB`BsA|@eDlBsFbCoEzAmBh@{Bf@mCb@_BTqBPqCPcDH{T?io@A{L?eCGgAIwASwCa@eCe@e\\qIwd@mLsD}@_Do@aCa@wD_@_Jo@kCSu_@sCeWgBaLy@a`@qCoFa@c@EuBUm@I}@?cGa@cHg@o^iC}DQsDEeDAuGBeEHsCLuLp@gCRo@Jw@Rm@RaBl@yAx@{@j@y@r@iAlAc@^ORCJ}H|Ka@^kDxEeAtAqBpC{@z@u@r@w@^gBX[@_@?_@GYKYOg@a@_A{@eFaHmAqCs@}AeEyF}B_De@l@gAc@BR"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 37.77674500000001,
+          "lng": -122.3895426
+        },
+        "southwest": {
+          "lat": 37.6554568,
+          "lng": -122.4061032
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$4.00",
+        "value": 4
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "4:17 PM",
+            "time_zone": "America/Los_Angeles",
+            "value": 1764980277
+          },
+          "departure_time": {
+            "text": "3:57 PM",
+            "time_zone": "America/Los_Angeles",
+            "value": 1764979021
+          },
+          "distance": {
+            "text": "9.3 mi",
+            "value": 14975
+          },
+          "duration": {
+            "text": "21 mins",
+            "value": 1256
+          },
+          "end_address": "San Francisco Station, San Francisco, CA, USA",
+          "end_location": {
+            "lat": 37.7767296,
+            "lng": -122.3949144
+          },
+          "start_address": "South San Francisco Caltrain Station Entrance, South San Francisco, CA 94080, USA",
+          "start_location": {
+            "lat": 37.6564579,
+            "lng": -122.4059433
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.1 mi",
+                "value": 216
+              },
+              "duration": {
+                "text": "3 mins",
+                "value": 190
+              },
+              "end_location": {
+                "lat": 37.65546,
+                "lng": -122.40546
+              },
+              "html_instructions": "Walk to South San Francisco",
+              "polyline": {
+                "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?FAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GEBA?A?A?A?AAGDA`AJ"
+              },
+              "start_location": {
+                "lat": 37.6564579,
+                "lng": -122.4059433
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "299 ft",
+                    "value": 91
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 74
+                  },
+                  "end_location": {
+                    "lat": 37.6556536,
+                    "lng": -122.406099
+                  },
+                  "html_instructions": "Head <b>south</b> on <b>South San Francisco Caltrain Station Entrance</b>",
+                  "polyline": {
+                    "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?"
+                  },
+                  "start_location": {
+                    "lat": 37.6564579,
+                    "lng": -122.4059433
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "256 ft",
+                    "value": 78
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 58
+                  },
+                  "end_location": {
+                    "lat": 37.6558313,
+                    "lng": -122.4054991
+                  },
+                  "html_instructions": "Slight <b>left</b> to stay on <b>South San Francisco Caltrain Station Entrance</b>",
+                  "maneuver": "turn-slight-left",
+                  "polyline": {
+                    "points": "yrydFbmbjVFAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GE"
+                  },
+                  "start_location": {
+                    "lat": 37.6556536,
+                    "lng": -122.406099
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "33 ft",
+                    "value": 10
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 9
+                  },
+                  "end_location": {
+                    "lat": 37.6558167,
+                    "lng": -122.4054074
+                  },
+                  "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "}sydFjibjVBA?A?A?A?AAG"
+                  },
+                  "start_location": {
+                    "lat": 37.6558313,
+                    "lng": -122.4054991
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "121 ft",
+                    "value": 37
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 49
+                  },
+                  "end_location": {
+                    "lat": 37.65546,
+                    "lng": -122.40546
+                  },
+                  "html_instructions": "Take entrance <span class=\"location\">Entrance</span>",
+                  "polyline": {
+                    "points": "usydFvhbjV`AJ"
+                  },
+                  "start_location": {
+                    "lat": 37.6557942,
+                    "lng": -122.4053994
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "9.1 mi",
+                "value": 14708
+              },
+              "duration": {
+                "text": "16 mins",
+                "value": 960
+              },
+              "end_location": {
+                "lat": 37.77639,
+                "lng": -122.39499
+              },
+              "html_instructions": "Train towards San Francisco",
+              "polyline": {
+                "points": "sqydFbibjV?AaLsKg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@i@^}AdAwDxCuKxIWRmA~@k@`@WP{@j@IDc@VuAx@a@Tc@RwAp@}@^y@\\y@Zo@Ts@Tq@Rs@Ry@T{@R_AR{@NqARE@yARy@Hw@FgAHiAFiBFy@@k@?oS?aR?c@?{XAgA?c@?{B?S?c@?oC?o@?W?K?]A]?]Ak@Ci@E]Ci@Im@Ii@IMAw@Mg@Gg@K}AYoD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
+              },
+              "start_location": {
+                "lat": 37.65546,
+                "lng": -122.40546
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 37.77639,
+                    "lng": -122.39499
+                  },
+                  "name": "San Francisco"
+                },
+                "arrival_time": {
+                  "text": "4:16 PM",
+                  "time_zone": "America/Los_Angeles",
+                  "value": 1764980178
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 37.65546,
+                    "lng": -122.40546
+                  },
+                  "name": "South San Francisco"
+                },
+                "departure_time": {
+                  "text": "4:00 PM",
+                  "time_zone": "America/Los_Angeles",
+                  "value": 1764979242
+                },
+                "headsign": "San Francisco",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Caltrain",
+                      "phone": "1 (800) 660-4287",
+                      "url": "http://www.caltrain.com/"
+                    }
+                  ],
+                  "color": "#a7a8a8",
+                  "name": "Local Weekday",
+                  "text_color": "#000000",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                    "local_icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/us-caltrain.png",
+                    "name": "Train",
+                    "type": "HEAVY_RAIL"
+                  }
+                },
+                "num_stops": 3,
+                "trip_short_name": "141"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "167 ft",
+                "value": 51
+              },
+              "duration": {
+                "text": "2 mins",
+                "value": 99
+              },
+              "end_location": {
+                "lat": 37.7767296,
+                "lng": -122.3949144
+              },
+              "html_instructions": "Walk to San Francisco Station, San Francisco, CA, USA",
+              "polyline": {
+                "points": "meqeFtg`jVgAc@BR"
+              },
+              "start_location": {
+                "lat": 37.77639,
+                "lng": -122.39499
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "138 ft",
+                    "value": 42
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 92
+                  },
+                  "end_location": {
+                    "lat": 37.77674500000001,
+                    "lng": -122.394808
+                  },
+                  "html_instructions": "Take exit <span class=\"location\">Enter/Exit: 1</span>",
+                  "polyline": {
+                    "points": "meqeFtg`jVgAc@"
+                  },
+                  "start_location": {
+                    "lat": 37.77639,
+                    "lng": -122.39499
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "30 ft",
+                    "value": 9
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 7
+                  },
+                  "end_location": {
+                    "lat": 37.7767296,
+                    "lng": -122.3949144
+                  },
+                  "polyline": {
+                    "points": "ugqeFpf`jVBR"
+                  },
+                  "start_location": {
+                    "lat": 37.77674500000001,
+                    "lng": -122.394808
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AHaZgYkQuPyLkLm@m@eQsP}@u@iCwCmCgC_BwAmA{@sAw@yAw@iBo@gA]oCc@uBOcCEmCJqANiB`@iAZ}EpByNxKkSnP}AdAwDxCmLlJyB`BsA|@eDlBsFbCoEzAmBh@{Bf@mCb@_BTqBPqCPcDH{T?io@A{L?eCGgAIwASwCa@eCe@e\\qIwd@mLsD}@_Do@aCa@wD_@_Jo@kCSu_@sCeWgBaLy@a`@qCoFa@c@EuBUm@I}@?cGa@cHg@o^iC}DQsDEeDAuGBeEHsCLuLp@gCRo@Jw@Rm@RaBl@yAx@{@j@y@r@iAlAc@^ORCJ}H|Ka@^kDxEeAtAqBpC{@z@u@r@w@^gBX[@_@?_@GYKYOg@a@_A{@eFaHmAqCs@}AeEyF}B_De@l@gAc@BR"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 37.77674500000001,
+          "lng": -122.3895426
+        },
+        "southwest": {
+          "lat": 37.655439,
+          "lng": -122.4061032
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$4.00",
+        "value": 4
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "4:24 PM",
+            "time_zone": "America/Los_Angeles",
+            "value": 1764980673
+          },
+          "departure_time": {
+            "text": "4:06 PM",
+            "time_zone": "America/Los_Angeles",
+            "value": 1764979573
+          },
+          "distance": {
+            "text": "9.3 mi",
+            "value": 14983
+          },
+          "duration": {
+            "text": "18 mins",
+            "value": 1100
+          },
+          "end_address": "San Francisco Station, San Francisco, CA, USA",
+          "end_location": {
+            "lat": 37.7767296,
+            "lng": -122.3949144
+          },
+          "start_address": "South San Francisco Caltrain Station Entrance, South San Francisco, CA 94080, USA",
+          "start_location": {
+            "lat": 37.6564579,
+            "lng": -122.4059433
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.1 mi",
+                "value": 216
+              },
+              "duration": {
+                "text": "3 mins",
+                "value": 190
+              },
+              "end_location": {
+                "lat": 37.65546,
+                "lng": -122.40546
+              },
+              "html_instructions": "Walk to South San Francisco",
+              "polyline": {
+                "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?FAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GEBA?A?A?A?AAGDA`AJ"
+              },
+              "start_location": {
+                "lat": 37.6564579,
+                "lng": -122.4059433
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "299 ft",
+                    "value": 91
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 74
+                  },
+                  "end_location": {
+                    "lat": 37.6556536,
+                    "lng": -122.406099
+                  },
+                  "html_instructions": "Head <b>south</b> on <b>South San Francisco Caltrain Station Entrance</b>",
+                  "polyline": {
+                    "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?"
+                  },
+                  "start_location": {
+                    "lat": 37.6564579,
+                    "lng": -122.4059433
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "256 ft",
+                    "value": 78
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 58
+                  },
+                  "end_location": {
+                    "lat": 37.6558313,
+                    "lng": -122.4054991
+                  },
+                  "html_instructions": "Slight <b>left</b> to stay on <b>South San Francisco Caltrain Station Entrance</b>",
+                  "maneuver": "turn-slight-left",
+                  "polyline": {
+                    "points": "yrydFbmbjVFAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GE"
+                  },
+                  "start_location": {
+                    "lat": 37.6556536,
+                    "lng": -122.406099
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "33 ft",
+                    "value": 10
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 9
+                  },
+                  "end_location": {
+                    "lat": 37.6558167,
+                    "lng": -122.4054074
+                  },
+                  "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "}sydFjibjVBA?A?A?A?AAG"
+                  },
+                  "start_location": {
+                    "lat": 37.6558313,
+                    "lng": -122.4054991
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "121 ft",
+                    "value": 37
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 49
+                  },
+                  "end_location": {
+                    "lat": 37.65546,
+                    "lng": -122.40546
+                  },
+                  "html_instructions": "Take entrance <span class=\"location\">Entrance</span>",
+                  "polyline": {
+                    "points": "usydFvhbjV`AJ"
+                  },
+                  "start_location": {
+                    "lat": 37.6557942,
+                    "lng": -122.4053994
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "9.1 mi",
+                "value": 14716
+              },
+              "duration": {
+                "text": "13 mins",
+                "value": 780
+              },
+              "end_location": {
+                "lat": 37.77639,
+                "lng": -122.39499
+              },
+              "html_instructions": "Train towards San Francisco",
+              "polyline": {
+                "points": "sqydFbibjVBEKMmAmAgAeAq@o@e@c@{@y@y@w@CC_A}@uAqAyAwAiAgAsAsAmCgCkBeBcBaB{BuBKKaB}AWWq@o@II{AyAwAsAe@c@k@k@{CuCeBeBaB}AeD_Dc@c@e@e@eAaAWWgA}@aA{@}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@g@b@yAjAyDxCuKxIWRmA~@cAr@GD]TUNm@^sAv@c@Tc@RoAj@{@^s@ZiAb@s@Tw@Vq@Rq@R_ATq@N}@R]HC?_@Fa@Hi@HaALk@H}@HeAJ_BH_ADcABq@@q@@cSAyO?yB?mXAgA?c@?oC?c@?c@?kB?c@?Y?m@?k@A]Ay@C]C]Ec@EYE[Eg@Ia@Ic@Ic@Iq@OwA[oD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
+              },
+              "start_location": {
+                "lat": 37.65546,
+                "lng": -122.40546
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 37.77639,
+                    "lng": -122.39499
+                  },
+                  "name": "San Francisco"
+                },
+                "arrival_time": {
+                  "text": "4:22 PM",
+                  "time_zone": "America/Los_Angeles",
+                  "value": 1764980574
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 37.65546,
+                    "lng": -122.40546
+                  },
+                  "name": "South San Francisco"
+                },
+                "departure_time": {
+                  "text": "4:09 PM",
+                  "time_zone": "America/Los_Angeles",
+                  "value": 1764979794
+                },
+                "headsign": "San Francisco",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Caltrain",
+                      "phone": "1 (800) 660-4287",
+                      "url": "http://www.caltrain.com/"
+                    }
+                  ],
+                  "color": "#ce202f",
+                  "name": "Express",
+                  "text_color": "#ffffff",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                    "local_icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/us-caltrain.png",
+                    "name": "Train",
+                    "type": "HEAVY_RAIL"
+                  }
+                },
+                "num_stops": 2,
+                "trip_short_name": "515"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "167 ft",
+                "value": 51
+              },
+              "duration": {
+                "text": "2 mins",
+                "value": 99
+              },
+              "end_location": {
+                "lat": 37.7767296,
+                "lng": -122.3949144
+              },
+              "html_instructions": "Walk to San Francisco Station, San Francisco, CA, USA",
+              "polyline": {
+                "points": "meqeFtg`jVgAc@BR"
+              },
+              "start_location": {
+                "lat": 37.77639,
+                "lng": -122.39499
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "138 ft",
+                    "value": 42
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 92
+                  },
+                  "end_location": {
+                    "lat": 37.77674500000001,
+                    "lng": -122.394808
+                  },
+                  "html_instructions": "Take exit <span class=\"location\">Enter/Exit: 1</span>",
+                  "polyline": {
+                    "points": "meqeFtg`jVgAc@"
+                  },
+                  "start_location": {
+                    "lat": 37.77639,
+                    "lng": -122.39499
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "30 ft",
+                    "value": 9
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 7
+                  },
+                  "end_location": {
+                    "lat": 37.7767296,
+                    "lng": -122.3949144
+                  },
+                  "polyline": {
+                    "points": "ugqeFpf`jVBR"
+                  },
+                  "start_location": {
+                    "lat": 37.77674500000001,
+                    "lng": -122.394808
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AJBEyA{AyBuB_DyCyHoHsT{ScQsPqIgI}AyAiCyB}@u@iCwCwCqCuAmAmA{@oBiA}@e@a@MkC}@sCe@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBwKlIuPjNaCnBoQrNqDlCuD|BsEtB}B~@kBl@uElA_Cd@yDj@cCT_DNuBDuT?io@AsM?cCGyBUiCc@uAYgGwAuVuGk\\kIoEiA{Cy@kDw@qCg@_C[wIo@uS{AcS}AgSuAyAK{CUoGe@_OgAgNaAoHk@gBMiBWc@AkBGoM_Ai]eC_FUcDGaJAsFFgCHiKj@{EXcBTyC~@iBz@}@h@}@r@iAfAaAbAOT{H~Ka@^gBbCwBtCcAtA_ApA_@\\o@p@YVq@^[Jq@Js@Ja@?]C]IWKa@Yq@m@a@_@qD_Fs@aA[m@kAuCYk@_AoAcGiIe@l@gAc@BR"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 37.77674500000001,
+          "lng": -122.3895426
+        },
+        "southwest": {
+          "lat": 37.6554568,
+          "lng": -122.4061032
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$4.00",
+        "value": 4
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "4:47 PM",
+            "time_zone": "America/Los_Angeles",
+            "value": 1764982065
+          },
+          "departure_time": {
+            "text": "4:26 PM",
+            "time_zone": "America/Los_Angeles",
+            "value": 1764980809
+          },
+          "distance": {
+            "text": "9.3 mi",
+            "value": 14975
+          },
+          "duration": {
+            "text": "21 mins",
+            "value": 1256
+          },
+          "end_address": "San Francisco Station, San Francisco, CA, USA",
+          "end_location": {
+            "lat": 37.7767296,
+            "lng": -122.3949144
+          },
+          "start_address": "South San Francisco Caltrain Station Entrance, South San Francisco, CA 94080, USA",
+          "start_location": {
+            "lat": 37.6564579,
+            "lng": -122.4059433
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.1 mi",
+                "value": 216
+              },
+              "duration": {
+                "text": "3 mins",
+                "value": 190
+              },
+              "end_location": {
+                "lat": 37.65546,
+                "lng": -122.40546
+              },
+              "html_instructions": "Walk to South San Francisco",
+              "polyline": {
+                "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?FAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GEBA?A?A?A?AAGDA`AJ"
+              },
+              "start_location": {
+                "lat": 37.6564579,
+                "lng": -122.4059433
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "299 ft",
+                    "value": 91
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 74
+                  },
+                  "end_location": {
+                    "lat": 37.6556536,
+                    "lng": -122.406099
+                  },
+                  "html_instructions": "Head <b>south</b> on <b>South San Francisco Caltrain Station Entrance</b>",
+                  "polyline": {
+                    "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?"
+                  },
+                  "start_location": {
+                    "lat": 37.6564579,
+                    "lng": -122.4059433
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "256 ft",
+                    "value": 78
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 58
+                  },
+                  "end_location": {
+                    "lat": 37.6558313,
+                    "lng": -122.4054991
+                  },
+                  "html_instructions": "Slight <b>left</b> to stay on <b>South San Francisco Caltrain Station Entrance</b>",
+                  "maneuver": "turn-slight-left",
+                  "polyline": {
+                    "points": "yrydFbmbjVFAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GE"
+                  },
+                  "start_location": {
+                    "lat": 37.6556536,
+                    "lng": -122.406099
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "33 ft",
+                    "value": 10
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 9
+                  },
+                  "end_location": {
+                    "lat": 37.6558167,
+                    "lng": -122.4054074
+                  },
+                  "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+                  "maneuver": "turn-right",
+                  "polyline": {
+                    "points": "}sydFjibjVBA?A?A?A?AAG"
+                  },
+                  "start_location": {
+                    "lat": 37.6558313,
+                    "lng": -122.4054991
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "121 ft",
+                    "value": 37
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 49
+                  },
+                  "end_location": {
+                    "lat": 37.65546,
+                    "lng": -122.40546
+                  },
+                  "html_instructions": "Take entrance <span class=\"location\">Entrance</span>",
+                  "polyline": {
+                    "points": "usydFvhbjV`AJ"
+                  },
+                  "start_location": {
+                    "lat": 37.6557942,
+                    "lng": -122.4053994
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "9.1 mi",
+                "value": 14708
+              },
+              "duration": {
+                "text": "16 mins",
+                "value": 960
+              },
+              "end_location": {
+                "lat": 37.77639,
+                "lng": -122.39499
+              },
+              "html_instructions": "Train towards San Francisco",
+              "polyline": {
+                "points": "sqydFbibjV?AaLsKg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@i@^}AdAwDxCuKxIWRmA~@k@`@WP{@j@IDc@VuAx@a@Tc@RwAp@}@^y@\\y@Zo@Ts@Tq@Rs@Ry@T{@R_AR{@NqARE@yARy@Hw@FgAHiAFiBFy@@k@?oS?aR?c@?{XAgA?c@?{B?S?c@?oC?o@?W?K?]A]?]Ak@Ci@E]Ci@Im@Ii@IMAw@Mg@Gg@K}AYoD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
+              },
+              "start_location": {
+                "lat": 37.65546,
+                "lng": -122.40546
+              },
+              "transit_details": {
+                "arrival_stop": {
+                  "location": {
+                    "lat": 37.77639,
+                    "lng": -122.39499
+                  },
+                  "name": "San Francisco"
+                },
+                "arrival_time": {
+                  "text": "4:46 PM",
+                  "time_zone": "America/Los_Angeles",
+                  "value": 1764981966
+                },
+                "departure_stop": {
+                  "location": {
+                    "lat": 37.65546,
+                    "lng": -122.40546
+                  },
+                  "name": "South San Francisco"
+                },
+                "departure_time": {
+                  "text": "4:30 PM",
+                  "time_zone": "America/Los_Angeles",
+                  "value": 1764981030
+                },
+                "headsign": "San Francisco",
+                "line": {
+                  "agencies": [
+                    {
+                      "name": "Caltrain",
+                      "phone": "1 (800) 660-4287",
+                      "url": "http://www.caltrain.com/"
+                    }
+                  ],
+                  "color": "#a7a8a8",
+                  "name": "Local Weekday",
+                  "text_color": "#000000",
+                  "vehicle": {
+                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
+                    "local_icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/us-caltrain.png",
+                    "name": "Train",
+                    "type": "HEAVY_RAIL"
+                  }
+                },
+                "num_stops": 3,
+                "trip_short_name": "143"
+              },
+              "travel_mode": "TRANSIT"
+            },
+            {
+              "distance": {
+                "text": "167 ft",
+                "value": 51
+              },
+              "duration": {
+                "text": "2 mins",
+                "value": 99
+              },
+              "end_location": {
+                "lat": 37.7767296,
+                "lng": -122.3949144
+              },
+              "html_instructions": "Walk to San Francisco Station, San Francisco, CA, USA",
+              "polyline": {
+                "points": "meqeFtg`jVgAc@BR"
+              },
+              "start_location": {
+                "lat": 37.77639,
+                "lng": -122.39499
+              },
+              "steps": [
+                {
+                  "distance": {
+                    "text": "138 ft",
+                    "value": 42
+                  },
+                  "duration": {
+                    "text": "2 mins",
+                    "value": 92
+                  },
+                  "end_location": {
+                    "lat": 37.77674500000001,
+                    "lng": -122.394808
+                  },
+                  "html_instructions": "Take exit <span class=\"location\">Enter/Exit: 1</span>",
+                  "polyline": {
+                    "points": "meqeFtg`jVgAc@"
+                  },
+                  "start_location": {
+                    "lat": 37.77639,
+                    "lng": -122.39499
+                  },
+                  "travel_mode": "WALKING"
+                },
+                {
+                  "distance": {
+                    "text": "30 ft",
+                    "value": 9
+                  },
+                  "duration": {
+                    "text": "1 min",
+                    "value": 7
+                  },
+                  "end_location": {
+                    "lat": 37.7767296,
+                    "lng": -122.3949144
+                  },
+                  "polyline": {
+                    "points": "ugqeFpf`jVBR"
+                  },
+                  "start_location": {
+                    "lat": 37.77674500000001,
+                    "lng": -122.394808
+                  },
+                  "travel_mode": "WALKING"
+                }
+              ],
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AHaZgYkQuPyLkLm@m@eQsP}@u@iCwCmCgC_BwAmA{@sAw@yAw@iBo@gA]oCc@uBOcCEmCJqANiB`@iAZ}EpByNxKkSnP}AdAwDxCmLlJyB`BsA|@eDlBsFbCoEzAmBh@{Bf@mCb@_BTqBPqCPcDH{T?io@A{L?eCGgAIwASwCa@eCe@e\\qIwd@mLsD}@_Do@aCa@wD_@_Jo@kCSu_@sCeWgBaLy@a`@qCoFa@c@EuBUm@I}@?cGa@cHg@o^iC}DQsDEeDAuGBeEHsCLuLp@gCRo@Jw@Rm@RaBl@yAx@{@j@y@r@iAlAc@^ORCJ}H|Ka@^kDxEeAtAqBpC{@z@u@r@w@^gBX[@_@?_@GYKYOg@a@_A{@eFaHmAqCs@}AeEyF}B_De@l@gAc@BR"
+      },
+      "summary": "",
+      "warnings": [
+        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+      ],
+      "waypoint_order": []
+    },
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 37.77674500000001,
+          "lng": -122.3896367
+        },
+        "southwest": {
+          "lat": 37.655439,
+          "lng": -122.4061032
+        }
+      },
+      "copyrights": "Powered by Google, ©2025 Google",
+      "fare": {
+        "currency": "USD",
+        "text": "$4.00",
+        "value": 4
+      },
+      "legs": [
+        {
+          "arrival_time": {
+            "text": "4:54 PM",
+            "time_zone": "America/Los_Angeles",
+            "value": 1764982491
+          },
+          "departure_time": {
+            "text": "4:35 PM",
+            "time_zone": "America/Los_Angeles",
+            "value": 1764981319
+          },
+          "distance": {
+            "text": "9.3 mi",
+            "value": 14970
           },
           "duration": {
             "text": "20 mins",
-            "value": 1200
+            "value": 1172
           },
           "end_address": "San Francisco Station, San Francisco, CA, USA",
           "end_location": {
@@ -189,11 +1473,11 @@
             {
               "distance": {
                 "text": "9.1 mi",
-                "value": 14708
+                "value": 14703
               },
               "duration": {
-                "text": "16 mins",
-                "value": 960
+                "text": "14 mins",
+                "value": 840
               },
               "end_location": {
                 "lat": 37.77639,
@@ -201,7 +1485,7 @@
               },
               "html_instructions": "Train towards San Francisco",
               "polyline": {
-                "points": "sqydFbibjV?AaLsKg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@i@^}AdAwDxCuKxIWRmA~@k@`@WP{@j@IDc@VuAx@a@Tc@RwAp@}@^y@\\y@Zo@Ts@Tq@Rs@Ry@T{@R_AR{@NqARE@yARy@Hw@FgAHiAFiBFy@@k@?oS?aR?c@?{XAgA?c@?{B?S?c@?oC?o@?W?K?]A]?]Ak@Ci@E]Ci@Im@Ii@IMAw@Mg@Gg@K}AYoD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
+                "points": "sqydFbibjVBEKMmAmAgAeAq@o@e@c@{@y@y@w@CCYSWOg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@}GwGIIsAkAmA{@sAw@yAw@a@KiAa@[Ia@KOEqCc@{@IeAC[AkB?iADaAHsANsAVy@TkBp@eCjAoBrA_LfJcOrLu@n@i@`@{AjAmQrNeBrAcAr@i@^QLm@\\sAx@c@Vg@TsB|@gAd@kAb@q@Tq@TgBf@y@T{@Re@Js@LiARi@He@Hk@Fo@HiBN{@Fy@Du@Dm@@{@@y@@yPAgS?oA?qX?gA?c@?oC?c@?c@?kB?_A?G?m@?c@AYAm@Cg@Ec@E[E[EC?YEEAUEMC_@GAAe@I_@Iu@Os@Oa@IeAWeAUkAY[IgBe@cAYa@Mc@KcAYa@Kc@McAYgBe@cAYeAYA?eBc@cAWeAYKCy@Sa@Ka@Kc@KcAWeAYa@Kc@Ka@KeAWgBc@mBg@m@OKCUGa@K]IEAcAYyA_@aAWs@QOEQE}@SeASeASk@IWCq@IcAMoAKiAIgT{AcCQcS}AiBM_PgAu@Ge@Eg@CqCUoCSqAI}AMoCSqDWa@CEAc@Cc@CsCUc@CeAKoCSgAIiBMc@Ec@Cc@Ec@Cc@Ec@EUAE?]C[CgAIc@Ea@Cc@EgAIkBMiBOc@C{DYe@EQAQA{@G_BUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Kw@hAq@|@c@n@mBhCQTq@~@yAnBW\\[`@UVONUPWNQHSFWFYDU@O?O?QCUCQEOEQGOIYO_@]QSQSa@k@q@_AoAcBcB_CcB_CgAyAqHcKAB"
               },
               "start_location": {
                 "lat": 37.65546,
@@ -216,9 +1500,9 @@
                   "name": "San Francisco"
                 },
                 "arrival_time": {
-                  "text": "10:47 AM",
+                  "text": "4:53 PM",
                   "time_zone": "America/Los_Angeles",
-                  "value": 1764960422
+                  "value": 1764982392
                 },
                 "departure_stop": {
                   "location": {
@@ -228,9 +1512,9 @@
                   "name": "South San Francisco"
                 },
                 "departure_time": {
-                  "text": "10:32 AM",
+                  "text": "4:39 PM",
                   "time_zone": "America/Los_Angeles",
-                  "value": 1764959542
+                  "value": 1764981540
                 },
                 "headsign": "San Francisco",
                 "line": {
@@ -241,8 +1525,8 @@
                       "url": "http://www.caltrain.com/"
                     }
                   ],
-                  "color": "#a7a8a8",
-                  "name": "Local Weekday",
+                  "color": "#99d7dc",
+                  "name": "Limited",
                   "text_color": "#000000",
                   "vehicle": {
                     "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
@@ -251,8 +1535,8 @@
                     "type": "HEAVY_RAIL"
                   }
                 },
-                "num_stops": 3,
-                "trip_short_name": "119"
+                "num_stops": 2,
+                "trip_short_name": "417"
               },
               "travel_mode": "TRANSIT"
             },
@@ -332,7 +1616,7 @@
         }
       ],
       "overview_polyline": {
-        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AHaZgYkQuPyLkLm@m@eQsP}@u@iCwCmCgC_BwAmA{@sAw@yAw@iBo@gA]oCc@uBOcCEmCJqANiB`@iAZ}EpByNxKkSnP}AdAwDxCmLlJyB`BsA|@eDlBsFbCoEzAmBh@{Bf@mCb@_BTqBPqCPcDH{T?io@A{L?eCGgAIwASwCa@eCe@e\\qIwd@mLsD}@_Do@aCa@wD_@_Jo@kCSu_@sCeWgBaLy@a`@qCoFa@c@EuBUm@I}@?cGa@cHg@o^iC}DQsDEeDAuGBeEHsCLuLp@gCRo@Jw@Rm@RaBl@yAx@{@j@y@r@iAlAc@^ORCJ}H|Ka@^kDxEeAtAqBpC{@z@u@r@w@^gBX[@_@?_@GYKYOg@a@_A{@eFaHmAqCs@}AeEyF}B_De@l@gAc@BR"
+        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AJBEyA{AyBuB_DyCq@c@qBoB_UgTmEeEoLaLiSwR}@u@}GwG}AuAmA{@sAw@yAw@a@KeBk@q@QqCc@{@IaBEkB?iADuCXsAVy@TkBp@eCjAoBrA_LfJyPbNsU`RiDfC{@l@aCvAkAl@{DbB}Bx@yC|@uBh@cDl@kDd@eDVoBJiBBsR?qq@?}M?kBGcCWoCe@kDs@sFqA_MgDoNsDaXyGyI{BcCg@qB]iAMsCYyn@uEeVcB}YuB{Z}BuZyB_BUw@GqKw@aIk@gCOoCIaDEkD?_C?sFFgCHuEVoKl@cBT_AVyAf@eAb@aB`AuAhAeBfB]b@{H~KiBfCuEnGcDfEe@`@i@Xk@No@F_@?g@Ga@Ka@Qy@m@c@g@gGoIkDyEqHcKABgAc@BR"
       },
       "summary": "",
       "warnings": [
@@ -360,656 +1644,14 @@
       "legs": [
         {
           "arrival_time": {
-            "text": "11:17 AM",
+            "text": "5:18 PM",
             "time_zone": "America/Los_Angeles",
-            "value": 1764962265
+            "value": 1764983895
           },
           "departure_time": {
-            "text": "10:56 AM",
+            "text": "4:56 PM",
             "time_zone": "America/Los_Angeles",
-            "value": 1764961009
-          },
-          "distance": {
-            "text": "9.3 mi",
-            "value": 14975
-          },
-          "duration": {
-            "text": "21 mins",
-            "value": 1256
-          },
-          "end_address": "San Francisco Station, San Francisco, CA, USA",
-          "end_location": {
-            "lat": 37.7767296,
-            "lng": -122.3949144
-          },
-          "start_address": "South San Francisco Caltrain Station Entrance, South San Francisco, CA 94080, USA",
-          "start_location": {
-            "lat": 37.6564579,
-            "lng": -122.4059433
-          },
-          "steps": [
-            {
-              "distance": {
-                "text": "0.1 mi",
-                "value": 216
-              },
-              "duration": {
-                "text": "3 mins",
-                "value": 190
-              },
-              "end_location": {
-                "lat": 37.65546,
-                "lng": -122.40546
-              },
-              "html_instructions": "Walk to South San Francisco",
-              "polyline": {
-                "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?FAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GEBA?A?A?A?AAGDA`AJ"
-              },
-              "start_location": {
-                "lat": 37.6564579,
-                "lng": -122.4059433
-              },
-              "steps": [
-                {
-                  "distance": {
-                    "text": "299 ft",
-                    "value": 91
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 74
-                  },
-                  "end_location": {
-                    "lat": 37.6556536,
-                    "lng": -122.406099
-                  },
-                  "html_instructions": "Head <b>south</b> on <b>South San Francisco Caltrain Station Entrance</b>",
-                  "polyline": {
-                    "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?"
-                  },
-                  "start_location": {
-                    "lat": 37.6564579,
-                    "lng": -122.4059433
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "256 ft",
-                    "value": 78
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 58
-                  },
-                  "end_location": {
-                    "lat": 37.6558313,
-                    "lng": -122.4054991
-                  },
-                  "html_instructions": "Slight <b>left</b> to stay on <b>South San Francisco Caltrain Station Entrance</b>",
-                  "maneuver": "turn-slight-left",
-                  "polyline": {
-                    "points": "yrydFbmbjVFAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GE"
-                  },
-                  "start_location": {
-                    "lat": 37.6556536,
-                    "lng": -122.406099
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "33 ft",
-                    "value": 10
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 9
-                  },
-                  "end_location": {
-                    "lat": 37.6558167,
-                    "lng": -122.4054074
-                  },
-                  "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
-                  "maneuver": "turn-right",
-                  "polyline": {
-                    "points": "}sydFjibjVBA?A?A?A?AAG"
-                  },
-                  "start_location": {
-                    "lat": 37.6558313,
-                    "lng": -122.4054991
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "121 ft",
-                    "value": 37
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 49
-                  },
-                  "end_location": {
-                    "lat": 37.65546,
-                    "lng": -122.40546
-                  },
-                  "html_instructions": "Take entrance <span class=\"location\">Entrance</span>",
-                  "polyline": {
-                    "points": "usydFvhbjV`AJ"
-                  },
-                  "start_location": {
-                    "lat": 37.6557942,
-                    "lng": -122.4053994
-                  },
-                  "travel_mode": "WALKING"
-                }
-              ],
-              "travel_mode": "WALKING"
-            },
-            {
-              "distance": {
-                "text": "9.1 mi",
-                "value": 14708
-              },
-              "duration": {
-                "text": "16 mins",
-                "value": 960
-              },
-              "end_location": {
-                "lat": 37.77639,
-                "lng": -122.39499
-              },
-              "html_instructions": "Train towards San Francisco",
-              "polyline": {
-                "points": "sqydFbibjV?AaLsKg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@i@^}AdAwDxCuKxIWRmA~@k@`@WP{@j@IDc@VuAx@a@Tc@RwAp@}@^y@\\y@Zo@Ts@Tq@Rs@Ry@T{@R_AR{@NqARE@yARy@Hw@FgAHiAFiBFy@@k@?oS?aR?c@?{XAgA?c@?{B?S?c@?oC?o@?W?K?]A]?]Ak@Ci@E]Ci@Im@Ii@IMAw@Mg@Gg@K}AYoD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
-              },
-              "start_location": {
-                "lat": 37.65546,
-                "lng": -122.40546
-              },
-              "transit_details": {
-                "arrival_stop": {
-                  "location": {
-                    "lat": 37.77639,
-                    "lng": -122.39499
-                  },
-                  "name": "San Francisco"
-                },
-                "arrival_time": {
-                  "text": "11:16 AM",
-                  "time_zone": "America/Los_Angeles",
-                  "value": 1764962166
-                },
-                "departure_stop": {
-                  "location": {
-                    "lat": 37.65546,
-                    "lng": -122.40546
-                  },
-                  "name": "South San Francisco"
-                },
-                "departure_time": {
-                  "text": "11:00 AM",
-                  "time_zone": "America/Los_Angeles",
-                  "value": 1764961230
-                },
-                "headsign": "San Francisco",
-                "line": {
-                  "agencies": [
-                    {
-                      "name": "Caltrain",
-                      "phone": "1 (800) 660-4287",
-                      "url": "http://www.caltrain.com/"
-                    }
-                  ],
-                  "color": "#a7a8a8",
-                  "name": "Local Weekday",
-                  "text_color": "#000000",
-                  "vehicle": {
-                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
-                    "local_icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/us-caltrain.png",
-                    "name": "Train",
-                    "type": "HEAVY_RAIL"
-                  }
-                },
-                "num_stops": 3,
-                "trip_short_name": "121"
-              },
-              "travel_mode": "TRANSIT"
-            },
-            {
-              "distance": {
-                "text": "167 ft",
-                "value": 51
-              },
-              "duration": {
-                "text": "2 mins",
-                "value": 99
-              },
-              "end_location": {
-                "lat": 37.7767296,
-                "lng": -122.3949144
-              },
-              "html_instructions": "Walk to San Francisco Station, San Francisco, CA, USA",
-              "polyline": {
-                "points": "meqeFtg`jVgAc@BR"
-              },
-              "start_location": {
-                "lat": 37.77639,
-                "lng": -122.39499
-              },
-              "steps": [
-                {
-                  "distance": {
-                    "text": "138 ft",
-                    "value": 42
-                  },
-                  "duration": {
-                    "text": "2 mins",
-                    "value": 92
-                  },
-                  "end_location": {
-                    "lat": 37.77674500000001,
-                    "lng": -122.394808
-                  },
-                  "html_instructions": "Take exit <span class=\"location\">Enter/Exit: 1</span>",
-                  "polyline": {
-                    "points": "meqeFtg`jVgAc@"
-                  },
-                  "start_location": {
-                    "lat": 37.77639,
-                    "lng": -122.39499
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "30 ft",
-                    "value": 9
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 7
-                  },
-                  "end_location": {
-                    "lat": 37.7767296,
-                    "lng": -122.3949144
-                  },
-                  "polyline": {
-                    "points": "ugqeFpf`jVBR"
-                  },
-                  "start_location": {
-                    "lat": 37.77674500000001,
-                    "lng": -122.394808
-                  },
-                  "travel_mode": "WALKING"
-                }
-              ],
-              "travel_mode": "WALKING"
-            }
-          ],
-          "traffic_speed_entry": [],
-          "via_waypoint": []
-        }
-      ],
-      "overview_polyline": {
-        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AHaZgYkQuPyLkLm@m@eQsP}@u@iCwCmCgC_BwAmA{@sAw@yAw@iBo@gA]oCc@uBOcCEmCJqANiB`@iAZ}EpByNxKkSnP}AdAwDxCmLlJyB`BsA|@eDlBsFbCoEzAmBh@{Bf@mCb@_BTqBPqCPcDH{T?io@A{L?eCGgAIwASwCa@eCe@e\\qIwd@mLsD}@_Do@aCa@wD_@_Jo@kCSu_@sCeWgBaLy@a`@qCoFa@c@EuBUm@I}@?cGa@cHg@o^iC}DQsDEeDAuGBeEHsCLuLp@gCRo@Jw@Rm@RaBl@yAx@{@j@y@r@iAlAc@^ORCJ}H|Ka@^kDxEeAtAqBpC{@z@u@r@w@^gBX[@_@?_@GYKYOg@a@_A{@eFaHmAqCs@}AeEyF}B_De@l@gAc@BR"
-      },
-      "summary": "",
-      "warnings": [
-        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
-      ],
-      "waypoint_order": []
-    },
-    {
-      "bounds": {
-        "northeast": {
-          "lat": 37.77674500000001,
-          "lng": -122.3895426
-        },
-        "southwest": {
-          "lat": 37.6554568,
-          "lng": -122.4061032
-        }
-      },
-      "copyrights": "Powered by Google, ©2025 Google",
-      "fare": {
-        "currency": "USD",
-        "text": "$4.00",
-        "value": 4
-      },
-      "legs": [
-        {
-          "arrival_time": {
-            "text": "11:47 AM",
-            "time_zone": "America/Los_Angeles",
-            "value": 1764964065
-          },
-          "departure_time": {
-            "text": "11:26 AM",
-            "time_zone": "America/Los_Angeles",
-            "value": 1764962809
-          },
-          "distance": {
-            "text": "9.3 mi",
-            "value": 14975
-          },
-          "duration": {
-            "text": "21 mins",
-            "value": 1256
-          },
-          "end_address": "San Francisco Station, San Francisco, CA, USA",
-          "end_location": {
-            "lat": 37.7767296,
-            "lng": -122.3949144
-          },
-          "start_address": "South San Francisco Caltrain Station Entrance, South San Francisco, CA 94080, USA",
-          "start_location": {
-            "lat": 37.6564579,
-            "lng": -122.4059433
-          },
-          "steps": [
-            {
-              "distance": {
-                "text": "0.1 mi",
-                "value": 216
-              },
-              "duration": {
-                "text": "3 mins",
-                "value": 190
-              },
-              "end_location": {
-                "lat": 37.65546,
-                "lng": -122.40546
-              },
-              "html_instructions": "Walk to South San Francisco",
-              "polyline": {
-                "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?FAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GEBA?A?A?A?AAGDA`AJ"
-              },
-              "start_location": {
-                "lat": 37.6564579,
-                "lng": -122.4059433
-              },
-              "steps": [
-                {
-                  "distance": {
-                    "text": "299 ft",
-                    "value": 91
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 74
-                  },
-                  "end_location": {
-                    "lat": 37.6556536,
-                    "lng": -122.406099
-                  },
-                  "html_instructions": "Head <b>south</b> on <b>South San Francisco Caltrain Station Entrance</b>",
-                  "polyline": {
-                    "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?"
-                  },
-                  "start_location": {
-                    "lat": 37.6564579,
-                    "lng": -122.4059433
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "256 ft",
-                    "value": 78
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 58
-                  },
-                  "end_location": {
-                    "lat": 37.6558313,
-                    "lng": -122.4054991
-                  },
-                  "html_instructions": "Slight <b>left</b> to stay on <b>South San Francisco Caltrain Station Entrance</b>",
-                  "maneuver": "turn-slight-left",
-                  "polyline": {
-                    "points": "yrydFbmbjVFAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GE"
-                  },
-                  "start_location": {
-                    "lat": 37.6556536,
-                    "lng": -122.406099
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "33 ft",
-                    "value": 10
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 9
-                  },
-                  "end_location": {
-                    "lat": 37.6558167,
-                    "lng": -122.4054074
-                  },
-                  "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
-                  "maneuver": "turn-right",
-                  "polyline": {
-                    "points": "}sydFjibjVBA?A?A?A?AAG"
-                  },
-                  "start_location": {
-                    "lat": 37.6558313,
-                    "lng": -122.4054991
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "121 ft",
-                    "value": 37
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 49
-                  },
-                  "end_location": {
-                    "lat": 37.65546,
-                    "lng": -122.40546
-                  },
-                  "html_instructions": "Take entrance <span class=\"location\">Entrance</span>",
-                  "polyline": {
-                    "points": "usydFvhbjV`AJ"
-                  },
-                  "start_location": {
-                    "lat": 37.6557942,
-                    "lng": -122.4053994
-                  },
-                  "travel_mode": "WALKING"
-                }
-              ],
-              "travel_mode": "WALKING"
-            },
-            {
-              "distance": {
-                "text": "9.1 mi",
-                "value": 14708
-              },
-              "duration": {
-                "text": "16 mins",
-                "value": 960
-              },
-              "end_location": {
-                "lat": 37.77639,
-                "lng": -122.39499
-              },
-              "html_instructions": "Train towards San Francisco",
-              "polyline": {
-                "points": "sqydFbibjV?AaLsKg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@i@^}AdAwDxCuKxIWRmA~@k@`@WP{@j@IDc@VuAx@a@Tc@RwAp@}@^y@\\y@Zo@Ts@Tq@Rs@Ry@T{@R_AR{@NqARE@yARy@Hw@FgAHiAFiBFy@@k@?oS?aR?c@?{XAgA?c@?{B?S?c@?oC?o@?W?K?]A]?]Ak@Ci@E]Ci@Im@Ii@IMAw@Mg@Gg@K}AYoD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
-              },
-              "start_location": {
-                "lat": 37.65546,
-                "lng": -122.40546
-              },
-              "transit_details": {
-                "arrival_stop": {
-                  "location": {
-                    "lat": 37.77639,
-                    "lng": -122.39499
-                  },
-                  "name": "San Francisco"
-                },
-                "arrival_time": {
-                  "text": "11:46 AM",
-                  "time_zone": "America/Los_Angeles",
-                  "value": 1764963966
-                },
-                "departure_stop": {
-                  "location": {
-                    "lat": 37.65546,
-                    "lng": -122.40546
-                  },
-                  "name": "South San Francisco"
-                },
-                "departure_time": {
-                  "text": "11:30 AM",
-                  "time_zone": "America/Los_Angeles",
-                  "value": 1764963030
-                },
-                "headsign": "San Francisco",
-                "line": {
-                  "agencies": [
-                    {
-                      "name": "Caltrain",
-                      "phone": "1 (800) 660-4287",
-                      "url": "http://www.caltrain.com/"
-                    }
-                  ],
-                  "color": "#a7a8a8",
-                  "name": "Local Weekday",
-                  "text_color": "#000000",
-                  "vehicle": {
-                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
-                    "local_icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/us-caltrain.png",
-                    "name": "Train",
-                    "type": "HEAVY_RAIL"
-                  }
-                },
-                "num_stops": 3,
-                "trip_short_name": "123"
-              },
-              "travel_mode": "TRANSIT"
-            },
-            {
-              "distance": {
-                "text": "167 ft",
-                "value": 51
-              },
-              "duration": {
-                "text": "2 mins",
-                "value": 99
-              },
-              "end_location": {
-                "lat": 37.7767296,
-                "lng": -122.3949144
-              },
-              "html_instructions": "Walk to San Francisco Station, San Francisco, CA, USA",
-              "polyline": {
-                "points": "meqeFtg`jVgAc@BR"
-              },
-              "start_location": {
-                "lat": 37.77639,
-                "lng": -122.39499
-              },
-              "steps": [
-                {
-                  "distance": {
-                    "text": "138 ft",
-                    "value": 42
-                  },
-                  "duration": {
-                    "text": "2 mins",
-                    "value": 92
-                  },
-                  "end_location": {
-                    "lat": 37.77674500000001,
-                    "lng": -122.394808
-                  },
-                  "html_instructions": "Take exit <span class=\"location\">Enter/Exit: 1</span>",
-                  "polyline": {
-                    "points": "meqeFtg`jVgAc@"
-                  },
-                  "start_location": {
-                    "lat": 37.77639,
-                    "lng": -122.39499
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "30 ft",
-                    "value": 9
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 7
-                  },
-                  "end_location": {
-                    "lat": 37.7767296,
-                    "lng": -122.3949144
-                  },
-                  "polyline": {
-                    "points": "ugqeFpf`jVBR"
-                  },
-                  "start_location": {
-                    "lat": 37.77674500000001,
-                    "lng": -122.394808
-                  },
-                  "travel_mode": "WALKING"
-                }
-              ],
-              "travel_mode": "WALKING"
-            }
-          ],
-          "traffic_speed_entry": [],
-          "via_waypoint": []
-        }
-      ],
-      "overview_polyline": {
-        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AHaZgYkQuPyLkLm@m@eQsP}@u@iCwCmCgC_BwAmA{@sAw@yAw@iBo@gA]oCc@uBOcCEmCJqANiB`@iAZ}EpByNxKkSnP}AdAwDxCmLlJyB`BsA|@eDlBsFbCoEzAmBh@{Bf@mCb@_BTqBPqCPcDH{T?io@A{L?eCGgAIwASwCa@eCe@e\\qIwd@mLsD}@_Do@aCa@wD_@_Jo@kCSu_@sCeWgBaLy@a`@qCoFa@c@EuBUm@I}@?cGa@cHg@o^iC}DQsDEeDAuGBeEHsCLuLp@gCRo@Jw@Rm@RaBl@yAx@{@j@y@r@iAlAc@^ORCJ}H|Ka@^kDxEeAtAqBpC{@z@u@r@w@^gBX[@_@?_@GYKYOg@a@_A{@eFaHmAqCs@}AeEyF}B_De@l@gAc@BR"
-      },
-      "summary": "",
-      "warnings": [
-        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
-      ],
-      "waypoint_order": []
-    },
-    {
-      "bounds": {
-        "northeast": {
-          "lat": 37.77674500000001,
-          "lng": -122.3895426
-        },
-        "southwest": {
-          "lat": 37.6554568,
-          "lng": -122.4061032
-        }
-      },
-      "copyrights": "Powered by Google, ©2025 Google",
-      "fare": {
-        "currency": "USD",
-        "text": "$4.00",
-        "value": 4
-      },
-      "legs": [
-        {
-          "arrival_time": {
-            "text": "12:17 PM",
-            "time_zone": "America/Los_Angeles",
-            "value": 1764965865
-          },
-          "departure_time": {
-            "text": "11:56 AM",
-            "time_zone": "America/Los_Angeles",
-            "value": 1764964585
+            "value": 1764982615
           },
           "distance": {
             "text": "9.3 mi",
@@ -1179,9 +1821,9 @@
                   "name": "San Francisco"
                 },
                 "arrival_time": {
-                  "text": "12:16 PM",
+                  "text": "5:16 PM",
                   "time_zone": "America/Los_Angeles",
-                  "value": 1764965766
+                  "value": 1764983796
                 },
                 "departure_stop": {
                   "location": {
@@ -1191,9 +1833,9 @@
                   "name": "South San Francisco"
                 },
                 "departure_time": {
-                  "text": "12:00 PM",
+                  "text": "5:00 PM",
                   "time_zone": "America/Los_Angeles",
-                  "value": 1764964806
+                  "value": 1764982836
                 },
                 "headsign": "San Francisco",
                 "line": {
@@ -1215,649 +1857,7 @@
                   }
                 },
                 "num_stops": 3,
-                "trip_short_name": "125"
-              },
-              "travel_mode": "TRANSIT"
-            },
-            {
-              "distance": {
-                "text": "167 ft",
-                "value": 51
-              },
-              "duration": {
-                "text": "2 mins",
-                "value": 99
-              },
-              "end_location": {
-                "lat": 37.7767296,
-                "lng": -122.3949144
-              },
-              "html_instructions": "Walk to San Francisco Station, San Francisco, CA, USA",
-              "polyline": {
-                "points": "meqeFtg`jVgAc@BR"
-              },
-              "start_location": {
-                "lat": 37.77639,
-                "lng": -122.39499
-              },
-              "steps": [
-                {
-                  "distance": {
-                    "text": "138 ft",
-                    "value": 42
-                  },
-                  "duration": {
-                    "text": "2 mins",
-                    "value": 92
-                  },
-                  "end_location": {
-                    "lat": 37.77674500000001,
-                    "lng": -122.394808
-                  },
-                  "html_instructions": "Take exit <span class=\"location\">Enter/Exit: 1</span>",
-                  "polyline": {
-                    "points": "meqeFtg`jVgAc@"
-                  },
-                  "start_location": {
-                    "lat": 37.77639,
-                    "lng": -122.39499
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "30 ft",
-                    "value": 9
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 7
-                  },
-                  "end_location": {
-                    "lat": 37.7767296,
-                    "lng": -122.3949144
-                  },
-                  "polyline": {
-                    "points": "ugqeFpf`jVBR"
-                  },
-                  "start_location": {
-                    "lat": 37.77674500000001,
-                    "lng": -122.394808
-                  },
-                  "travel_mode": "WALKING"
-                }
-              ],
-              "travel_mode": "WALKING"
-            }
-          ],
-          "traffic_speed_entry": [],
-          "via_waypoint": []
-        }
-      ],
-      "overview_polyline": {
-        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AHaZgYkQuPyLkLm@m@eQsP}@u@iCwCmCgC_BwAmA{@sAw@yAw@iBo@gA]oCc@uBOcCEmCJqANiB`@iAZ}EpByNxKkSnP}AdAwDxCmLlJyB`BsA|@eDlBsFbCoEzAmBh@{Bf@mCb@_BTqBPqCPcDH{T?io@A{L?eCGgAIwASwCa@eCe@e\\qIwd@mLsD}@_Do@aCa@wD_@_Jo@kCSu_@sCeWgBaLy@a`@qCoFa@c@EuBUm@I}@?cGa@cHg@o^iC}DQsDEeDAuGBeEHsCLuLp@gCRo@Jw@Rm@RaBl@yAx@{@j@y@r@iAlAc@^ORCJ}H|Ka@^kDxEeAtAqBpC{@z@u@r@w@^gBX[@_@?_@GYKYOg@a@_A{@eFaHmAqCs@}AeEyF}B_De@l@gAc@BR"
-      },
-      "summary": "",
-      "warnings": [
-        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
-      ],
-      "waypoint_order": []
-    },
-    {
-      "bounds": {
-        "northeast": {
-          "lat": 37.77674500000001,
-          "lng": -122.3895426
-        },
-        "southwest": {
-          "lat": 37.6554568,
-          "lng": -122.4061032
-        }
-      },
-      "copyrights": "Powered by Google, ©2025 Google",
-      "fare": {
-        "currency": "USD",
-        "text": "$4.00",
-        "value": 4
-      },
-      "legs": [
-        {
-          "arrival_time": {
-            "text": "12:48 PM",
-            "time_zone": "America/Los_Angeles",
-            "value": 1764967683
-          },
-          "departure_time": {
-            "text": "12:26 PM",
-            "time_zone": "America/Los_Angeles",
-            "value": 1764966403
-          },
-          "distance": {
-            "text": "9.3 mi",
-            "value": 14975
-          },
-          "duration": {
-            "text": "21 mins",
-            "value": 1280
-          },
-          "end_address": "San Francisco Station, San Francisco, CA, USA",
-          "end_location": {
-            "lat": 37.7767296,
-            "lng": -122.3949144
-          },
-          "start_address": "South San Francisco Caltrain Station Entrance, South San Francisco, CA 94080, USA",
-          "start_location": {
-            "lat": 37.6564579,
-            "lng": -122.4059433
-          },
-          "steps": [
-            {
-              "distance": {
-                "text": "0.1 mi",
-                "value": 216
-              },
-              "duration": {
-                "text": "3 mins",
-                "value": 190
-              },
-              "end_location": {
-                "lat": 37.65546,
-                "lng": -122.40546
-              },
-              "html_instructions": "Walk to South San Francisco",
-              "polyline": {
-                "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?FAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GEBA?A?A?A?AAGDA`AJ"
-              },
-              "start_location": {
-                "lat": 37.6564579,
-                "lng": -122.4059433
-              },
-              "steps": [
-                {
-                  "distance": {
-                    "text": "299 ft",
-                    "value": 91
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 74
-                  },
-                  "end_location": {
-                    "lat": 37.6556536,
-                    "lng": -122.406099
-                  },
-                  "html_instructions": "Head <b>south</b> on <b>South San Francisco Caltrain Station Entrance</b>",
-                  "polyline": {
-                    "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?"
-                  },
-                  "start_location": {
-                    "lat": 37.6564579,
-                    "lng": -122.4059433
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "256 ft",
-                    "value": 78
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 58
-                  },
-                  "end_location": {
-                    "lat": 37.6558313,
-                    "lng": -122.4054991
-                  },
-                  "html_instructions": "Slight <b>left</b> to stay on <b>South San Francisco Caltrain Station Entrance</b>",
-                  "maneuver": "turn-slight-left",
-                  "polyline": {
-                    "points": "yrydFbmbjVFAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GE"
-                  },
-                  "start_location": {
-                    "lat": 37.6556536,
-                    "lng": -122.406099
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "33 ft",
-                    "value": 10
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 9
-                  },
-                  "end_location": {
-                    "lat": 37.6558167,
-                    "lng": -122.4054074
-                  },
-                  "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
-                  "maneuver": "turn-right",
-                  "polyline": {
-                    "points": "}sydFjibjVBA?A?A?A?AAG"
-                  },
-                  "start_location": {
-                    "lat": 37.6558313,
-                    "lng": -122.4054991
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "121 ft",
-                    "value": 37
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 49
-                  },
-                  "end_location": {
-                    "lat": 37.65546,
-                    "lng": -122.40546
-                  },
-                  "html_instructions": "Take entrance <span class=\"location\">Entrance</span>",
-                  "polyline": {
-                    "points": "usydFvhbjV`AJ"
-                  },
-                  "start_location": {
-                    "lat": 37.6557942,
-                    "lng": -122.4053994
-                  },
-                  "travel_mode": "WALKING"
-                }
-              ],
-              "travel_mode": "WALKING"
-            },
-            {
-              "distance": {
-                "text": "9.1 mi",
-                "value": 14708
-              },
-              "duration": {
-                "text": "16 mins",
-                "value": 960
-              },
-              "end_location": {
-                "lat": 37.77639,
-                "lng": -122.39499
-              },
-              "html_instructions": "Train towards San Francisco",
-              "polyline": {
-                "points": "sqydFbibjV?AaLsKg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@i@^}AdAwDxCuKxIWRmA~@k@`@WP{@j@IDc@VuAx@a@Tc@RwAp@}@^y@\\y@Zo@Ts@Tq@Rs@Ry@T{@R_AR{@NqARE@yARy@Hw@FgAHiAFiBFy@@k@?oS?aR?c@?{XAgA?c@?{B?S?c@?oC?o@?W?K?]A]?]Ak@Ci@E]Ci@Im@Ii@IMAw@Mg@Gg@K}AYoD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
-              },
-              "start_location": {
-                "lat": 37.65546,
-                "lng": -122.40546
-              },
-              "transit_details": {
-                "arrival_stop": {
-                  "location": {
-                    "lat": 37.77639,
-                    "lng": -122.39499
-                  },
-                  "name": "San Francisco"
-                },
-                "arrival_time": {
-                  "text": "12:46 PM",
-                  "time_zone": "America/Los_Angeles",
-                  "value": 1764967584
-                },
-                "departure_stop": {
-                  "location": {
-                    "lat": 37.65546,
-                    "lng": -122.40546
-                  },
-                  "name": "South San Francisco"
-                },
-                "departure_time": {
-                  "text": "12:30 PM",
-                  "time_zone": "America/Los_Angeles",
-                  "value": 1764966624
-                },
-                "headsign": "San Francisco",
-                "line": {
-                  "agencies": [
-                    {
-                      "name": "Caltrain",
-                      "phone": "1 (800) 660-4287",
-                      "url": "http://www.caltrain.com/"
-                    }
-                  ],
-                  "color": "#a7a8a8",
-                  "name": "Local Weekday",
-                  "text_color": "#000000",
-                  "vehicle": {
-                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
-                    "local_icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/us-caltrain.png",
-                    "name": "Train",
-                    "type": "HEAVY_RAIL"
-                  }
-                },
-                "num_stops": 3,
-                "trip_short_name": "127"
-              },
-              "travel_mode": "TRANSIT"
-            },
-            {
-              "distance": {
-                "text": "167 ft",
-                "value": 51
-              },
-              "duration": {
-                "text": "2 mins",
-                "value": 99
-              },
-              "end_location": {
-                "lat": 37.7767296,
-                "lng": -122.3949144
-              },
-              "html_instructions": "Walk to San Francisco Station, San Francisco, CA, USA",
-              "polyline": {
-                "points": "meqeFtg`jVgAc@BR"
-              },
-              "start_location": {
-                "lat": 37.77639,
-                "lng": -122.39499
-              },
-              "steps": [
-                {
-                  "distance": {
-                    "text": "138 ft",
-                    "value": 42
-                  },
-                  "duration": {
-                    "text": "2 mins",
-                    "value": 92
-                  },
-                  "end_location": {
-                    "lat": 37.77674500000001,
-                    "lng": -122.394808
-                  },
-                  "html_instructions": "Take exit <span class=\"location\">Enter/Exit: 1</span>",
-                  "polyline": {
-                    "points": "meqeFtg`jVgAc@"
-                  },
-                  "start_location": {
-                    "lat": 37.77639,
-                    "lng": -122.39499
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "30 ft",
-                    "value": 9
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 7
-                  },
-                  "end_location": {
-                    "lat": 37.7767296,
-                    "lng": -122.3949144
-                  },
-                  "polyline": {
-                    "points": "ugqeFpf`jVBR"
-                  },
-                  "start_location": {
-                    "lat": 37.77674500000001,
-                    "lng": -122.394808
-                  },
-                  "travel_mode": "WALKING"
-                }
-              ],
-              "travel_mode": "WALKING"
-            }
-          ],
-          "traffic_speed_entry": [],
-          "via_waypoint": []
-        }
-      ],
-      "overview_polyline": {
-        "points": "{wydFblbjVjBXn@DLAFCJMAUW_@EE_@g@BCAMDA`AHaZgYkQuPyLkLm@m@eQsP}@u@iCwCmCgC_BwAmA{@sAw@yAw@iBo@gA]oCc@uBOcCEmCJqANiB`@iAZ}EpByNxKkSnP}AdAwDxCmLlJyB`BsA|@eDlBsFbCoEzAmBh@{Bf@mCb@_BTqBPqCPcDH{T?io@A{L?eCGgAIwASwCa@eCe@e\\qIwd@mLsD}@_Do@aCa@wD_@_Jo@kCSu_@sCeWgBaLy@a`@qCoFa@c@EuBUm@I}@?cGa@cHg@o^iC}DQsDEeDAuGBeEHsCLuLp@gCRo@Jw@Rm@RaBl@yAx@{@j@y@r@iAlAc@^ORCJ}H|Ka@^kDxEeAtAqBpC{@z@u@r@w@^gBX[@_@?_@GYKYOg@a@_A{@eFaHmAqCs@}AeEyF}B_De@l@gAc@BR"
-      },
-      "summary": "",
-      "warnings": [
-        "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
-      ],
-      "waypoint_order": []
-    },
-    {
-      "bounds": {
-        "northeast": {
-          "lat": 37.77674500000001,
-          "lng": -122.3895426
-        },
-        "southwest": {
-          "lat": 37.6554568,
-          "lng": -122.4061032
-        }
-      },
-      "copyrights": "Powered by Google, ©2025 Google",
-      "fare": {
-        "currency": "USD",
-        "text": "$4.00",
-        "value": 4
-      },
-      "legs": [
-        {
-          "arrival_time": {
-            "text": "1:17 PM",
-            "time_zone": "America/Los_Angeles",
-            "value": 1764969459
-          },
-          "departure_time": {
-            "text": "12:56 PM",
-            "time_zone": "America/Los_Angeles",
-            "value": 1764968179
-          },
-          "distance": {
-            "text": "9.3 mi",
-            "value": 14975
-          },
-          "duration": {
-            "text": "21 mins",
-            "value": 1280
-          },
-          "end_address": "San Francisco Station, San Francisco, CA, USA",
-          "end_location": {
-            "lat": 37.7767296,
-            "lng": -122.3949144
-          },
-          "start_address": "South San Francisco Caltrain Station Entrance, South San Francisco, CA 94080, USA",
-          "start_location": {
-            "lat": 37.6564579,
-            "lng": -122.4059433
-          },
-          "steps": [
-            {
-              "distance": {
-                "text": "0.1 mi",
-                "value": 216
-              },
-              "duration": {
-                "text": "3 mins",
-                "value": 190
-              },
-              "end_location": {
-                "lat": 37.65546,
-                "lng": -122.40546
-              },
-              "html_instructions": "Walk to South San Francisco",
-              "polyline": {
-                "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?FAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GEBA?A?A?A?AAGDA`AJ"
-              },
-              "start_location": {
-                "lat": 37.6564579,
-                "lng": -122.4059433
-              },
-              "steps": [
-                {
-                  "distance": {
-                    "text": "299 ft",
-                    "value": 91
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 74
-                  },
-                  "end_location": {
-                    "lat": 37.6556536,
-                    "lng": -122.406099
-                  },
-                  "html_instructions": "Head <b>south</b> on <b>South San Francisco Caltrain Station Entrance</b>",
-                  "polyline": {
-                    "points": "{wydFblbjV\\HD@d@F`@Df@DF?D?"
-                  },
-                  "start_location": {
-                    "lat": 37.6564579,
-                    "lng": -122.4059433
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "256 ft",
-                    "value": 78
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 58
-                  },
-                  "end_location": {
-                    "lat": 37.6558313,
-                    "lng": -122.4054991
-                  },
-                  "html_instructions": "Slight <b>left</b> to stay on <b>South San Francisco Caltrain Station Entrance</b>",
-                  "maneuver": "turn-slight-left",
-                  "polyline": {
-                    "points": "yrydFbmbjVFAB??ABADE@A@C@A?A?A?C?C?A?CACACAAOUCCEEWa@GE"
-                  },
-                  "start_location": {
-                    "lat": 37.6556536,
-                    "lng": -122.406099
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "33 ft",
-                    "value": 10
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 9
-                  },
-                  "end_location": {
-                    "lat": 37.6558167,
-                    "lng": -122.4054074
-                  },
-                  "html_instructions": "Turn <b>right</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
-                  "maneuver": "turn-right",
-                  "polyline": {
-                    "points": "}sydFjibjVBA?A?A?A?AAG"
-                  },
-                  "start_location": {
-                    "lat": 37.6558313,
-                    "lng": -122.4054991
-                  },
-                  "travel_mode": "WALKING"
-                },
-                {
-                  "distance": {
-                    "text": "121 ft",
-                    "value": 37
-                  },
-                  "duration": {
-                    "text": "1 min",
-                    "value": 49
-                  },
-                  "end_location": {
-                    "lat": 37.65546,
-                    "lng": -122.40546
-                  },
-                  "html_instructions": "Take entrance <span class=\"location\">Entrance</span>",
-                  "polyline": {
-                    "points": "usydFvhbjV`AJ"
-                  },
-                  "start_location": {
-                    "lat": 37.6557942,
-                    "lng": -122.4053994
-                  },
-                  "travel_mode": "WALKING"
-                }
-              ],
-              "travel_mode": "WALKING"
-            },
-            {
-              "distance": {
-                "text": "9.1 mi",
-                "value": 14708
-              },
-              "duration": {
-                "text": "16 mins",
-                "value": 960
-              },
-              "end_location": {
-                "lat": 37.77639,
-                "lng": -122.39499
-              },
-              "html_instructions": "Train towards San Francisco",
-              "polyline": {
-                "points": "sqydFbibjV?AaLsKg@g@iAgAmIcIqBkBmBkBqCkCOOeBaBiAgAMKKKg@e@[[k@k@y@u@s@s@uAqAoBkBUU][OQeQsP}@u@iCwCmCgCIIuAmAmA{@sAw@[Q}@e@a@MgAa@cA[CAoCc@uBOyACi@AmCJqANiB`@iAZ_Bn@}B`AmCnBkJhHk@b@_OxLu@p@i@^}AdAwDxCuKxIWRmA~@k@`@WP{@j@IDc@VuAx@a@Tc@RwAp@}@^y@\\y@Zo@Ts@Tq@Rs@Ry@T{@R_AR{@NqARE@yARy@Hw@FgAHiAFiBFy@@k@?oS?aR?c@?{XAgA?c@?{B?S?c@?oC?o@?W?K?]A]?]Ak@Ci@E]Ci@Im@Ii@IMAw@Mg@Gg@K}AYoD{@uVuGk\\kIwCu@w@S{@W_Ba@sA[wA[gASiASw@MgAMoBQUAqAK_COwBQwAKs@GqKu@cS}AgSuAu@Ec@Ec@EWAi@Eu@GkBM_AIu@Gm@EYCu@EoCSuDYYCIAa@Cc@EmCQIAYCc@Cc@EmCSgAIWAsAK_@EA?c@Cc@Ec@Cc@Ei@ESAGA[Co@EeAOc@GIAY?c@?OASAc@C{DYkFa@MAYAOAOA}CUw@G_CQqGe@c@C}Gg@u@EqAISAcACSAc@AM?}ACc@?QAoA?m@?U?W?eA?y@?}BBuBBoADw@B{AHyBLiDPI@gCNsAHs@Ho@Jw@RGBe@Ns@Vm@TWLEB]R]R_@T[Ta@\\WTYXWVWZ[XGDEFIJEH@@}H|Ka@^gBbCcAtAs@~@QTq@~@_ApA_@\\[\\SRONIFGFKFKFQFMFMBI@g@Hg@HK@O?Q?M?OCOCMEKEKEMISOSQ][a@_@qD_Fs@aA[m@q@cBYq@Yk@_AoAeCiD}B_De@l@"
-              },
-              "start_location": {
-                "lat": 37.65546,
-                "lng": -122.40546
-              },
-              "transit_details": {
-                "arrival_stop": {
-                  "location": {
-                    "lat": 37.77639,
-                    "lng": -122.39499
-                  },
-                  "name": "San Francisco"
-                },
-                "arrival_time": {
-                  "text": "1:16 PM",
-                  "time_zone": "America/Los_Angeles",
-                  "value": 1764969360
-                },
-                "departure_stop": {
-                  "location": {
-                    "lat": 37.65546,
-                    "lng": -122.40546
-                  },
-                  "name": "South San Francisco"
-                },
-                "departure_time": {
-                  "text": "1:00 PM",
-                  "time_zone": "America/Los_Angeles",
-                  "value": 1764968400
-                },
-                "headsign": "San Francisco",
-                "line": {
-                  "agencies": [
-                    {
-                      "name": "Caltrain",
-                      "phone": "1 (800) 660-4287",
-                      "url": "http://www.caltrain.com/"
-                    }
-                  ],
-                  "color": "#a7a8a8",
-                  "name": "Local Weekday",
-                  "text_color": "#000000",
-                  "vehicle": {
-                    "icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png",
-                    "local_icon": "//maps.gstatic.com/mapfiles/transit/iw2/6/us-caltrain.png",
-                    "name": "Train",
-                    "type": "HEAVY_RAIL"
-                  }
-                },
-                "num_stops": 3,
-                "trip_short_name": "129"
+                "trip_short_name": "145"
               },
               "travel_mode": "TRANSIT"
             },
