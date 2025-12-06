@@ -1,0 +1,109 @@
+/* Review popup */
+.review-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.review-popup {
+  background: white;
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.review-popup h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: #000;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.review-changes {
+  margin-bottom: 20px;
+}
+
+.review-change-item {
+  margin-bottom: 15px;
+  font-family: Arial, sans-serif;
+}
+
+.review-change-item strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #333;
+}
+
+.review-change {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: #f0f0f0;
+  border-radius: 12px;
+}
+
+.review-from,
+.review-to {
+  flex: 1;
+  font-size: 12px;
+}
+
+.review-from {
+  color: #666;
+  text-decoration: line-through;
+}
+
+.review-to {
+  color: #000;
+  font-weight: bold;
+}
+
+.review-arrow {
+  color: #73AD21;
+  font-weight: bold;
+}
+
+.review-popup-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.review-cancel,
+.review-submit {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.review-cancel {
+  background: white;
+  color: black;
+}
+
+.review-submit {
+  background: #73AD21;
+  color: white;
+}
+
+.review-cancel:hover,
+.review-submit:hover {
+  transform: scale(1.05);
+}
+

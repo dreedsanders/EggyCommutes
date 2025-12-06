@@ -1,6 +1,12 @@
 import axios from "axios";
 import { convertToCentralTime } from "../utils/helpers";
 import { CALTRAIN_STOPS } from "../utils/constants";
+import {
+  findNextArrival,
+  calculateLastStopTime,
+  calculateIsWithinTwoStops,
+} from "../utils/timeCalculations";
+import { loadSavedData, hasMatchingTrainRoute } from "../utils/fileLoader";
 
 /**
  * Train Service
@@ -138,112 +144,23 @@ export const processTrainResponse = (stopConfig, response) => {
     );
   }
 
-  // Find next arrival time
+  // Find next arrival time using utility
   const now = new Date();
-  const currentTimeInMinutes = now.getHours() * 60 + now.getMinutes();
+  const nextArrival = findNextArrival(allArrivalTimes, now);
 
-  // Helper function to get time of day in minutes from a Date
-  const getTimeInMinutes = (date) => {
-    return date.getHours() * 60 + date.getMinutes();
-  };
-
-  // Helper function to create a Date for today or tomorrow with given time
-  const createNextDate = (timeInMinutes) => {
-    const nextDate = new Date(now);
-    const hours = Math.floor(timeInMinutes / 60);
-    const minutes = timeInMinutes % 60;
-    nextDate.setHours(hours, minutes, 0, 0);
-
-    if (nextDate <= now) {
-      nextDate.setDate(nextDate.getDate() + 1);
-    }
-
-    return nextDate;
-  };
-
-  // Find next arrival by time of day
-  let nextArrival = null;
-
-  // First, try to find real-time arrivals that are still in the future
-  const realTimeArrivals = allArrivalTimes.filter(
-    (time) => time.isRealTime && time.arrivalTime > now
+  // Determine last stop time using utility
+  const lastStopTime = calculateLastStopTime(
+    allArrivalTimes,
+    nextArrival,
+    now
   );
 
-  if (realTimeArrivals.length > 0) {
-    nextArrival = realTimeArrivals[0];
-  } else {
-    // Find the next time by comparing time of day
-    const timesByTimeOfDay = allArrivalTimes
-      .map((time) => ({
-        ...time,
-        timeOfDay: getTimeInMinutes(time.arrivalTime),
-      }))
-      .sort((a, b) => a.timeOfDay - b.timeOfDay);
-
-    const nextToday = timesByTimeOfDay.find(
-      (time) => time.timeOfDay > currentTimeInMinutes
-    );
-
-    if (nextToday) {
-      nextArrival = {
-        ...nextToday,
-        arrivalTime: createNextDate(nextToday.timeOfDay),
-      };
-    } else {
-      const firstTomorrow = timesByTimeOfDay[0];
-      if (firstTomorrow) {
-        nextArrival = {
-          ...firstTomorrow,
-          arrivalTime: createNextDate(firstTomorrow.timeOfDay),
-        };
-      }
-    }
-  }
-
-  // Determine last stop time
-  let lastStopTime = null;
-  if (allArrivalTimes.length > 0 && nextArrival) {
-    const timesByTimeOfDay = allArrivalTimes
-      .map((time) => ({
-        ...time,
-        timeOfDay: getTimeInMinutes(time.arrivalTime),
-      }))
-      .sort((a, b) => a.timeOfDay - b.timeOfDay);
-
-    const lastTimeOfDay = timesByTimeOfDay[timesByTimeOfDay.length - 1];
-    const nextArrivalTimeOfDay = getTimeInMinutes(nextArrival.arrivalTime);
-
-    if (lastTimeOfDay.timeOfDay > nextArrivalTimeOfDay) {
-      lastStopTime = createNextDate(lastTimeOfDay.timeOfDay);
-    } else {
-      const tomorrowDate = createNextDate(lastTimeOfDay.timeOfDay);
-      tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-      lastStopTime = tomorrowDate;
-    }
-  }
-
-  // Calculate if next arrival is within 2 stops
-  let isWithinTwoStops = false;
-  if (nextArrival && lastStopTime) {
-    const nextArrivalTimeOfDay = getTimeInMinutes(nextArrival.arrivalTime);
-    const lastStopTimeOfDay = getTimeInMinutes(lastStopTime);
-
-    const timesByTimeOfDay = allArrivalTimes
-      .map((time) => getTimeInMinutes(time.arrivalTime))
-      .sort((a, b) => a - b);
-
-    const nextIndex = timesByTimeOfDay.findIndex(
-      (time) => time === nextArrivalTimeOfDay
-    );
-    const lastIndex = timesByTimeOfDay.findIndex(
-      (time) => time === lastStopTimeOfDay
-    );
-
-    if (nextIndex >= 0 && lastIndex >= 0) {
-      const stopsBetween = Math.abs(lastIndex - nextIndex);
-      isWithinTwoStops = stopsBetween <= 2;
-    }
-  }
+  // Calculate if next arrival is within 2 stops using utility
+  const isWithinTwoStops = calculateIsWithinTwoStops(
+    nextArrival,
+    lastStopTime,
+    allArrivalTimes
+  );
 
   return {
     name: stopConfig.name,
@@ -270,21 +187,11 @@ export const getTrainStopData = async (stopConfig, apiKey) => {
   try {
     // Try to load from saved file first
     if (stopConfig.dataFile) {
-      try {
-        const filePath = `${process.env.PUBLIC_URL || ""}${stopConfig.dataFile}`;
-        const response = await fetch(filePath);
-        if (response.ok) {
-          const data = await response.json();
-          console.log(
-            `✓ Loaded saved data for ${stopConfig.name} (train)`
-          );
-          return processTrainResponse(stopConfig, data);
-        }
-      } catch (error) {
-        console.log(
-          `✗ Error loading saved file for ${stopConfig.name}, will fetch from API:`,
-          error.message
-        );
+      const filePath = `${process.env.PUBLIC_URL || ""}${stopConfig.dataFile}`;
+      const data = await loadSavedData(filePath);
+      if (data && hasMatchingTrainRoute(data)) {
+        console.log(`✓ Loaded saved data for ${stopConfig.name} (train)`);
+        return processTrainResponse(stopConfig, data);
       }
     }
 

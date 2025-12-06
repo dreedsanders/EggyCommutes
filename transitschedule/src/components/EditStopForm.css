@@ -1,0 +1,115 @@
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Edit form modal */
+.edit-form-modal {
+  background-color: #73AD21;
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.edit-form-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.edit-form-field {
+  margin-bottom: 15px;
+}
+
+.edit-form-field label {
+  display: block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.edit-form-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: 2px solid #000;
+  background: white;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.edit-form-input:focus {
+  outline: none;
+  border-color: #FF69B4;
+}
+
+.edit-form-input select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: 2px solid #000;
+  background: white;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.edit-form-input select:focus {
+  outline: none;
+  border-color: #FF69B4;
+}
+
+.edit-form-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.edit-form-cancel,
+.edit-form-review {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.edit-form-cancel {
+  background: white;
+  color: black;
+}
+
+.edit-form-review {
+  background: #FF69B4;
+  color: white;
+}
+
+.edit-form-cancel:hover,
+.edit-form-review:hover {
+  transform: scale(1.05);
+}
+
