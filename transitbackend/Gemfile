@@ -35,6 +35,9 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
 
+# Load environment variables from .env file
+gem "dotenv-rails", groups: [:development, :production]
+
 # JWT for authentication
 gem "jwt"
 

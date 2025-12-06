@@ -48,6 +48,11 @@ export const updateStop = async ({
   };
 
   try {
+    // Validate API key is provided
+    if (!apiKey || apiKey === "YOUR_API_KEY_HERE") {
+      throw new Error("Google Maps API key is not configured. Please check your environment variables.");
+    }
+
     // For ferry, just update direction
     if (stop.type === "ferry") {
       const newFerryDirection = newConfig.ferryDirection || "anacortes";
@@ -66,10 +71,30 @@ export const updateStop = async ({
     let params;
 
     if (stop.type === "bike" || stop.type === "walk" || stop.type === "drive") {
+      // Validate origin and destination are provided
+      if (!newConfig.origin || !newConfig.origin.trim()) {
+        throw new Error("Origin address is required");
+      }
+      if (!newConfig.destination || !newConfig.destination.trim()) {
+        throw new Error("Destination address is required");
+      }
+
+      // Determine mode based on stop type if not set
+      let mode = stop.mode;
+      if (!mode) {
+        if (stop.type === "bike") {
+          mode = "bicycling";
+        } else if (stop.type === "walk") {
+          mode = "walking";
+        } else if (stop.type === "drive") {
+          mode = "driving";
+        }
+      }
+
       params = {
-        origin: newConfig.origin,
-        destination: newConfig.destination,
-        mode: stop.mode,
+        origin: newConfig.origin.trim(),
+        destination: newConfig.destination.trim(),
+        mode: mode,
         key: apiKey,
       };
     } else if (stop.type === "bus") {

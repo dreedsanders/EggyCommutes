@@ -147,6 +147,22 @@ export const getDestinationName = async (destination, apiKey) => {
  * @returns {string} - User-friendly error message
  */
 export const parseApiError = (error) => {
+  // Handle network errors (no response from server)
+  if (!error.response) {
+    if (error.code === "ECONNABORTED" || error.message?.includes("timeout")) {
+      return "Request timed out. Please check your internet connection and try again.";
+    }
+    if (error.message?.includes("Network Error") || error.message?.includes("ERR_NETWORK")) {
+      return "Network error. Please check your internet connection and try again.";
+    }
+    if (error.code === "ERR_CANCELED") {
+      return "Request was cancelled.";
+    }
+    // Generic network error
+    return "Network error. Please check your internet connection and try again.";
+  }
+
+  // Handle API response errors
   if (error.response?.data?.error_message) {
     return error.response.data.error_message;
   }
@@ -161,6 +177,17 @@ export const parseApiError = (error) => {
       return "Invalid request - please check your inputs";
     }
     return status;
+  }
+
+  // Handle HTTP status errors
+  if (error.response?.status) {
+    if (error.response.status === 403) {
+      return "Access denied. Please check your API key.";
+    } else if (error.response.status === 404) {
+      return "Service not found. Please check your configuration.";
+    } else if (error.response.status >= 500) {
+      return "Server error. Please try again later.";
+    }
   }
 
   if (error.message) {

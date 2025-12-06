@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "../config/api";
 import { convertToCentralTime } from "../utils/helpers";
 import { CAP_METRO_STOPS } from "../utils/constants";
 import {
@@ -17,43 +18,63 @@ import { loadSavedData, hasMatchingRoute } from "../utils/fileLoader";
 const BASE_URL = "https://maps.googleapis.com/maps/api/directions/json";
 
 /**
- * Fetches bus transit data from Google Directions API
+ * Fetches bus transit data from Google Directions API via backend proxy
+ * This avoids CORS issues and ensures live data is always fetched
  *
  * @param {string} origin - Starting bus stop
  * @param {string} destination - Destination bus stop (always Downtown Station)
- * @param {string} apiKey - Google Maps API key
+ * @param {string} apiKey - Google Maps API key (for fallback direct call)
  * @returns {Promise<Object>} - API response data
  */
 export const fetchBusRoute = async (origin, destination, apiKey) => {
-  const params = {
-    origin,
-    destination: destination || "Downtown Station, Austin, TX",
-    mode: "transit",
-    transit_mode: "bus",
-    departure_time: "now",
-    alternatives: true,
-    key: apiKey,
-  };
-
+  // First try backend proxy (avoids CORS issues)
   try {
-    const response = await axios.get(BASE_URL, { params });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching bus route:", error);
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.error("Response data:", error.response.data);
-      console.error("Response status:", error.response.status);
-      console.error("Response headers:", error.response.headers);
-    } else if (error.request) {
-      // The request was made but no response was received
-      console.error("No response received:", error.request);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.error("Error message:", error.message);
+    const proxyResponse = await api.get("/api/v1/transit_data/live_transit", {
+      params: {
+        origin,
+        destination: destination || "Downtown Station, Austin, TX",
+        transit_mode: "bus",
+      },
+    });
+    console.log("✓ Live transit data fetched via backend proxy");
+    return proxyResponse.data;
+  } catch (proxyError) {
+    console.warn(
+      "Backend proxy failed, trying direct API call:",
+      proxyError.message
+    );
+
+    // Fallback to direct API call if proxy fails
+    const params = {
+      origin,
+      destination: destination || "Downtown Station, Austin, TX",
+      mode: "transit",
+      transit_mode: "bus",
+      departure_time: "now",
+      alternatives: true,
+      key: apiKey,
+    };
+
+    try {
+      const response = await axios.get(BASE_URL, { params });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching bus route:", error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("No response received:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error message:", error.message);
+      }
+      throw error;
     }
-    throw error;
   }
 };
 
@@ -105,24 +126,28 @@ export const processBusResponse = (stopConfig, response) => {
             transitDetails.line?.short_name || transitDetails.line?.name || "";
           const matchesRoute = lineName === routeFilter;
 
-          if (matchesRoute && transitDetails.arrival_time) {
+          if (matchesRoute && transitDetails.departure_time) {
             // Check if we have real-time data
-            const isRealTime = transitDetails.arrival_time.value !== undefined;
+            const isRealTime =
+              transitDetails.departure_time.value !== undefined;
 
-            if (isRealTime || transitDetails.arrival_time.text) {
-              const arrivalTime = convertToCentralTime(
-                transitDetails.arrival_time
-              );
+            if (isRealTime || transitDetails.departure_time.text) {
+              // For bus stops, use departure_time (when bus leaves your stop)
+              // not arrival_time (when it arrives at the next stop)
               const departureTime = convertToCentralTime(
                 transitDetails.departure_time
               );
+              const arrivalTime = convertToCentralTime(
+                transitDetails.arrival_time
+              );
 
-              if (arrivalTime) {
+              if (departureTime) {
                 allArrivalTimes.push({
                   stopName:
-                    transitDetails.arrival_stop?.name || stopConfig.name,
-                  arrivalTime: arrivalTime,
+                    transitDetails.departure_stop?.name || stopConfig.name,
+                  arrivalTime: departureTime, // Using departure as the primary time
                   departureTime: departureTime,
+                  arrivalAtNextStop: arrivalTime,
                   headsign: transitDetails.headsign || "Unknown",
                   lineName: lineName,
                   isRealTime: isRealTime,
@@ -190,28 +215,24 @@ export const processBusResponse = (stopConfig, response) => {
  */
 export const getBusStopData = async (stopConfig, apiKey) => {
   try {
-    // Try to load from saved file first, but verify it has the correct route
-    if (stopConfig.dataFile) {
-      const filePath = `${process.env.PUBLIC_URL || ""}${stopConfig.dataFile}`;
-      const data = await loadSavedData(filePath);
-      if (data) {
-        const routeFilter = stopConfig.routeFilter || "801";
-        if (hasMatchingRoute(data, routeFilter)) {
-          console.log(`✓ Loaded saved data for ${stopConfig.name} (bus)`);
-          return processBusResponse(stopConfig, data);
-        } else {
-          console.log(
-            `✗ Saved data for ${stopConfig.name} doesn't contain route ${routeFilter}, fetching from API`
-          );
-        }
-      }
-    }
-
-    // If file doesn't exist or failed to load, make API call
+    // Always try API call first to get current/real-time data
     if (!apiKey || apiKey === "YOUR_API_KEY_HERE") {
       console.warn(
         `⚠ No API key configured for ${stopConfig.name} (bus) - cannot fetch live data`
       );
+      // Fallback to saved data if no API key
+      if (stopConfig.dataFile) {
+        const filePath = `${process.env.PUBLIC_URL || ""}${
+          stopConfig.dataFile
+        }`;
+        const savedData = await loadSavedData(filePath);
+        if (savedData) {
+          console.log(
+            `⚠ Using saved data for ${stopConfig.name} (no API key available)`
+          );
+          return processBusResponse(stopConfig, savedData);
+        }
+      }
       return {
         name: stopConfig.name,
         type: "bus",
@@ -226,6 +247,7 @@ export const getBusStopData = async (stopConfig, apiKey) => {
       };
     }
 
+    // Try live API call first
     try {
       const response = await fetchBusRoute(
         stopConfig.origin,
@@ -234,26 +256,40 @@ export const getBusStopData = async (stopConfig, apiKey) => {
       );
 
       if (response && response.status === "OK") {
-        console.log(`✓ Request successful for ${stopConfig.name} (bus)`);
+        console.log(
+          `✓ Request successful for ${stopConfig.name} (bus) - using live data`
+        );
         return processBusResponse(stopConfig, response);
+      } else {
+        console.warn(
+          `⚠ API call failed for ${stopConfig.name} (bus): ${
+            response?.status || "Unknown error"
+          }, falling back to saved data`
+        );
       }
     } catch (networkError) {
       console.warn(
-        `⚠ Network error fetching live data for ${stopConfig.name} (bus), attempting to use saved data as fallback`
+        `⚠ Network error fetching live data for ${stopConfig.name} (bus), attempting to use saved data as fallback:`,
+        networkError.message
       );
     }
 
-    // Last resort - try saved data
+    // Fallback to saved data only if API call fails
     if (stopConfig.dataFile) {
       const filePath = `${process.env.PUBLIC_URL || ""}${stopConfig.dataFile}`;
       const savedData = await loadSavedData(filePath);
       if (savedData) {
-        console.log(
-          `⚠ Using saved data for ${stopConfig.name} (may not have route ${
-            stopConfig.routeFilter || "801"
-          })`
-        );
-        return processBusResponse(stopConfig, savedData);
+        const routeFilter = stopConfig.routeFilter || "801";
+        if (hasMatchingRoute(savedData, routeFilter)) {
+          console.log(
+            `⚠ Using saved data for ${stopConfig.name} (API call failed)`
+          );
+          return processBusResponse(stopConfig, savedData);
+        } else {
+          console.log(
+            `✗ Saved data for ${stopConfig.name} doesn't contain route ${routeFilter}`
+          );
+        }
       }
     }
   } catch (error) {

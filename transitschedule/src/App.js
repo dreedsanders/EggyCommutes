@@ -53,27 +53,16 @@ function App() {
     process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE";
 
   /**
-   * Check authentication on mount and load user stops
+   * Check authentication on mount
+   * DO NOT call fetchTransitData here - only call it after successful login
    */
   useEffect(() => {
     const authStatus = isAuthenticated();
-
     if (authStatus) {
-      // Fetch transit data if user is already authenticated (page refresh)
-      const fetchDataOnMount = async () => {
-        setFetchingTransitData(true);
-        try {
-          await fetchTransitData();
-          console.log("Transit data fetched successfully");
-        } catch (error) {
-          console.error("Error fetching transit data:", error);
-        } finally {
-          setFetchingTransitData(false);
-          setAuthenticated(true);
-          loadUserStops();
-        }
-      };
-      fetchDataOnMount();
+      // User has a token, set authenticated state
+      // Transit data will be fetched in handleLoginSuccess or when authenticated becomes true
+      setAuthenticated(true);
+      loadUserStops();
     } else {
       setAuthenticated(false);
     }
@@ -87,6 +76,8 @@ function App() {
       const stops = await fetchUserStops();
       setUserStops(stops || []);
     } catch (error) {
+      // fetchUserStops now handles errors internally and returns []
+      // This catch is just for safety
       console.error("Error loading user stops:", error);
       setUserStops([]);
     }
@@ -99,12 +90,29 @@ function App() {
     setFetchingTransitData(true);
     try {
       // Fetch transit data before showing the main page
-      await fetchTransitData();
-      console.log("Transit data fetched successfully");
+      const result = await fetchTransitData();
+      if (!result?.skipped) {
+        console.log("Transit data fetched successfully");
+        // Small delay to ensure JSON files are fully written
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
     } catch (error) {
-      console.error("Error fetching transit data:", error);
-      // Continue to show the page even if transit data fetch fails
-      // The app will still work, just without the cached data files
+      // Error already logged in fetchTransitData, continue anyway
+    }
+
+    // Always fetch transit times - will use live API or saved files
+    try {
+      if (apiKey && apiKey !== "YOUR_API_KEY_HERE") {
+        await fetchAllTransitTimes(
+          setStops,
+          apiKey,
+          homeAddress,
+          ferryDirection
+        );
+        console.log("Transit times refreshed after login");
+      }
+    } catch (error) {
+      console.error("Error fetching transit times:", error);
     } finally {
       setFetchingTransitData(false);
       setAuthenticated(true);
@@ -121,8 +129,11 @@ function App() {
     setAuthenticated(false);
   };
 
+  // Only fetch transit times when authenticated - DO NOT call fetchTransitData here
   useEffect(() => {
-    if (!authenticated) return;
+    if (!authenticated) return; // Don't fetch on login page
+
+    // Set up interval for refreshing transit times (but don't fetch transit data here)
     if (apiKey && apiKey !== "YOUR_API_KEY_HERE") {
       fetchAllTransitTimes(setStops, apiKey, homeAddress, ferryDirection);
       const interval = setInterval(() => {

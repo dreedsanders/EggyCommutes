@@ -184,26 +184,23 @@ function TransitDisplay({
                 borderColor: "#000000",
                 color: isBikeWalkDrive ? bikeTextColor : textColor,
               }}
+              onClick={() => onEditStop(fullIndex)}
             >
-              {/* Edit and Delete Buttons */}
-              <div className="stop-action-buttons">
-                <button
-                  className="stop-edit-button"
-                  onClick={() => onEditStop(fullIndex)}
-                  title="Edit stop"
-                >
-                  ✏️
-                </button>
-                {stop.id && onDeleteStop && (
+              {/* Delete Button - only show on hover */}
+              {stop.id && onDeleteStop && (
+                <div className="stop-action-buttons">
                   <button
                     className="stop-delete-button"
-                    onClick={() => onDeleteStop(stop.id)}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent triggering the box click
+                      onDeleteStop(stop.id);
+                    }}
                     title="Delete stop"
                   >
                     🗑️
                   </button>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Transit Type Label */}
               <div className="transit-type">{typeLabel}</div>

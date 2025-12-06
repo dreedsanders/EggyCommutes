@@ -95,6 +95,23 @@
   gap: 10px;
   background-color: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(5px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Hover effect for stop boxes - using title color #FF69B4 */
+.stop-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(255, 105, 180, 0.5);
+  border-color: #FF69B4;
+  border-width: 3px;
+}
+
+/* Bike/walk/drive boxes hover effect - using title color #FF69B4 */
+.stop-box.bike-box:hover {
+  border-color: #FF69B4;
+  box-shadow: 0 8px 16px rgba(255, 105, 180, 0.5);
 }
 
 /* Transit type label */
@@ -154,10 +171,6 @@
 }
 
 /* Stop action buttons container */
-.stop-box {
-  position: relative;
-}
-
 .stop-action-buttons {
   position: absolute;
   top: 8px;
@@ -165,21 +178,13 @@
   display: flex;
   gap: 4px;
   z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
-.stop-edit-button {
-  position: relative;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 2px;
-  transition: transform 0.2s;
-}
-
-.stop-edit-button:hover {
-  background: white;
-  border-radius: 50%;
+/* Show delete button on hover */
+.stop-box:hover .stop-action-buttons {
+  opacity: 1;
 }
 
 /* Delete button */

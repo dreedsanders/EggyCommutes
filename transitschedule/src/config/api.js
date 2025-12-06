@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { clearAuthData } from '../utils/authHelpers';
 
 const API_BASE_URL = 'http://localhost:3001';
 
@@ -27,10 +28,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Handle 401 Unauthorized - token might be expired
+    // Handle 401 Unauthorized - token might be expired or invalid
     if (error.response?.status === 401) {
-      // Optionally clear auth data and redirect to login
-      // This can be implemented if needed
+      // Clear auth data when token is invalid
+      clearAuthData();
     }
     return Promise.reject(error);
   }

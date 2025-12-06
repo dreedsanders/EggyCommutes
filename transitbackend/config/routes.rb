@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "auth/login", to: "auth#login"
       post "transit_data/fetch", to: "transit_data#fetch"
+      get "transit_data/live_transit", to: "transit_data#live_transit"
       resources :users
       resources :stops do
         member do
