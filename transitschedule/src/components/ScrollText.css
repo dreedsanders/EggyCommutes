@@ -1,0 +1,38 @@
+/* Scrolling text container */
+.scroll-text-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Scrolling text animation */
+.scroll-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  white-space: nowrap;
+  display: inline-block;
+  line-height: 18px;
+  position: absolute;
+  top: 0;
+}
+
+/* Animation for scrolling text - right to left with seamless wrap */
+.scroll-text.scrolling {
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-right-to-left 9.45s linear infinite;
+}
+
+/* Keyframes for horizontal scrolling right to left with seamless loop */
+/* Text is duplicated 3 times, so we scroll exactly 1/3 (33.333%) for seamless loop */
+/* Start from center (0%) and scroll left */
+@keyframes scroll-right-to-left {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(calc(-50% - 33.333%));
+  }
+}
+

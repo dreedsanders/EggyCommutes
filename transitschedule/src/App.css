@@ -4,3 +4,21 @@
   margin: 0;
   padding: 0;
 }
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Press Start 2P', monospace;
+  color: #FF69B4;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-content p {
+  font-size: 12px;
+  margin-top: 20px;
+}
