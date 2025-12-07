@@ -47,12 +47,13 @@ module Api
         end
       end
 
-      # Proxy endpoint to fetch live transit data from Google Maps API
+      # Proxy endpoint to fetch live transit/driving data from Google Maps API
       def live_transit
         begin
           origin = params[:origin]
           destination = params[:destination]
-          transit_mode = params[:transit_mode] || 'bus'
+          mode = params[:mode] || 'transit'  # Can be 'transit' or 'driving'
+          transit_mode = params[:transit_mode] || 'bus'  # Only used when mode is 'transit'
           route_filter = params[:route_filter]
 
           unless origin && destination
@@ -78,15 +79,20 @@ module Api
           params_hash = {
             origin: origin,
             destination: destination,
-            mode: 'transit',
-            transit_mode: transit_mode,
-            departure_time: 'now',
-            alternatives: true,
+            mode: mode,
             key: api_key
           }
+
+          # Add transit-specific parameters only when mode is 'transit'
+          if mode == 'transit'
+            params_hash[:transit_mode] = transit_mode
+            params_hash[:departure_time] = 'now'
+            params_hash[:alternatives] = true
+          end
+
           uri.query = URI.encode_www_form(params_hash)
 
-          Rails.logger.info("Fetching live transit data: #{uri}")
+          Rails.logger.info("Fetching live directions data: #{uri}")
 
           # Make request to Google Maps API
           http = Net::HTTP.new(uri.host, uri.port)
@@ -96,15 +102,15 @@ module Api
 
           if response.code == '200'
             data = JSON.parse(response.body)
-            Rails.logger.info("Live transit data fetched successfully")
+            Rails.logger.info("Live directions data fetched successfully")
             render json: data
           else
             Rails.logger.error("Google Maps API error: #{response.code} - #{response.body}")
-            render_error("Failed to fetch transit data from Google Maps API: #{response.code}", status: :bad_gateway)
+            render_error("Failed to fetch directions data from Google Maps API: #{response.code}", status: :bad_gateway)
           end
         rescue => e
-          Rails.logger.error("Error fetching live transit data: #{e.message}\n#{e.backtrace.join("\n")}")
-          render_error("Error fetching live transit data: #{e.message}", status: :internal_server_error)
+          Rails.logger.error("Error fetching live directions data: #{e.message}\n#{e.backtrace.join("\n")}")
+          render_error("Error fetching live directions data: #{e.message}", status: :internal_server_error)
         end
       end
     end

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { login } from "../services/authService";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { loginUser, selectAuthError, selectAuthLoading } from "../store/slices/authSlice";
 import "./AuthForms.css";
 
 const LoginForm = ({ onLoginSuccess, onSwitchToSignup }) => {
+  const dispatch = useAppDispatch();
+  const authError = useAppSelector(selectAuthError);
+  const authLoading = useAppSelector(selectAuthLoading);
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,15 +22,31 @@ const LoginForm = ({ onLoginSuccess, onSwitchToSignup }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("[LoginForm] Form submitted");
+    console.log("[LoginForm] Email:", formData.email ? "provided" : "missing");
+    console.log("[LoginForm] Password:", formData.password ? "provided" : "missing");
+    
     setError("");
     setLoading(true);
 
     try {
-      await login(formData.email, formData.password);
-      onLoginSuccess();
+      console.log("[LoginForm] Dispatching loginUser action...");
+      const result = await dispatch(loginUser({ email: formData.email, password: formData.password }));
+      
+      if (loginUser.fulfilled.match(result)) {
+        console.log("[LoginForm] Login successful, calling onLoginSuccess");
+        onLoginSuccess();
+      } else {
+        // Login failed
+        const errorMsg = result.payload || "Login failed. Please try again.";
+        setError(errorMsg);
+        console.error("[LoginForm] Login failed:", errorMsg);
+      }
     } catch (err) {
+      console.error("[LoginForm] Login error:", err);
       setError(err.message || "Login failed. Please try again.");
     } finally {
+      console.log("[LoginForm] Setting loading to false");
       setLoading(false);
     }
   };
@@ -33,7 +54,7 @@ const LoginForm = ({ onLoginSuccess, onSwitchToSignup }) => {
   return (
     <div className="auth-form-container">
       <h2 className="edit-form-title">Login</h2>
-      {error && <div className="auth-error">{error}</div>}
+      {(error || authError) && <div className="auth-error">{error || authError}</div>}
       <form onSubmit={handleSubmit}>
         <div className="edit-form-field">
           <label>Email:</label>
@@ -65,8 +86,8 @@ const LoginForm = ({ onLoginSuccess, onSwitchToSignup }) => {
           >
             Create Account
           </button>
-          <button type="submit" className="edit-form-review" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          <button type="submit" className="edit-form-review" disabled={loading || authLoading}>
+            {(loading || authLoading) ? "Logging in..." : "Login"}
           </button>
         </div>
       </form>

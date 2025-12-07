@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { createAccount } from "../services/authService";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { createAccount as createAccountAction, selectAuthError, selectAuthLoading } from "../store/slices/authSlice";
 import "./AuthForms.css";
 
 const CreateAccountForm = ({ onSignupSuccess, onSwitchToLogin }) => {
+  const dispatch = useAppDispatch();
+  const authError = useAppSelector(selectAuthError);
+  const authLoading = useAppSelector(selectAuthLoading);
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,13 +35,20 @@ const CreateAccountForm = ({ onSignupSuccess, onSwitchToLogin }) => {
     }
 
     try {
-      await createAccount(
-        formData.name,
-        formData.email,
-        formData.password,
-        formData.passwordConfirmation
-      );
-      onSignupSuccess();
+      const result = await dispatch(createAccountAction({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        passwordConfirmation: formData.passwordConfirmation,
+      }));
+      
+      if (createAccountAction.fulfilled.match(result)) {
+        onSignupSuccess();
+      } else {
+        // Account creation failed
+        const errorMsg = result.payload || "Account creation failed. Please try again.";
+        setError(errorMsg);
+      }
     } catch (err) {
       setError(err.message || "Account creation failed. Please try again.");
     } finally {
@@ -47,7 +59,7 @@ const CreateAccountForm = ({ onSignupSuccess, onSwitchToLogin }) => {
   return (
     <div className="auth-form-container">
       <h2 className="edit-form-title">Create Account</h2>
-      {error && <div className="auth-error">{error}</div>}
+      {(error || authError) && <div className="auth-error">{error || authError}</div>}
       <form onSubmit={handleSubmit}>
         <div className="edit-form-field">
           <label>Name:</label>
@@ -101,8 +113,8 @@ const CreateAccountForm = ({ onSignupSuccess, onSwitchToLogin }) => {
           >
             Back to Login
           </button>
-          <button type="submit" className="edit-form-review" disabled={loading}>
-            {loading ? "Creating..." : "Create Account"}
+          <button type="submit" className="edit-form-review" disabled={loading || authLoading}>
+            {(loading || authLoading) ? "Creating..." : "Create Account"}
           </button>
         </div>
       </form>

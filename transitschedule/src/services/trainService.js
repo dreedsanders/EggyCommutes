@@ -194,6 +194,7 @@ export const processTrainResponse = (stopConfig, response) => {
     nextArrivalTime: nextArrival?.arrivalTime || null,
     lastStopTime: lastStopTime,
     isWithinTwoStops: isWithinTwoStops,
+    walkTime: stopConfig.walkTime || null,
   };
 };
 
@@ -233,6 +234,7 @@ export const getTrainStopData = async (stopConfig, apiKey) => {
         nextArrivalTime: null,
         lastStopTime: null,
         isWithinTwoStops: false,
+        walkTime: stopConfig.walkTime || null,
       };
     }
 
@@ -288,6 +290,7 @@ export const getTrainStopData = async (stopConfig, apiKey) => {
       nextArrivalTime: null,
       lastStopTime: null,
       isWithinTwoStops: false,
+      walkTime: stopConfig.walkTime || null,
     };
   } catch (error) {
     console.error(`Error fetching train data for ${stopConfig.name}:`, error);
@@ -302,6 +305,7 @@ export const getTrainStopData = async (stopConfig, apiKey) => {
       nextArrivalTime: null,
       lastStopTime: null,
       isWithinTwoStops: false,
+      walkTime: stopConfig.walkTime || null,
     };
   }
 };

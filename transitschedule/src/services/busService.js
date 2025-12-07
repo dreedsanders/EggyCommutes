@@ -203,6 +203,7 @@ export const processBusResponse = (stopConfig, response) => {
     nextArrivalTime: nextArrival?.arrivalTime || null,
     lastStopTime: lastStopTime,
     isWithinTwoStops: isWithinTwoStops,
+    walkTime: stopConfig.walkTime || null,
   };
 };
 
@@ -244,6 +245,7 @@ export const getBusStopData = async (stopConfig, apiKey) => {
         nextArrivalTime: null,
         lastStopTime: null,
         isWithinTwoStops: false,
+        walkTime: stopConfig.walkTime || null,
       };
     }
 
@@ -305,6 +307,7 @@ export const getBusStopData = async (stopConfig, apiKey) => {
       nextArrivalTime: null,
       lastStopTime: null,
       isWithinTwoStops: false,
+      walkTime: stopConfig.walkTime || null,
     };
   }
 };

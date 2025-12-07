@@ -22,3 +22,75 @@
   font-size: 12px;
   margin-top: 20px;
 }
+
+/* Stop Type Selector Modal */
+.stop-type-selector-modal {
+  background: white;
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.stop-type-selector-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.stop-type-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stop-type-button {
+  padding: 15px;
+  border-radius: 25px;
+  border: 2px solid #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  background: #73AD21;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.stop-type-button:hover {
+  transform: scale(1.05);
+  background: #5a8a1a;
+}
+
+.stop-type-cancel {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  background: white;
+  color: black;
+  transition: transform 0.2s;
+}
+
+.stop-type-cancel:hover {
+  transform: scale(1.05);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}

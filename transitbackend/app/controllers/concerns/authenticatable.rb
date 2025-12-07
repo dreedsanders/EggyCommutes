@@ -2,7 +2,7 @@ module Authenticatable
   extend ActiveSupport::Concern
 
   included do
-    before_action :authenticate_user!, except: [:login]
+    before_action :authenticate_user!
   end
 
   private

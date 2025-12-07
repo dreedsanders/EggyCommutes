@@ -34,7 +34,16 @@ const ReviewPopup = ({ reviewData, onClose, onSubmit }) => {
           <button onClick={onClose} className="review-cancel">
             Cancel
           </button>
-          <button onClick={onSubmit} className="review-submit">
+          <button
+            onClick={() => {
+              console.log("[ReviewPopup] Submit button clicked");
+              console.log("[ReviewPopup] reviewData:", reviewData);
+              console.log("[ReviewPopup] reviewData.stopIndex:", reviewData.stopIndex);
+              console.log("[ReviewPopup] reviewData.formData:", reviewData.formData);
+              onSubmit();
+            }}
+            className="review-submit"
+          >
             Submit
           </button>
         </div>

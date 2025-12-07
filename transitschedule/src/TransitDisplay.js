@@ -3,7 +3,7 @@ import "./TransitDisplay.css";
 import "@fontsource/press-start-2p";
 // Import components
 import ScrollText from "./components/ScrollText";
-import EditStopForm from "./components/EditStopForm";
+import GoogleMapsStopSelector from "./components/GoogleMapsStopSelector";
 import ReviewPopup from "./components/ReviewPopup";
 import EditHomeForm from "./components/EditHomeForm";
 // Import utilities
@@ -236,6 +236,14 @@ function TransitDisplay({
                     </span>
                   </div>
 
+                  {/* Walk time display for bus and train stops */}
+                  {(stop.type === "bus" || stop.type === "train") &&
+                    stop.walkTime && (
+                      <div className="walk-time">
+                        walk to stop {stop.walkTime}
+                      </div>
+                    )}
+
                   {/* Conditional Last Stop Display */}
                   {stop.isWithinTwoStops && stop.lastStopTime && (
                     <div className="last-stop">
@@ -251,13 +259,50 @@ function TransitDisplay({
 
       {/* Edit Stop Modal */}
       {editingStop !== null && stops[editingStop] && (
-        <EditStopForm
+        <GoogleMapsStopSelector
           stop={stops[editingStop]}
-          stopIndex={editingStop}
-          onClose={onCloseEdit}
-          onReview={onReview}
-          previousConfig={stops[editingStop]}
           homeAddress={homeAddress}
+          apiKey={
+            process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY_HERE"
+          }
+          onClose={onCloseEdit}
+          onSubmit={async (stopData) => {
+            // Transform stopData to match format expected by updateStop
+            const stop = stops[editingStop];
+            let newConfig = {};
+
+            if (stop.type === "ferry") {
+              newConfig.ferryDirection =
+                stopData.ferry_direction || "anacortes";
+              // For ferry, we can submit directly without directions
+              if (onUpdateStop) {
+                await onUpdateStop(editingStop, newConfig);
+              }
+              return;
+            } else if (
+              stop.type === "bike" ||
+              stop.type === "walk" ||
+              stop.type === "drive"
+            ) {
+              newConfig.origin = stopData.origin;
+              newConfig.destination = stopData.destination;
+            } else if (stop.type === "bus") {
+              newConfig.origin = stopData.origin;
+              newConfig.destination = stopData.destination;
+              newConfig.routeNumber =
+                stopData.route_filter || stop.routeFilter || "";
+              newConfig.stopName = stopData.origin || "";
+            } else if (stop.type === "train") {
+              newConfig.origin = stopData.origin;
+              newConfig.destination = stopData.destination;
+              newConfig.trainInputMode = "originDestination";
+            }
+
+            // Call onUpdateStop with transformed config
+            if (onUpdateStop) {
+              await onUpdateStop(editingStop, newConfig);
+            }
+          }}
         />
       )}
 
@@ -277,11 +322,32 @@ function TransitDisplay({
           reviewData={reviewData}
           onClose={() => onReview(null)}
           onSubmit={() => {
+            console.log("[TransitDisplay] ReviewPopup onSubmit called");
+            console.log("[TransitDisplay] reviewData:", reviewData);
+            console.log(
+              "[TransitDisplay] reviewData.fullAddress:",
+              reviewData.fullAddress
+            );
+            console.log(
+              "[TransitDisplay] reviewData.stopIndex:",
+              reviewData.stopIndex
+            );
+            console.log(
+              "[TransitDisplay] reviewData.formData:",
+              reviewData.formData
+            );
+
             if (reviewData.fullAddress) {
               // Home address update
+              console.log("[TransitDisplay] Updating home address");
               onUpdateHome(reviewData.fullAddress, reviewData.formData.name);
             } else {
               // Stop update
+              console.log("[TransitDisplay] Updating stop");
+              console.log("[TransitDisplay] Calling onUpdateStop with:", {
+                stopIndex: reviewData.stopIndex,
+                formData: reviewData.formData,
+              });
               onUpdateStop(reviewData.stopIndex, reviewData.formData);
             }
           }}
