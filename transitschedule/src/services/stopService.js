@@ -38,12 +38,25 @@ export const fetchUserStops = async () => {
  */
 export const createStop = async (stopData) => {
   try {
+    console.log("[stopService] Creating stop - POST to /api/v1/stops");
+    console.log("[stopService] Request payload:", JSON.stringify({ stop: stopData }, null, 2));
+    
     const response = await api.post("/api/v1/stops", {
       stop: stopData,
     });
+    
+    console.log("[stopService] Stop created successfully");
+    console.log("[stopService] Response status:", response.status);
+    console.log("[stopService] Created stop object:", JSON.stringify(response.data, null, 2));
+    console.log("[stopService] Created stop ID:", response.data?.id);
+    console.log("[stopService] Created stop name:", response.data?.name);
+    console.log("[stopService] Created stop type:", response.data?.transit_type);
+    
     return response.data;
   } catch (error) {
-    console.error("Error creating stop:", error);
+    console.error("[stopService] Error creating stop:", error);
+    console.error("[stopService] Error response:", error.response);
+    console.error("[stopService] Error response data:", error.response?.data);
     throw error;
   }
 };
@@ -77,6 +90,21 @@ export const hideStop = async (id) => {
     return response.data;
   } catch (error) {
     console.error("Error hiding stop:", error);
+    throw error;
+  }
+};
+
+/**
+ * Delete a stop permanently
+ * @param {number} id - Stop ID
+ * @returns {Promise<Object>} - Response message
+ */
+export const deleteStop = async (id) => {
+  try {
+    const response = await api.delete(`/api/v1/stops/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting stop:", error);
     throw error;
   }
 };

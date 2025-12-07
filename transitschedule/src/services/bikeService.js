@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "../config/api";
 
 /**
  * Bike Service
@@ -9,27 +10,47 @@ import axios from "axios";
 const BASE_URL = "https://maps.googleapis.com/maps/api/directions/json";
 
 /**
- * Fetches bike route data from Google Directions API
+ * Fetches bike route data from Google Directions API via backend proxy
+ * This avoids CORS issues and ensures live data is always fetched
  * 
  * @param {string} origin - Starting location
  * @param {string} destination - Destination location
- * @param {string} apiKey - Google Maps API key
+ * @param {string} apiKey - Google Maps API key (for fallback direct call)
  * @returns {Promise<Object>} - API response data
  */
 export const fetchBikeRoute = async (origin, destination, apiKey) => {
-  const params = {
-    origin,
-    destination,
-    mode: "bicycling",
-    key: apiKey,
-  };
-
+  // First try backend proxy (avoids CORS issues)
   try {
-    const response = await axios.get(BASE_URL, { params });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching bike route:", error);
-    throw error;
+    const proxyResponse = await api.get("/api/v1/transit_data/live_transit", {
+      params: {
+        origin,
+        destination,
+        mode: "bicycling",
+      },
+    });
+    console.log("✓ Live bike data fetched via backend proxy");
+    return proxyResponse.data;
+  } catch (proxyError) {
+    console.warn(
+      "Backend proxy failed, trying direct API call:",
+      proxyError.message
+    );
+
+    // Fallback to direct API call if proxy fails
+    const params = {
+      origin,
+      destination,
+      mode: "bicycling",
+      key: apiKey,
+    };
+
+    try {
+      const response = await axios.get(BASE_URL, { params });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching bike route:", error);
+      throw error;
+    }
   }
 };
 

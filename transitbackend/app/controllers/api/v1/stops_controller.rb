@@ -1,7 +1,7 @@
 module Api
   module V1
     class StopsController < BaseController
-      before_action :set_stop, only: [:show, :update, :hide, :reorder]
+      before_action :set_stop, only: [:show, :update, :hide, :reorder, :destroy]
 
       # GET /api/v1/stops
       def index
@@ -48,6 +48,15 @@ module Api
       def reorder
         if @stop.update(position: params[:position])
           render json: stop_json(@stop)
+        else
+          render_validation_errors(@stop)
+        end
+      end
+
+      # DELETE /api/v1/stops/:id
+      def destroy
+        if @stop.destroy
+          render json: { message: "Stop deleted successfully" }, status: :ok
         else
           render_validation_errors(@stop)
         end
